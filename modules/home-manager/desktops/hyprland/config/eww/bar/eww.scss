@@ -1,0 +1,205 @@
+/** EWW.SCSS **/
+$icon-size: 42px;
+
+* {
+    all: unset;
+    font-family: Roboto Regular;
+    font-size: 14px;
+}
+
+/** General **/
+.dock {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+
+.bar {
+    // border: 2px solid rgba(white, 0.075);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modules-container {
+    // background: rgba(0, 0, 0, 0.5);
+    background: none;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+button {
+    transition: all 0.25s ease;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.075);
+    border: 2px solid rgba(white, 0.025);
+    padding: 0px 4px;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(white, 0.25);
+        border-radius: 8px;
+    }
+}
+
+.separator {
+    background: rgba(255, 255, 255, 0.5);
+    min-width: 1px;
+    min-height: 16px;
+    margin: 4px 4px;
+}
+
+.icon {
+    transition: all 0.125s ease-out;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.popup {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    border: 2px solid rgba(white, 0.25);
+
+    menuitem {
+        background: rgba(255, 0, 0, 0.5);
+        margin: 2px 4px;
+    }
+}
+
+/** tooltip!! **/
+tooltip.background {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+}
+
+tooltip label {
+    margin: 4px;
+}
+
+.launcher-button {
+    transition: all 0.25s ease;
+    border-radius: 12px;
+    background: rgba(purple, 0.5);
+    border: 2px solid rgba(white, 0.025);
+    padding: 0px 0px;
+
+    &:hover {
+        background: rgba(purple, 0.75);
+        border: 2px solid rgba(white, 0.25);
+        border-radius: 8px;
+    }
+}
+
+.workspace-button {
+    min-width: $icon-size;
+    min-height: $icon-size;
+    padding: 0px 0px;
+    border: 2px solid rgba(white, 0.05);
+
+    .highlight {
+        transition: all 0.25s ease;
+        border-radius: 12px;
+        margin: -2px;
+    }
+
+    .icon {
+        transition: all 0.25s ease;
+        opacity: 0.85;
+        margin: 0.35em;
+    }
+
+    &.empty {
+        min-width: 24px;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.175);
+        border: 2px solid rgba(white, 0.1);
+
+        .highlight {
+            border-radius: 8px;
+            margin: -2px;
+        }
+
+        .icon {
+            opacity: 1.0;
+            // margin: 0.025em;
+        }
+
+        &.empty {
+            min-width: $icon-size;
+        }
+    }
+}
+
+.workspace-active {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 1.0);
+    border: 2px solid rgba(white, 0.25);
+
+    .highlight {
+        border-radius: 8px;
+        margin: -2px;
+    }
+
+    .icon {
+        margin: 0.25em;
+        opacity: 1.0;
+    }
+
+    &.empty {
+        min-width: $icon-size;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border: 2px solid rgba(white, 0.25);
+
+        .icon {
+            margin: 0.25em;
+        }
+
+        &.empty {
+            min-width: $icon-size;
+        }
+    }
+}
+
+.workspace-empty {
+    min-width: 16px;
+}
+
+.system-tray-widget {
+    // transition: all 0.25s ease;
+    // border-radius: 12px;
+    // background: rgba(255, 255, 255, 0.075);
+    // border: 2px solid rgba(white, 0.025);
+    // padding: 0px 0px;
+  
+    // &:hover {
+    //   background: rgba(255, 255, 255, 0.25);
+    //   border: 2px solid rgba(white, 0.25);
+    //   border-radius: 8px;
+    // }
+
+    menuitem {
+        image {
+            transition: all 0.25s ease;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.075);
+            background-color: transparent;
+            min-width: 28px;
+            min-height: 28px;
+        }
+    
+        &:hover {
+            image {
+                background-color: rgba(255, 255, 255, 0.25);
+                border-radius: 8px;
+            }
+        }
+    }
+}
+
+.controls-box {
+    margin-left: 8px;
+}
