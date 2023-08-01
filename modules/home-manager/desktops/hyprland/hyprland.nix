@@ -12,15 +12,15 @@
         networkmanagerapplet
         dolphin
         ark
-        #xfce.thunar
+        xfce.thunar
         gvfs # might not need for thumbnails?
         gnome.gnome-system-monitor
 
-        #swayidle
-        #swaylock
-        #wlogout
-        #wl-clipboard
-        #wlr-randr
+        swayidle
+        swaylock
+        wlogout
+        wl-clipboard
+        wlr-randr
 
         inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
 

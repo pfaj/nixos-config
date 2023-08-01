@@ -2,7 +2,7 @@
 {
     imports = with inputs.self.homeManagerModules; [
         home
-        #dev
+        dev
         theme.gtk
         theme.qt
         desktops.hyprland
@@ -33,7 +33,7 @@
     ];
 
     programs = {
-        #obs-studio.enable = true;
+        obs-studio.enable = true;
         kitty = {
             enable = true;
             shellIntegration.enableFishIntegration = true;

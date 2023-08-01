@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
     qt = {
-        enable = true;
+        enable = false;
         platformTheme = "gtk";
         style = {
             name = "adwaita-dark";

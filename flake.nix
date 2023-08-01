@@ -37,18 +37,18 @@
     in
     {
         nixosConfigurations = {
-		"desktop" = nixpkgs.lib.nixosSystem {
-		    system = "x86_64-linux";
-		    modules = [ ./hosts/desktop/configuration.nix ];
-		    specialArgs = { inherit inputs; };
-		};
-		
-		"surface-laptop" = nixpkgs.lib.nixosSystem {
-            		system = "x86_64-linux";
-            		modules = [ ./hosts/surface-laptop/configuration.nix ];
-            		specialArgs = { inherit inputs; };
-        	};
-	};
+            "desktop" = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                modules = [ ./hosts/desktop/configuration.nix ];
+                specialArgs = { inherit inputs; };
+            };
+
+            "surface-laptop" = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                modules = [ ./hosts/surface-laptop/configuration.nix ];
+                specialArgs = { inherit inputs; };
+            };
+        };
 
         nix.settings = {
             builders-use-substitutes = true;

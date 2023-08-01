@@ -1,11 +1,7 @@
-{}:
-let usingHyprland = programs.hyprland ? enable && programs.hyprland.enable;
+{ config, lib, ... }:
 {
-    options = mkIf usingHyprland {
+    config = lib.mkIf config.programs.hyprland.enable {
         programs.hyprland.nvidiaPatches = true;
-
-        environment.sessionVariables = {
-            WLR_NO_HARDWARE_CURSORS = "1";
-        };
+        environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
     };
 }
