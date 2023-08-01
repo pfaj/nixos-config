@@ -4,6 +4,5 @@ let
 in
 {
     xwaylandvideobridge = callPackage ./xwaylandvideobridge.nix { };
-    eww = callPackage ./eww.nix { };
     hyprland-workspaces = callPackage ./hyprland-workspaces.nix { };
 }
