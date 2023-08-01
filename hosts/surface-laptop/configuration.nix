@@ -15,6 +15,7 @@ in
         nixpkgs
         hm
         fonts
+        sddm
         #gaming
         #kde
         #gnome
@@ -70,10 +71,6 @@ in
         bindfs
         git
         htop
-
-        # required by sddm theme
-        pkgs.sddm-chili
-        libsForQt5.qt5.qtgraphicaleffects
     ];
 
     # Enable sound with pipewire.
@@ -85,11 +82,6 @@ in
         # Enable the X11 windowing system.
         xserver = {
             enable = true;
-
-            displayManager.sddm = {
-                enable = true;
-                theme = "sddm-chili";
-            };
 
             layout = "us";
             xkbVariant = "";

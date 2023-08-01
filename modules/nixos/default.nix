@@ -7,4 +7,5 @@
     gnome = import ./gnome.nix;
     fonts = import ./fonts.nix;
     gaming = import ./gaming.nix;
+    sddm = import ./sddm.nix;
 }
