@@ -13,7 +13,7 @@
                 #dictionary
                 #kidex
                 #randr
-                #rink
+                rink # math plugin
                 #shell
                 #stdin
                 #symbols
