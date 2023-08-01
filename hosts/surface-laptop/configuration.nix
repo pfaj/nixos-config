@@ -8,7 +8,6 @@ in
 {
     imports = [
         ./hardware-configuration.nix
-        ./override.nix
         home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
@@ -16,7 +15,7 @@ in
         nixpkgs
         hm
         fonts
-        gaming
+        #gaming
         #kde
         #gnome
         hyprland
@@ -26,25 +25,7 @@ in
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    zramSwap.enable = true;
-    zramSwap.memoryPercent = 100;
-    # zram is relatively cheap, prefer swap
-    boot.kernel.sysctl."vm.swappiness" = 180;
-    # zram is in memory, no need to readahead
-    boot.kernel.sysctl."vm.page-cluster" = 0;
-    # Start asynchronously writing at 128 MiB dirty memory
-    boot.kernel.sysctl."vm.dirty_background_bytes" = 128 * 1024 * 1024;
-    # Start synchronously writing at 50% dirty memory
-    # boot.kernel.sysctl."vm.dirty_ratio" = 50;
-    boot.kernel.sysctl."vm.dirty_bytes" = 64 * 1024 * 1024;
-    boot.kernel.sysctl."vm.vfs_cache_pressure" = 500;
-
-    # With 32 GiB of RAM and zram enabled OOM is unlikely
-    systemd.oomd.enable = false;
-    systemd.services.NetworkManager-wait-online.enable = false;
-    #systemd.network.wait-online.enable = false;
-
-    networking.hostName = "ben-nixos"; # Define your hostname.
+    networking.hostName = "ben-nixos-surface-laptop"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
@@ -81,24 +62,6 @@ in
     };
     home-manager.users.ben = import ../../users/ben/home.nix;
 
-    # virtualization
-    virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [ "ben" ];
-    users.extraUsers.ben.extraGroups = [ "vboxusers" ];
-
-    environment.etc = {
-        "xdg/user-dirs.defaults".text = ''
-            DESKTOP=/mnt/LinuxExpansion/Places/Desktop
-            DOWNLOAD=/mnt/LinuxExpansion/Places/Downloads
-            TEMPLATES=/mnt/LinuxExpansion/Places/Templates
-            PUBLICSHARE=/mnt/LinuxExpansion/Places/PublicShare
-            DOCUMENTS=/mnt/LinuxExpansion/Places/Documents
-            MUSIC=/mnt/LinuxExpansion/Places/Audio
-            PICTURES=/mnt/LinuxExpansion/Places/Images
-            VIDEOS=/mnt/LinuxExpansion/Places/Videos
-        '';
-    };
-
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
@@ -121,7 +84,6 @@ in
         # Enable the X11 windowing system.
         xserver = {
             enable = true;
-            videoDrivers = ["nvidia"];
 
             displayManager.sddm = {
                 enable = true;
@@ -176,8 +138,8 @@ in
     # 25565 - Minecraft
     # 24454 - Minecraft voice chat mod
     # 57621 - Spotify discovery
-    networking.firewall.allowedTCPPorts = [ 25565 57621 ];
-    networking.firewall.allowedUDPPorts = [ 25565 24454 ];
+    #networking.firewall.allowedTCPPorts = [ 25565 57621 ];
+    #networking.firewall.allowedUDPPorts = [ 25565 24454 ];
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;
 

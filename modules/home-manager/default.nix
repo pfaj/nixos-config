@@ -1,14 +1,9 @@
 {
-    home = import ./home.nix;
+    applications = import ./applications;
+    desktops = import ./desktops;
+    theme = import ./theme;
+
     dev = import ./dev.nix;
+    home = import ./home.nix;
     xdg = import ./xdg.nix;
-
-    desktops = {
-        hyprland = import ./desktops/hyprland/hyprland.nix;
-    };
-
-    theme = {
-        gtk = import ./theme/gtk.nix;
-        qt = import ./theme/qt.nix;
-    };
 }

@@ -10,14 +10,14 @@
             plugins = with inputs.anyrun.packages.${pkgs.system}; [
                 # An array of all the plugins you want, which either can be paths to the .so files, or their packages
                 applications
-                dictionary
-                kidex
-                randr
-                rink
-                shell
-                stdin
-                symbols
-                translate
+                #dictionary
+                #kidex
+                #randr
+                #rink
+                #shell
+                #stdin
+                #symbols
+                #translate
             ];
             width = { fraction = 0.3; };
             #position = "top";

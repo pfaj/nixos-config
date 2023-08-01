@@ -2,10 +2,12 @@
 {
     imports = with inputs.self.homeManagerModules; [
         home
-        dev
+        #dev
         theme.gtk
         theme.qt
         desktops.hyprland
+        applications.audio
+        applications.games
     ];
 
     home = {
@@ -27,27 +29,11 @@
 
         appimage-run
 
-        # audio
-        soundux
-        pavucontrol
-        lsp-plugins
-        calf
-        rnnoise
-        zam-plugins
-        zita-convolver
-        soundtouch
-
-        lutris
-        lunar-client
-        prismlauncher
-
         obsidian
     ];
 
-    services.easyeffects.enable = true;
-
     programs = {
-        obs-studio.enable = true;
+        #obs-studio.enable = true;
         kitty = {
             enable = true;
             shellIntegration.enableFishIntegration = true;

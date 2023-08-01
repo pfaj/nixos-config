@@ -46,19 +46,14 @@
     services = {
         udisks2.enable = true;
         gnome.gnome-keyring.enable = true;
-        xserver.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+        xserver.gdk-pixbuf.modulePackages = [ pkgs.librsvg ]; # for eww icons to work
     };
 
     programs = {
         hyprland = {
             enable = true;
-            #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-            nvidiaPatches = true;
+            package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+            #nvidiaPatches = true;
         };
-    };
-
-    environment.sessionVariables = {
-        WLR_NO_HARDWARE_CURSORS = "1";
-        QT_QPA_PLATFORMTHEME = "qt5ct";
     };
 }

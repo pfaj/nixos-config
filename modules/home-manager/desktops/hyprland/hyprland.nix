@@ -1,29 +1,26 @@
 { inputs, pkgs, config, lib, self, ... }:
 {
-    imports = [
-        #inputs.hyprland.homeManagerModules.default
-        ./anyrun.nix # runner
-        ./mako.nix # notification daemon
-    ] ++ (with inputs.self.homeManagerModules; [
+    imports = (with inputs.self.homeManagerModules; [
         xdg
+
+        applications.anyrun # runner
+        applications.mako # notification daemon
     ]);
 
     home.packages = with pkgs; [
         swww
         networkmanagerapplet
         dolphin
-        qt5ct
-        qt6ct
         ark
-        xfce.thunar
+        #xfce.thunar
         gvfs # might not need for thumbnails?
         gnome.gnome-system-monitor
 
-        swayidle
-        swaylock
-        wlogout
-        wl-clipboard
-        wlr-randr
+        #swayidle
+        #swaylock
+        #wlogout
+        #wl-clipboard
+        #wlr-randr
 
         inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
 
