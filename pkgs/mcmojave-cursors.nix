@@ -1,8 +1,11 @@
-{ pkgs }:
-pkgs.stdenv.mkDerivation {
-    name = "McMojave-cursors";
+{
+    stdenv,
+    fetchFromGitHub,
+}:
+stdenv.mkDerivation {
+    name = "mcmojave-cursors";
 
-    src = pkgs.fetchFromGitHub {
+    src = fetchFromGitHub {
         owner = "vinceliuice";
         repo = "McMojave-cursors";
         rev = "7d0bfc1f91028191cdc220b87fd335a235ee4439";

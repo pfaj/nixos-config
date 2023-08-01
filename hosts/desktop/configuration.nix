@@ -109,6 +109,7 @@ in
         htop
 
         # required by sddm theme
+        pkgs.sddm-chili
         libsForQt5.qt5.qtgraphicaleffects
     ];
 
@@ -125,7 +126,7 @@ in
 
             displayManager.sddm = {
                 enable = true;
-                theme = "${import ../../modules/home-manager/theme/sddm-chili.nix { inherit pkgs; }}";
+                theme = "sddm-chili";
             };
 
             layout = "us";

@@ -13,7 +13,7 @@ in
 
         theme = {
             name = "Marwaita X Dark";
-            package = callPackage ./marwaita-x.nix { };
+            package = pkgs.marwaita-x;
         };
 
         iconTheme = {
@@ -23,7 +23,7 @@ in
 
         cursorTheme = {
             name = "McMojave-cursors";
-            package = callPackage ./mcmojave-cursors.nix { };
+            package = pkgs.mcmojave-cursors;
             size = 24;
         };
     };

@@ -1,8 +1,11 @@
-{ pkgs }:
-pkgs.stdenv.mkDerivation {
-    name = "chili-sddm-theme";
+{
+    stdenv,
+    fetchFromGitHub,
+}:
+stdenv.mkDerivation {
+    name = "sddm-chili";
 
-    src = pkgs.fetchFromGitHub {
+    src = fetchFromGitHub {
         owner = "MarianArlt";
         repo = "sddm-chili";
         rev = "6516d50176c3b34df29003726ef9708813d06271";
@@ -10,7 +13,7 @@ pkgs.stdenv.mkDerivation {
     };
 
     installPhase = ''
-        mkdir -p $out
-        cp -R ./* $out/
+        mkdir -p $out/share/sddm/themes
+        cp -aR $src $out/share/sddm/themes/sddm-chili
     '';
 }
