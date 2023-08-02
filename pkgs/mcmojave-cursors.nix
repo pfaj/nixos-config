@@ -14,6 +14,6 @@ stdenv.mkDerivation {
 
     installPhase = ''
         mkdir -p $out
-        cp -R ./dist $out/
+        cp -R $src/dist $out/
     '';
 }
