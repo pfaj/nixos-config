@@ -21,6 +21,7 @@
         kate
         webcord-vencord
         spotify
+        playerctl
 
         gwenview
         gimp
