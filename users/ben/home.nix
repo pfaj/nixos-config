@@ -13,7 +13,7 @@
     home = {
         username = "ben";
         homeDirectory = "/home/ben";
-        stateVersion = "23.05";
+        stateVersion = config.system.stateVersion;
     };
 
     home.packages = with pkgs; [
