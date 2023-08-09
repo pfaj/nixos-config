@@ -13,7 +13,7 @@
     home = {
         username = "ben";
         homeDirectory = "/home/ben";
-        stateVersion = config.system.stateVersion;
+        stateVersion = "23.05";
     };
 
     home.packages = with pkgs; [
@@ -43,6 +43,10 @@
                 enable_audio_bell = false;
                 update_check_interval = 0;
                 window_padding_width = 4;
+            };
+            font = {
+                name = "Roboto Mono";
+                size = 11;
             };
             extraConfig = ''
                 background_opacity 0.85

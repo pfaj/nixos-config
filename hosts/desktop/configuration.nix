@@ -1,9 +1,6 @@
 { pkgs, inputs, config, ... }:
 let
-    inherit (inputs)
-        self
-        home-manager
-        ;
+    inherit (inputs) self home-manager;
 in
 {
     imports = [
@@ -12,48 +9,50 @@ in
         home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
+        fonts
+        gaming
+        hm
         nix
         nixpkgs
-        hm
-        fonts
+        nvidia
         sddm
-        gaming
-        #kde
+        ssh
+        virtualization
+        zram
+
         #gnome
         hyprland
+        #kde
     ]);
+
+    boot = {
+        kernelPackages = pkgs.linuxPackages_xanmod_latest; # install custom xanmod kernel
+        kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop"];
+        extraModulePackages = with config.boot.kernelPackages; [ rtl88x2bu v4l2loopback.out ];
+        extraModprobeConfig = ''
+            options vl42loopback exclusive_caps=1 card_label="Virtual Camera"
+        ''; # setup virtual cam
+
+        initrd = {
+            availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "nvme" "usb_storage" "sd_mod" ];
+            kernelModules = [];
+        };
+    };
+
+    hardware = {
+        enableAllFirmware = true;
+        enableRedistributableFirmware = true;
+
+        opengl = {
+            enable = true;
+            driSupport = true;
+            driSupport32Bit = true;
+        };
+    };
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-
-    zramSwap.enable = true;
-    zramSwap.memoryPercent = 100;
-    # zram is relatively cheap, prefer swap
-    boot.kernel.sysctl."vm.swappiness" = 180;
-    # zram is in memory, no need to readahead
-    boot.kernel.sysctl."vm.page-cluster" = 0;
-    # Start asynchronously writing at 128 MiB dirty memory
-    boot.kernel.sysctl."vm.dirty_background_bytes" = 128 * 1024 * 1024;
-    # Start synchronously writing at 50% dirty memory
-    # boot.kernel.sysctl."vm.dirty_ratio" = 50;
-    boot.kernel.sysctl."vm.dirty_bytes" = 64 * 1024 * 1024;
-    boot.kernel.sysctl."vm.vfs_cache_pressure" = 500;
-
-    # With 32 GiB of RAM and zram enabled OOM is unlikely
-    systemd.oomd.enable = false;
-    systemd.services.NetworkManager-wait-online.enable = false;
-    #systemd.network.wait-online.enable = false;
-
-    networking.hostName = "ben-nixos"; # Define your hostname.
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Enable networking
-    networking.networkmanager.enable = true;
 
     # Set your time zone.
     time.timeZone = "America/New_York";
@@ -82,41 +81,39 @@ in
     };
     home-manager.users.ben = import ../../users/ben/home.nix;
 
-    # virtualization
-    virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [ "ben" ];
-    users.extraUsers.ben.extraGroups = [ "vboxusers" ];
+    environment = {
+        etc = {"xdg/user-dirs.defaults".text = ''
+                DESKTOP=/mnt/LinuxExpansion/Places/Desktop
+                DOWNLOAD=/mnt/LinuxExpansion/Places/Downloads
+                TEMPLATES=/mnt/LinuxExpansion/Places/Templates
+                PUBLICSHARE=/mnt/LinuxExpansion/Places/PublicShare
+                DOCUMENTS=/mnt/LinuxExpansion/Places/Documents
+                MUSIC=/mnt/LinuxExpansion/Places/Audio
+                PICTURES=/mnt/LinuxExpansion/Places/Images
+                VIDEOS=/mnt/LinuxExpansion/Places/Videos
+            '';
+        };
 
-    environment.etc = {
-        "xdg/user-dirs.defaults".text = ''
-            DESKTOP=/mnt/LinuxExpansion/Places/Desktop
-            DOWNLOAD=/mnt/LinuxExpansion/Places/Downloads
-            TEMPLATES=/mnt/LinuxExpansion/Places/Templates
-            PUBLICSHARE=/mnt/LinuxExpansion/Places/PublicShare
-            DOCUMENTS=/mnt/LinuxExpansion/Places/Documents
-            MUSIC=/mnt/LinuxExpansion/Places/Audio
-            PICTURES=/mnt/LinuxExpansion/Places/Images
-            VIDEOS=/mnt/LinuxExpansion/Places/Videos
-        '';
+        systemPackages = with pkgs; [
+            neovim
+            wget
+            bindfs
+            git
+            htop
+        ];
     };
 
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
-    environment.systemPackages = with pkgs; [
-        neovim
-        wget
-        bindfs
-        git
-        htop
-    ];
-
-    # Enable sound with pipewire.
+    # enable sound with pipewire.
     sound.enable = true;
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
 
     services = {
-        # Enable the X11 windowing system.
+        flatpak.enable = true;
+        printing.enable = true;
+        #openssh.enable = true;
+
+        # enable the X11 windowing system.
         xserver = {
             enable = true;
             videoDrivers = ["nvidia"];
@@ -132,13 +129,12 @@ in
             pulse.enable = true;
             jack.enable = true;
         };
-
-        flatpak.enable = true;
-        printing.enable = true;
     };
 
     programs = {
         dconf.enable = true;
+        droidcam.enable = true;
+
         fish = {
             enable = true;
             interactiveShellInit = ''
@@ -149,37 +145,31 @@ in
                 end
             '';
         };
-        droidcam.enable = true;
+
+        # Some programs need SUID wrappers, can be configured further or are
+        # started in user sessions.
+        mtr.enable = true;
+        gnupg.agent = {
+            enable = true;
+            enableSSHSupport = true;
+        };
     };
-
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    # programs.mtr.enable = true;
-    # programs.gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
-
-    # List services that you want to enable:
-
-    # Enable the OpenSSH daemon.
-    # services.openssh.enable = true;
 
     # Open ports in the firewall.
     # 25565 - Minecraft
     # 24454 - Minecraft voice chat mod
     # 57621 - Spotify discovery
-    networking.firewall.allowedTCPPorts = [ 25565 57621 ];
-    networking.firewall.allowedUDPPorts = [ 25565 24454 ];
-    # Or disable the firewall altogether.
-    # networking.firewall.enable = false;
+    # 22 - SSH
+    networking = {
+        hostName = "ben-nixos";
+        networkmanager.enable = true;
 
-    # This value determines the NixOS release from which the default
-    # settings for stateful data, like file locations and database versions
-    # on your system were taken. It‘s perfectly fine and recommended to leave
-    # this value at the release version of the first install of this system.
-    # Before changing this value read the documentation for this option
-    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "23.05"; # Did you read the comment?
+        firewall = {
+            allowedTCPPorts = [ 25565 57621 22 ];
+            allowedUDPPorts = [ 25565 24454 ];
+        };
+    };
+
+    system.stateVersion = "23.05";
 }
 

@@ -8,33 +8,6 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # install custom xanmod kernel
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "nvme" "usb_storage" "sd_mod" ];
-    initrd.kernelModules = [];
-    kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop"];
-    extraModulePackages = with config.boot.kernelPackages; [ rtl88x2bu v4l2loopback.out ];
-    extraModprobeConfig = ''
-      options vl42loopback exclusive_caps=1 card_label="Virtual Camera"
-    ''; # setup virtual cam
-  };
-
-  hardware = {
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
-
-    opengl = {
-        enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
-    };
-
-    nvidia = {
-        modesetting.enable = true; # fix wayland
-        package = config.boot.kernelPackages.nvidiaPackages.beta; # idek if this works
-    };
-  };
-
   fileSystems."/" =
     {
       device = "/dev/disk/by-uuid/25186290-ccca-4758-9ca3-bca0b72790da";
@@ -58,13 +31,9 @@
       { device = "/dev/disk/by-uuid/635dd7c6-377f-4d4d-bb5b-4ce5eb547ecd"; }
     ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s20f0u3.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
+  #networking.interfaces.enp0s20f0u3.useDHCP = lib.mkDefault true;
+  #networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";

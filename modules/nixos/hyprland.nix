@@ -39,7 +39,7 @@
         };
 
         portal = {
-            extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+#             extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
         };
     };
 
@@ -52,7 +52,7 @@
     programs = {
         hyprland = {
             enable = true;
-            #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+            package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         };
     };
 }
