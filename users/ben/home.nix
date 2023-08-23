@@ -2,12 +2,13 @@
 {
     imports = with inputs.self.homeManagerModules; [
         home
-        dev
+        #dev
         theme.gtk
         theme.qt
-        desktops.hyprland
-        applications.audio
-        applications.games
+        #desktops.hyprland
+        #applications.audio
+        #applications.games
+        applications.vscode
     ];
 
     home = {
