@@ -14,7 +14,6 @@ in
         config.allowUnfree = true;
         overlays =
             (builtins.attrValues self.overlays)
-            ++ [ (final: prev: import ../../pkgs { pkgs = prev; naersk = pkgs.callPackage inputs.naersk { }; }) ]
-            ++ [ makeEwwOverlay ];
+            ++ [ (final: prev: import ../../pkgs { pkgs = prev; naersk = pkgs.callPackage inputs.naersk { }; }) ];
     };
 }

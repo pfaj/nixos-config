@@ -3,52 +3,60 @@
     imports = (with inputs.self.homeManagerModules; [
         xdg
 
-        applications.anyrun # runner
-        applications.mako # notification daemon
+#         applications.anyrun # runner
+        #applications.mako # notification daemon
     ]) ++ ([
-        inputs.hyprland.homeManagerModules.default
+#         inputs.hyprland.homeManagerModules.default
     ]);
 
-    home.packages = with pkgs; [
-        swww
-        networkmanagerapplet
-        dolphin
-        ark
-        xfce.thunar
-        gvfs # might not need for thumbnails?
-        gnome.gnome-system-monitor
+    home = {
+        sessionVariables = {
+            XDG_CURRENT_DESKTOP = "Hyprland";
+            XDG_SESSION_TYPE = "wayland";
+            XDG_SESSION_DESKTOP = "Hyprland";
 
-        swayidle
-        swaylock
-        wlogout
-        wl-clipboard
-        wlr-randr
+            QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+            QT_QPA_PLATFORM = "wayland;xcb";
+            QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 
-        inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+            SDL_VIDEODRIVER = "wayland";
+            _JAVA_AWT_WM_NONREPARENTING = "1";
+            CLUTTER_BACKEND = "wayland";
+            GDK_BACKEND = "wayland,x11";
 
-        eww-wayland
-        hyprland-workspaces
-    ];
+            NIXOS_OZONE_WL = "1";
+        };
 
-    home.sessionVariables = {
-        XDG_CURRENT_DESKTOP = "Hyprland";
-        XDG_SESSION_TYPE = "wayland";
-        XDG_SESSION_DESKTOP = "Hyprland";
+        packages = with pkgs; [
+            swww
+            networkmanagerapplet
+            dolphin
+            ark
+            xfce.thunar
+            gvfs # might not need for thumbnails?
+            gnome.gnome-system-monitor
 
-        QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-        QT_QPA_PLATFORM = "wayland;xcb";
-        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+            swayidle
+            swaylock
+            wlogout
+            wl-clipboard
+            wlr-randr
 
-        SDL_VIDEODRIVER = "wayland";
-        _JAVA_AWT_WM_NONREPARENTING = "1";
-        CLUTTER_BACKEND = "wayland";
-        GDK_BACKEND = "wayland,x11";
+            inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+
+            eww-wayland
+            hyprland-workspaces
+        ];
     };
 
     wayland.windowManager.hyprland = {
 #         enable = true;
 #         package = null;
-#         settings = {};
+#         enableNvidiaPatches = true;
+/*
+        settings = {
+        };*/
+
 #         config = {
 #              # make sure left monitor is primary
 #              exec-once = [

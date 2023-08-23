@@ -5,7 +5,7 @@ in
 {
     imports = [
         ./hardware-configuration.nix
-        ./override.nix
+        ./overrides.nix
         home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
@@ -17,12 +17,12 @@ in
         nvidia
         sddm
         ssh
-        virtualization
+#         virtualization
         zram
 
-        #gnome
+#         gnome
         hyprland
-        #kde
+#         kde
     ]);
 
     boot = {
@@ -53,6 +53,8 @@ in
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+
+    systemd.services.NetworkManager-wait-online.enable = false;
 
     # Set your time zone.
     time.timeZone = "America/New_York";
