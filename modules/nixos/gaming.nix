@@ -2,6 +2,7 @@
 {
     environment.systemPackages =  with pkgs; [
         piper # mouse dpi settings
+        protontricks
     ];
 
     services = {

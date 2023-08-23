@@ -9,18 +9,22 @@ let
     sudoGroup = "@wheel";
 in
 {
-    nix.settings = {
-        trusted-users = [ sudoGroup ];
-        experimental-features = [ "nix-command" "flakes" ];
-        auto-optimise-store = true;
-    };
+    nix = {
+        package = pkgs.nixUnstable;
 
-    nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-    nix.nixPath = lib.mapAttrsToList (name: flake: "${name}=${flake}") flakeInputs;
+        settings = {
+            trusted-users = [ sudoGroup ];
+            experimental-features = [ "nix-command" "flakes" ];
+            auto-optimise-store = true;
+        };
 
-    nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 30d";
+        registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+        nixPath = lib.mapAttrsToList (name: flake: "${name}=${flake}") flakeInputs;
+
+        gc = {
+            automatic = true;
+            dates = "weekly";
+            options = "--delete-older-than 30d";
+        };
     };
 }
