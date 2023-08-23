@@ -1,9 +1,6 @@
 { pkgs, inputs, config, ... }:
 let
-    inherit (inputs)
-        self
-        home-manager
-        ;
+    inherit (inputs) self home-manager;
 in
 {
     imports = [
@@ -11,15 +8,20 @@ in
         home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
+        fonts
+        #gaming
+        hm
         nix
         nixpkgs
-        hm
-        fonts
+        #nvidia
         sddm
-        #gaming
-        #kde
+        ssh
+        #virtualization
+        #zram
+
         #gnome
-        hyprland
+        #hyprland
+        kde
     ]);
 
     # Bootloader.
@@ -95,7 +97,7 @@ in
             jack.enable = true;
         };
 
-        flatpak.enable = true;
+        #flatpak.enable = true;
         printing.enable = true;
     };
 
@@ -113,6 +115,9 @@ in
         };
         droidcam.enable = true;
     };
+
+    services.blueman.enable = true;
+    hardware.bluetooth.enable = true;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.

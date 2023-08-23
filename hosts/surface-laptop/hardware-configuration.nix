@@ -13,7 +13,7 @@
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [];
     kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop"];
-    extraModulePackages = with config.boot.kernelPackages; [ rtl88x2bu v4l2loopback.out ];
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
     extraModprobeConfig = ''
       options vl42loopback exclusive_caps=1 card_label="Virtual Camera"
     ''; # setup virtual cam
