@@ -21,10 +21,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         naersk.url = "github:nix-community/naersk"; # for easy rust builds
-        hyprland-workspaces = {
-            url = "github:bdebiase/hyprland-workspaces";
-            flake = false;
-        };
     };
 
     nixConfig = {
@@ -38,7 +34,7 @@
         ];
     };
 
-    outputs = { self, nixpkgs, home-manager, flake-utils, hyprland, hyprland-contrib, eww, anyrun, naersk, hyprland-workspaces, ags } @ inputs:
+    outputs = { self, nixpkgs, home-manager, flake-utils, hyprland, hyprland-contrib, eww, anyrun, naersk } @ inputs:
     let
         inherit (flake-utils.lib) eachDefaultSystem;
         inherit (nixpkgs.lib) nixosSystem;

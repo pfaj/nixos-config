@@ -8,14 +8,14 @@ in
         home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
-        fonts
+#         fonts
         #gaming
         hm
         nix
         nixpkgs
         #nvidia
         sddm
-        ssh
+        #ssh
         #virtualization
         #zram
 
@@ -73,6 +73,7 @@ in
         bindfs
         git
         htop
+        neofetch
     ];
 
     # Enable sound with pipewire.

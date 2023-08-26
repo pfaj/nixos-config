@@ -3,12 +3,12 @@
     imports = with inputs.self.homeManagerModules; [
         home
         #dev
-        theme.gtk
-        theme.qt
+        #theme.gtk
+        #theme.qt
         #desktops.hyprland
         #applications.audio
         #applications.games
-        applications.vscode
+       applications.vscode
     ];
 
     home = {
@@ -24,9 +24,9 @@
         spotify
         playerctl
 
-        gwenview
-        gimp
-        vlc
+        #gwenview
+        #gimp
+        #vlc
         whatsapp-for-linux
 
         appimage-run
@@ -35,7 +35,7 @@
     ];
 
     programs = {
-        obs-studio.enable = true;
+#         obs-studio.enable = true;
         kitty = {
             enable = true;
             shellIntegration.enableFishIntegration = true;

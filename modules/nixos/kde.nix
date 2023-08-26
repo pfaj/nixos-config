@@ -11,6 +11,5 @@
 
     environment.systemPackages = with pkgs; [
         sierra-breeze-enhanced
-        xwaylandvideobridge
     ];
 }
