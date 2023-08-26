@@ -2,12 +2,12 @@
 {
     imports = with inputs.self.homeManagerModules; [
         home
-        dev
-        theme.gtk
-        theme.qt
-        desktops.hyprland
-        applications.audio
-        applications.games
+        #dev
+        #theme.gtk
+        #theme.qt
+        #desktops.hyprland
+        #applications.audio
+        #applications.games
         applications.vscode
         applications.kitty
         services.syncthing
@@ -25,7 +25,7 @@
         webcord-vencord
         spotify
         playerctl
-	obs-studio
+        obs-studio
 
         gwenview
         gimp

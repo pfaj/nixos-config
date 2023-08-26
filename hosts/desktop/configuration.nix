@@ -84,7 +84,7 @@ in
         extraGroups = [ "networkmanager" "wheel" ];
         shell = pkgs.fish;
     };
-    home-manager.users.ben = import ../../users/ben/home.nix;
+    home-manager.users.ben = import ./home.nix;
 
     environment = {
         etc = {

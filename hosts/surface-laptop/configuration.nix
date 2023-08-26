@@ -63,7 +63,7 @@ in
         extraGroups = [ "networkmanager" "wheel" ];
         shell = pkgs.fish;
     };
-    home-manager.users.ben = import ../../users/ben/home.nix;
+    home-manager.users.ben = import ./home.nix;
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
