@@ -106,6 +106,7 @@ in
             bindfs
             git
             htop
+            neofetch
         ];
     };
 

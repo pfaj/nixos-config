@@ -25,16 +25,14 @@
         webcord-vencord
         spotify
         playerctl
-
-        obs-studio
+	obs-studio
 
         gwenview
         gimp
         vlc
+
         whatsapp-for-linux
-
         appimage-run
-
         obsidian
     ];
 }
