@@ -37,11 +37,18 @@ in
             availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "nvme" "usb_storage" "sd_mod" ];
             kernelModules = [];
         };
+
+        loader = {
+            systemd-boot.enable = true;
+            efi.canTouchEfiVariables = true;
+        };
     };
 
     hardware = {
         enableAllFirmware = true;
         enableRedistributableFirmware = true;
+
+        bluetooth.enable = true;
 
         opengl = {
             enable = true;
@@ -49,10 +56,6 @@ in
             driSupport32Bit = true;
         };
     };
-
-    # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
 
     systemd.services.NetworkManager-wait-online.enable = false;
 
@@ -84,7 +87,8 @@ in
     home-manager.users.ben = import ../../users/ben/home.nix;
 
     environment = {
-        etc = {"xdg/user-dirs.defaults".text = ''
+        etc = {
+            "xdg/user-dirs.defaults".text = ''
                 DESKTOP=/mnt/LinuxExpansion/Places/Desktop
                 DOWNLOAD=/mnt/LinuxExpansion/Places/Downloads
                 TEMPLATES=/mnt/LinuxExpansion/Places/Templates

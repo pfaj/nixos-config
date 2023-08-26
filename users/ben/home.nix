@@ -2,13 +2,15 @@
 {
     imports = with inputs.self.homeManagerModules; [
         home
-        #dev
+        dev
         theme.gtk
         theme.qt
-        #desktops.hyprland
-        #applications.audio
-        #applications.games
+        desktops.hyprland
+        applications.audio
+        applications.games
         applications.vscode
+        applications.kitty
+        services.syncthing
     ];
 
     home = {
@@ -24,6 +26,8 @@
         spotify
         playerctl
 
+        obs-studio
+
         gwenview
         gimp
         vlc
@@ -33,26 +37,4 @@
 
         obsidian
     ];
-
-    programs = {
-        obs-studio.enable = true;
-        kitty = {
-            enable = true;
-            shellIntegration.enableFishIntegration = true;
-            settings = {
-                scrollback_lines = 10000;
-                enable_audio_bell = false;
-                update_check_interval = 0;
-                window_padding_width = 4;
-            };
-            font = {
-                name = "Roboto Mono";
-                size = 11;
-            };
-            extraConfig = ''
-                background_opacity 0.85
-                background_blur 0
-            '';
-        };
-    };
 }

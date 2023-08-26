@@ -116,7 +116,6 @@ in
         droidcam.enable = true;
     };
 
-    services.blueman.enable = true;
     hardware.bluetooth.enable = true;
 
     # Some programs need SUID wrappers, can be configured further or are

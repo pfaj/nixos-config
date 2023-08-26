@@ -1,5 +1,6 @@
 {
     applications = import ./applications;
+    services = import ./services;
     desktops = import ./desktops;
     theme = import ./theme;
 

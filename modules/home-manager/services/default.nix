@@ -1,0 +1,3 @@
+{
+    syncthing = import ./syncthing.nix;
+}
