@@ -9,20 +9,19 @@ in
         home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
+        default
+
         fonts
         gaming
-        hm
-        nix
-        nixpkgs
         nvidia
         sddm
         ssh
-#         virtualization
+        #virtualization
         zram
 
-#         gnome
-        hyprland
-#         kde
+        #desktops.gnome
+        desktops.hyprland
+        #desktops.kde
     ]);
 
     boot = {

@@ -3,21 +3,21 @@
     imports = with inputs.self.homeManagerModules; [
         home
         #dev
+
         #theme.gtk
         #theme.qt
-        #desktops.hyprland
+
         #applications.audio
         #applications.games
         applications.vscode
         applications.kitty
-        services.syncthing
-    ];
 
-    home = {
-        username = "ben";
-        homeDirectory = "/home/ben";
-        stateVersion = "23.05";
-    };
+        services.syncthing
+
+        #desktops.hyprland
+        desktops.kde
+        #desktops.gnome
+    ];
 
     home.packages = with pkgs; [
         brave

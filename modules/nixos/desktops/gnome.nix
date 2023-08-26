@@ -2,11 +2,6 @@
     services.xserver.desktopManager.gnome.enable = true;
     services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
-    environment.systemPackages = with pkgs; [
-        gnomeExtensions.appindicator
-        gnomeExtensions.blur-my-shell
-    ];
-
     environment.gnome.excludePackages = (with pkgs; [
         gnome-photos
         gnome-tour

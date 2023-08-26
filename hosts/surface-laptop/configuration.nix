@@ -8,20 +8,19 @@ in
         home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
-#         fonts
+        default
+
+        #fonts
         #gaming
-        hm
-        nix
-        nixpkgs
         #nvidia
         sddm
         #ssh
         #virtualization
         #zram
 
-        #gnome
-        #hyprland
-        kde
+        #desktops.gnome
+        #desktops.hyprland
+        desktops.kde
     ]);
 
     # Bootloader.

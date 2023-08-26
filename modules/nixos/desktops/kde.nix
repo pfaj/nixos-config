@@ -8,8 +8,4 @@
         elisa
         khelpcenter
     ];
-
-    environment.systemPackages = with pkgs; [
-        sierra-breeze-enhanced
-    ];
 }
