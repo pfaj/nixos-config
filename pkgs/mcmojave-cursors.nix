@@ -3,7 +3,7 @@
     fetchFromGitHub,
 }:
 stdenv.mkDerivation {
-    name = "mcmojave-cursors";
+    name = "McMojave-cursors";
 
     src = fetchFromGitHub {
         owner = "vinceliuice";
@@ -13,7 +13,7 @@ stdenv.mkDerivation {
     };
 
     installPhase = ''
-        mkdir -p $out
-        cp -R $src/dist $out/
+        mkdir -p $out/share/icons/McMojave-cursors
+        cp -R $src/dist/* $out/share/icons/McMojave-cursors/
     '';
 }

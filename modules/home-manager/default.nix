@@ -1,10 +1,9 @@
 {
-    applications = import ./applications;
+    programs = import ./programs;
     services = import ./services;
     desktops = import ./desktops;
     theme = import ./theme;
 
-    dev = import ./dev.nix;
     home = import ./home.nix;
     xdg = import ./xdg.nix;
 }

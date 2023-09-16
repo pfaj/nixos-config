@@ -20,5 +20,7 @@
         partition-manager
         filelight
         gh
+        git-lfs
+        jaq
     ];
 }

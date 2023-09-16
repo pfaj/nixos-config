@@ -2,17 +2,17 @@
 {
     imports = with inputs.self.homeManagerModules; [
         home
-        #dev
 
         #theme.gtk
         #theme.qt
 
-        #applications.audio
-        #applications.games
-        applications.vscode
-        applications.kitty
+        #programs.dev
+        #programs.games
+        #programs.vscode
+        programs.kitty
 
-        services.syncthing
+        #services.arrpc
+        #services.easy-effects
 
         #desktops.hyprland
         desktops.kde
@@ -23,15 +23,15 @@
         brave
         kate
         webcord-vencord
-        spotify
-        playerctl
-        obs-studio
+        #         spotify
+#         playerctl
+        #         obs-studio
 
         gwenview
         gimp
-        vlc
+#         vlc
 
-        whatsapp-for-linux
+        #         whatsapp-for-linux
         appimage-run
         obsidian
     ];

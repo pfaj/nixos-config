@@ -3,37 +3,34 @@
 # other GUI applications on various systems (primarily Unix-like) to be interoperable:
 #   https://www.freedesktop.org/wiki/Specifications/
 { config, pkgs, ... }:
+let
+    browser = "brave-browser.desktop";
+    file-manager = "org.kde.dolphin.desktop";
+in
 {
-    home.packages = with pkgs; [
-        xdg-utils # provides cli tools such as `xdg-mime` `xdg-open`
-        xdg-user-dirs
-    ];
+    home = {
+        packages = with pkgs; [
+            xdg-utils # provides cli tools such as `xdg-mime` `xdg-open`
+            xdg-user-dirs
+        ];
 
-#     xdg = {
-#         enable = true;
-#
-#         cacheHome = config.home.homeDirectory + "/.local/cache";
-#
-#         # manage $XDG_CONFIG_HOME/mimeapps.list
-#         # xdg search all desktop entries from $XDG_DATA_DIRS, check it by command:
-#         #  echo $XDG_DATA_DIRS
-#         # the system-level desktop entries can be list by command:
-#         #   ls -l /run/current-system/sw/share/applications/
-#         # the user-level desktop entries can be list by command(user ben):
-#         #  ls /etc/profiles/per-user/ben/share/applications/
-#         userDirs = {
-#             enable = true;
-#
-#             desktop = "/mnt/LinuxExpansion/Places/Desktop";
-#             documents = "/mnt/LinuxExpansion/Places/Documents";
-#             download = "/mnt/LinuxExpansion/Places/Downloads";
-#             music = "/mnt/LinuxExpansion/Places/Audio";
-#             pictures = "/mnt/LinuxExpansion/Places/Images";
-#             videos = "/mnt/LinuxExpansion/Places/Videos";
-#
-#             extraConfig = {
-#                 XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
-#             };
-#         };
-#     };
+#         sessionVariables.DEFAULT_BROWSER = "${pkgs.brave}/bin/brave";
+    };
+
+    xdg = {
+        enable = true;
+
+        mimeApps = {
+            enable = true;
+
+            defaultApplications = {
+                "text/html" = browser;
+                "x-scheme-handler/http" = browser;
+                "x-scheme-handler/https" = browser;
+                "x-scheme-handler/about" = browser;
+                "x-scheme-handler/unknown" = browser;
+                "inode/directory" = file-manager;
+            };
+        };
+    };
 }

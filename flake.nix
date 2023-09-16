@@ -13,9 +13,7 @@
             url = "github:hyprwm/contrib";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        eww = {
-            url = "github:ralismark/eww/tray-3";
-        };
+        ags.url = "github:Aylur/ags";
         anyrun = {
             url = "github:Kirottu/anyrun";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -25,29 +23,30 @@
 
     nixConfig = {
         extra-substituters = [
+            "https://nix-community.cachix.org"
             "https://hyprland.cachix.org"
             "https://anyrun.cachix.org"
         ];
         extra-trusted-public-keys = [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
             "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
             "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
         ];
     };
 
-    outputs = { self, nixpkgs, home-manager, flake-utils, hyprland, hyprland-contrib, eww, anyrun, naersk } @ inputs:
+    outputs = { self, ... } @ inputs:
     let
-        inherit (flake-utils.lib) eachDefaultSystem;
-        inherit (nixpkgs.lib) nixosSystem;
+        inherit (inputs.nixpkgs.lib) nixosSystem;
     in
     {
         nixosConfigurations = {
-            "desktop" = nixpkgs.lib.nixosSystem {
+            "desktop" = nixosSystem {
                 system = "x86_64-linux";
                 modules = [ ./hosts/desktop/configuration.nix ];
                 specialArgs = { inherit inputs; };
             };
 
-            "surface-laptop" = nixpkgs.lib.nixosSystem {
+            "surface-laptop" = nixosSystem {
                 system = "x86_64-linux";
                 modules = [ ./hosts/surface-laptop/configuration.nix ];
                 specialArgs = { inherit inputs; };

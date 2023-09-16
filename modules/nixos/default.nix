@@ -1,10 +1,10 @@
 {
-    default = import ./default;
+    core = import ./core;
+    common = import ./common.nix;
     desktops = import ./desktops;
-
-    fonts = import ./fonts.nix;
     gaming = import ./gaming.nix;
     nvidia = import ./nvidia.nix;
+    pipewire = import ./pipewire.nix;
     sddm = import ./sddm.nix;
     ssh = import ./ssh.nix;
     virtualization = import ./virtualization.nix;

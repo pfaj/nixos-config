@@ -27,6 +27,8 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 Scale=1.75
 
 [org.kde.kdecoration2]
+BorderSize=None
+BorderSizeAuto=false
 ButtonsOnLeft=MSF
 library=org.kde.sierrabreezeenhanced
 theme=Sierra Breeze Enhanced

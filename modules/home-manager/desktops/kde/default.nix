@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
     home.packages = with pkgs; [
+        okular
         sierra-breeze-enhanced
     ];
 

@@ -1,13 +1,19 @@
 { pkgs, ... }:
-let
-    callPackage = pkgs.lib.callPackageWith (pkgs);
-in
 {
+    home.pointerCursor = {
+        name = "McMojave-cursors";
+        package = pkgs.mcmojave-cursors;
+        size = 24;
+        gtk.enable = true;
+        x11.enable = true;
+    };
+
     gtk = {
         enable = true;
 
         font = {
-            name = "Roboto Regular";
+            name = "Roboto";
+            package = pkgs.roboto;
             size = 11;
         };
 
@@ -21,10 +27,12 @@ in
             package = pkgs.kora-icon-theme;
         };
 
-        cursorTheme = {
-            name = "McMojave-cursors";
-            package = pkgs.mcmojave-cursors;
-            size = 24;
+        gtk3.extraConfig = {
+            gtk-application-prefer-dark-theme = 1;
+        };
+
+        gtk4.extraConfig = {
+            gtk-application-prefer-dark-theme = 1;
         };
     };
 }

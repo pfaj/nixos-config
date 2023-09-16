@@ -4,5 +4,6 @@
         lutris
         lunar-client
         prismlauncher
+        protonup-qt
     ];
 }

@@ -3,10 +3,10 @@
     imports = (with inputs.self.homeManagerModules; [
         xdg
 
-#         applications.anyrun # runner
-        #applications.mako # notification daemon
+        programs.anyrun # runner
+        #programs.mako # notification daemon
     ]) ++ ([
-#         inputs.hyprland.homeManagerModules.default
+        inputs.hyprland.homeManagerModules.default
     ]);
 
     home = {
@@ -23,8 +23,6 @@
             _JAVA_AWT_WM_NONREPARENTING = "1";
             CLUTTER_BACKEND = "wayland";
             GDK_BACKEND = "wayland,x11";
-
-            NIXOS_OZONE_WL = "1";
         };
 
         packages = with pkgs; [
@@ -33,7 +31,6 @@
             dolphin
             ark
             xfce.thunar
-            gvfs # might not need for thumbnails?
             gnome.gnome-system-monitor
 
             swayidle
@@ -44,18 +41,24 @@
 
             inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
 
-            eww-wayland
-            hyprland-workspaces
+            inputs.ags.packages.${pkgs.system}.default
+            hyprpicker
+            brightnessctl
+            glib
+
+            #eww-wayland
+            #hyprland-workspaces
         ];
     };
 
     wayland.windowManager.hyprland = {
-#         enable = true;
-#         package = null;
-#         enableNvidiaPatches = true;
-/*
-        settings = {
-        };*/
+        enable = true;
+        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        enableNvidiaPatches = true;
+        extraConfig = builtins.readFile ./hyprland.conf;
+
+#         settings = {
+#         };
 
 #         config = {
 #              # make sure left monitor is primary

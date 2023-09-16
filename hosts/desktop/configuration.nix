@@ -6,14 +6,13 @@ in
     imports = [
         ./hardware-configuration.nix
         ./overrides.nix
-        home-manager.nixosModules.home-manager
     ]
     ++ (with self.nixosModules; [
-        default
-
-        fonts
+        core
+        common
         gaming
         nvidia
+        pipewire
         sddm
         ssh
         #virtualization
@@ -21,7 +20,7 @@ in
 
         #desktops.gnome
         desktops.hyprland
-        #desktops.kde
+#         desktops.kde
     ]);
 
     boot = {
@@ -43,40 +42,6 @@ in
         };
     };
 
-    hardware = {
-        enableAllFirmware = true;
-        enableRedistributableFirmware = true;
-
-        bluetooth.enable = true;
-
-        opengl = {
-            enable = true;
-            driSupport = true;
-            driSupport32Bit = true;
-        };
-    };
-
-    systemd.services.NetworkManager-wait-online.enable = false;
-
-    # Set your time zone.
-    time.timeZone = "America/New_York";
-
-    # Select internationalisation properties.
-    i18n.defaultLocale = "en_US.UTF-8";
-
-    i18n.extraLocaleSettings = {
-        LC_ADDRESS = "en_US.UTF-8";
-        LC_IDENTIFICATION = "en_US.UTF-8";
-        LC_MEASUREMENT = "en_US.UTF-8";
-        LC_MONETARY = "en_US.UTF-8";
-        LC_NAME = "en_US.UTF-8";
-        LC_NUMERIC = "en_US.UTF-8";
-        LC_PAPER = "en_US.UTF-8";
-        LC_TELEPHONE = "en_US.UTF-8";
-        LC_TIME = "en_US.UTF-8";
-    };
-
-    # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.ben = {
         isNormalUser = true;
         description = "Ben";
@@ -85,79 +50,41 @@ in
     };
     home-manager.users.ben = import ./home.nix;
 
-    environment = {
-        etc = {
-            "xdg/user-dirs.defaults".text = ''
-                DESKTOP=/mnt/LinuxExpansion/Places/Desktop
-                DOWNLOAD=/mnt/LinuxExpansion/Places/Downloads
-                TEMPLATES=/mnt/LinuxExpansion/Places/Templates
-                PUBLICSHARE=/mnt/LinuxExpansion/Places/PublicShare
-                DOCUMENTS=/mnt/LinuxExpansion/Places/Documents
-                MUSIC=/mnt/LinuxExpansion/Places/Audio
-                PICTURES=/mnt/LinuxExpansion/Places/Images
-                VIDEOS=/mnt/LinuxExpansion/Places/Videos
-            '';
-        };
-
-        systemPackages = with pkgs; [
-            neovim
-            wget
-            bindfs
-            git
-            htop
-            neofetch
-        ];
-    };
-
-    # enable sound with pipewire.
-    sound.enable = true;
-    hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-
     services = {
         flatpak.enable = true;
-        printing.enable = true;
-        #openssh.enable = true;
+        openssh.enable = true;
 
-        # enable the X11 windowing system.
-        xserver = {
-            enable = true;
-            videoDrivers = ["nvidia"];
-
-            layout = "us";
-            xkbVariant = "";
-        };
-
-        pipewire = {
-            enable = true;
-            alsa.enable = true;
-            alsa.support32Bit = true;
-            pulse.enable = true;
-            jack.enable = true;
-        };
-    };
-
-    programs = {
-        dconf.enable = true;
-        droidcam.enable = true;
-
-        fish = {
-            enable = true;
-            interactiveShellInit = ''
-                set -U fish_greeting
-
-                if type -q neofetch
-                    neofetch
-                end
-            '';
-        };
-
-        # Some programs need SUID wrappers, can be configured further or are
-        # started in user sessions.
-        mtr.enable = true;
-        gnupg.agent = {
-            enable = true;
-            enableSSHSupport = true;
+        syncthing.settings = {
+            devices = {
+                "surface-laptop" = {
+                    id = "5T35XEK-CJHEG4W-XLPU2QL-UAF7AI3-FZRAA2S-UCCPKFZ-ZIYKFL4-QNR2HQL";
+                };
+#                 "samsung-phone" = {
+#                     id = "ILJUQUQ-55IYYIO-LBQ66ZC-7UZDPR3-FER5YO5-KRM2SDX-VXWOH6H-VLWOMQG";
+#                 };
+            };
+            folders = {
+                "nixos-config" = {
+                    path = "/home/ben/.config/nix/";
+                    devices = [ "surface-laptop" ];
+                    versioning = {
+                        type = "simple";
+                        params = {
+                            keep = "10";
+                        };
+                    };
+                };
+#                 "obsidian" = {
+#                     path = "/mnt/LinuxExpansion/Places/Documents/Obsidian";
+#                     devices = [ "surface-laptop" "samsung-phone" ];
+#                     versioning = {
+#                         type = "simple";
+#                         params = {
+#                             keep = "3";
+#                         };
+#                     };
+#                 };
+            };
         };
     };
 
@@ -167,9 +94,6 @@ in
     # 57621 - Spotify discovery
     # 22 - SSH
     networking = {
-        hostName = "ben-nixos";
-        networkmanager.enable = true;
-
         firewall = {
             allowedTCPPorts = [ 25565 57621 22 ];
             allowedUDPPorts = [ 25565 24454 ];

@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
     imports = [
-        ./hm.nix
+        ./home-manager.nix
         ./nix.nix
         ./nixpkgs.nix
     ];
