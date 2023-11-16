@@ -9,7 +9,8 @@
         #programs.dev
         #programs.games
         #programs.vscode
-        programs.kitty
+        programs.alacritty
+        programs.neovim
 
         #services.arrpc
         #services.easy-effects

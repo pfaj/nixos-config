@@ -1,9 +1,16 @@
 { inputs, pkgs, ... }:
 {
-    environment.systemPackages =  with pkgs; [
-        piper # mouse dpi settings
-        protontricks
-    ];
+    environment = {
+        sessionVariables = {
+            STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
+        };
+
+        systemPackages =  with pkgs; [
+            piper # mouse dpi settings
+            protontricks
+            steamtinkerlaunch
+        ];
+    };
 
     services = {
         ratbagd.enable = true; # required by piper

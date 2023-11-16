@@ -1,8 +1,4 @@
-{ inputs, pkgs, ... }: {
-    imports = [
-        inputs.hyprland.nixosModules.default
-    ];
-
+{ pkgs, ... }: {
     environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
     };
@@ -40,10 +36,13 @@
 
     programs = {
         dconf.enable = true;
-
-        hyprland = {
+        wayfire = {
             enable = true;
-            package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+            plugins = with pkgs.wayfirePlugins; [
+                wcm
+                wf-shell
+                wayfire-plugins-extra
+            ];
         };
     };
 }

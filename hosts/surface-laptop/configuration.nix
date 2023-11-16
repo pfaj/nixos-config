@@ -11,7 +11,7 @@ in
         common
         #gaming
         #nvidia
-        pipewire
+        audio
         sddm
         #ssh
         #virtualization
@@ -50,10 +50,12 @@ in
     home-manager.users.ben = import ./home.nix;
 
     services = {
+        iptsd.enable = true;
+
         syncthing.settings = {
             devices = {
                 "main-desktop" = {
-                    id = "GWBQ6FT-OFHIDSB-KC4LYAO-GUKY7GJ-6QJ6X4O-4RA2X3P-O6V4QE6-YXCXNQE";
+                    id = "Y3KNUJG-DJY2DKX-IXFY2DW-TNOAXLT-UO5LAD2-LV5WTKQ-PP22O6C-ETZ2FQV";
                 };
                 "samsung-phone" = {
                     id = "ILJUQUQ-55IYYIO-LBQ66ZC-7UZDPR3-FER5YO5-KRM2SDX-VXWOH6H-VLWOMQG";

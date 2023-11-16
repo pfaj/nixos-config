@@ -9,9 +9,17 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         hyprland.url = "github:hyprwm/Hyprland";
+        hyprland-plugins = {
+            url = "github:hyprwm/hyprland-plugins";
+            inputs.hyprland.follows = "hyprland";
+        };
         hyprland-contrib = {
             url = "github:hyprwm/contrib";
             inputs.nixpkgs.follows = "nixpkgs";
+        };
+        split-monitor-workspaces = {
+            url = "github:Duckonaut/split-monitor-workspaces";
+            inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
         };
         ags.url = "github:Aylur/ags";
         anyrun = {
@@ -19,6 +27,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         naersk.url = "github:nix-community/naersk"; # for easy rust builds
+        musnix  = { url = "github:musnix/musnix"; };
     };
 
     nixConfig = {

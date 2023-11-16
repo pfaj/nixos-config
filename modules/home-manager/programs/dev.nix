@@ -1,10 +1,9 @@
 { pkgs, ... }:
 {
     home.packages = with pkgs; [
-        conda
-        jetbrains.idea-community
+#         conda
+#         jetbrains.idea-community
         cargo
-        python3
         neofetch
         openjdk
         nodejs

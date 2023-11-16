@@ -5,6 +5,7 @@ in
 {
     arrpc = callPackage ./arrpc.nix { };
     hyprland-workspaces = callPackage ./hyprland-workspaces.nix { };
+    latencyflex = callPackage ./latencyflex.nix { };
     marwaita-x = callPackage ./marwaita-x.nix { };
     mcmojave-cursors = callPackage ./mcmojave-cursors.nix { };
     sddm-chili = callPackage ./sddm-chili.nix { };

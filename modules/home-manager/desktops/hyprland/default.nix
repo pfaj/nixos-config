@@ -30,7 +30,6 @@
             networkmanagerapplet
             dolphin
             ark
-            xfce.thunar
             gnome.gnome-system-monitor
 
             swayidle
@@ -53,8 +52,11 @@
 
     wayland.windowManager.hyprland = {
         enable = true;
-        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-        enableNvidiaPatches = true;
+        package = null;
+        plugins = [
+#             inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+            inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+        ];
         extraConfig = builtins.readFile ./hyprland.conf;
 
 #         settings = {

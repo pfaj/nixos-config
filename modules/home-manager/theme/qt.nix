@@ -6,12 +6,20 @@
         };
 
         packages = with pkgs; [
-            libsForQt5.qtstyleplugin-kvantum
             catppuccin-kvantum
         ];
     };
 
     xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
-        "%General".Theme = "Catppuccin";
+        General.theme = "Catppuccin-Frappe-Blue";
+    };
+
+    home.file.".config/Kvantum/Catppuccin-Frappe-Blue".source = "${pkgs.catppuccin-kvantum}/share/Kvantum/Catppuccin-Frappe-Blue";
+
+    qt = {
+        enable = true;
+        platformTheme = "qtct";
+        style.name = "kvantum";
     };
 }
+

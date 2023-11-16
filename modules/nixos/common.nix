@@ -1,5 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+    homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
+in
 {
+    # import home-manager env vars
+    environment.extraInit = "[[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars}";
+
     # Set your time zone.
     time.timeZone = "America/New_York";
 
@@ -33,28 +39,33 @@
         };
     };
 
+    security.sudo.wheelNeedsPassword = false;
+
     networking = {
         hostName = "ben-nixos";
-        networkmanager.enable = true;
+        networkmanager = {
+            enable = true;
+            wifi.powersave = false;
+        };
     };
 
     systemd.services.NetworkManager-wait-online.enable = false;
 
     services = {
+        flatpak.enable = true;
         printing.enable = true;
 
-        mullvad-vpn = {
-            enable = true;
-            enableExcludeWrapper = false;
-        };
+#         mullvad-vpn = {
+#             enable = true;
+#             enableExcludeWrapper = false;
+#         };
         syncthing = {
             enable = true;
             user = "ben";
-            dataDir = "/home/ben/Documents";
-            configDir = "/home/ben/.config/syncthing";
             openDefaultPorts = true;
-            overrideDevices = true;
-            overrideFolders = true;
+            systemService = true;
+            dataDir = "/home/ben/syncthing";
+            configDir = "/home/ben/.config/syncthing";
         };
         xserver = {
             enable = true;
@@ -80,7 +91,6 @@
     };
 
     environment.systemPackages = with pkgs; [
-        neovim
         wget
         bindfs
         git
