@@ -16,6 +16,7 @@ in
         sddm
         ssh
         #virtualization
+        wootility
 #         zram
 
 #         desktops.gnome
