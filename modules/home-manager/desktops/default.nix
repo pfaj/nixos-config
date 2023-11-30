@@ -1,5 +1,5 @@
 {
     hyprland = import ./hyprland;
-    kde = import ./kde;
+    plasma5 = import ./plasma5;
     gnome = import ./gnome.nix;
 }

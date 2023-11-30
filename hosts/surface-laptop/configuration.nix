@@ -8,6 +8,7 @@ in
     ]
     ++ (with self.nixosModules; [
         core
+        
         common
         #gaming
         #nvidia
@@ -16,10 +17,6 @@ in
         #ssh
         #virtualization
         #zram
-
-        #desktops.gnome
-        #desktops.hyprland
-        desktops.kde
     ]);
 
     boot = {
