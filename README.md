@@ -1,15 +1,21 @@
-**⚠️WARNING⚠️**
-
-**This configuration is VERY incomplete. Most usual desktop features flat out don't work yet or may never work.**
+> [!WARNING]
+> This configuration is VERY incomplete. Most usual desktop features flat out don't work yet or may never work.
 
 # nix-config
 The configuration for my personal NixOS setup.
-
-![image](https://github.com/bdebiase/nix-config/assets/66143154/211b1496-efc2-486c-b6c9-2acf9aebd84f)
+![image](https://github.com/bdebiase/nix-config/assets/66143154/3d76fe92-f50e-4b7e-84d2-b89a0ff4807b)
 
 The project structure is as follows:
-- `hosts`: contains the separate system-level configuration files for each of my own systems
-- `modules`: contains home-manager modules (set by home or other modules) and nixos modules (set in hosts config)
-- `overlays`: not even sure how it works but kinda self-explanatory
+- `hosts`: contains the separate configuration files for each of my own systems
+- `modules`: contains home-manager modules (set by home or other system modules) and nixos modules (set in hosts config)
+- `overlays`: custom overlays/additions to already existing packages
 - `pkgs`: all custom package derivations
-- `users`: contains only a single user for now, where the home resides
+
+## Contributing
+Contributions are always welcome. If you see something that looks off or have any suggests to improve the codebase, it would be very much appreciated. This repo will be constantly evolving and adapting to fit modern standards and any NixOS changes moving on.
+
+## Acknowledgements
+Massive thanks to all the resources provided by the NixOS community and the endless repositories providing a reference for me to learn and build off of. Some of the massive inspirations I used for building my own configuration are:
+- [Aylur's dotfiles](https://github.com/Aylur/dotfiles)
+- [fufexan's dotfiles](https://github.com/fufexan/dotfiles)
+- [dacioromero's nix config](https://github.com/dacioromero/nix-config)
