@@ -72,4 +72,16 @@ in
     "file://${config.xdg.userDirs.pictures}"
     "file://${config.xdg.userDirs.videos}"
   ];
+
+  wayland.windowManager.hyprland.settings = {
+    monitor = [
+      "DP-2,1920x1080@144,0x0,1,bitdepth,10"
+      ",preferred,auto,1,bitdepth,10"
+    ];
+
+    workspace = [
+      "DP-2,1"
+      "HDMI-A-1,11"
+    ];
+  };
 }

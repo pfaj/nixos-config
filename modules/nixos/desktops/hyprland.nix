@@ -1,13 +1,15 @@
-{ inputs, pkgs, ... }:
-let
-  inherit (inputs) self;
-in
 {
+  inputs,
+  pkgs,
+  ...
+}: let
+  inherit (inputs) self;
+in {
   imports = [
     inputs.hyprland.nixosModules.default
   ];
 
-	# imports hyprland home-manager module
+  # imports hyprland home-manager module
   home-manager.users.ben.imports = [
     self.homeManagerModules.desktops.hyprland
   ];
@@ -19,7 +21,7 @@ in
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
     config = {
       common = {
         default = [
@@ -35,9 +37,9 @@ in
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -60,7 +62,7 @@ in
 
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      package = inputs.hyprland.packages.${pkgs.system}.default;
     };
   };
 }

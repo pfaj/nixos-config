@@ -1,16 +1,22 @@
-{ inputs, pkgs, config, lib, self, ... }:
-{
-  imports = with inputs.self.homeManagerModules; [
-    theme.fonts
-    theme.gtk
-    theme.qt
-    xdg
+{ inputs
+, pkgs
+, config
+, lib
+, self
+, ...
+}: {
+  imports = with inputs.self.homeManagerModules;
+    [
+      theme.fonts
+      theme.gtk
+      theme.qt
+      xdg
 
-    programs.anyrun # runner
-    programs.ags # shell
-  ] ++ [
-    inputs.hyprland.homeManagerModules.default
-  ];
+      programs.ags # shell
+      programs.anyrun # runner
+    ] ++ [
+      ./settings.nix
+    ];
 
   home = {
     sessionVariables = {
@@ -30,26 +36,20 @@
 
     packages = with pkgs; [
       # programs
-      networkmanagerapplet
       dolphin
       ark
       gnome.gnome-system-monitor
 
       # external packages
       inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-
-      #eww-wayland
-      #hyprland-workspaces
     ];
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = null;
     plugins = [
       #inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces ### doesn't work as expected
-      #inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
     ];
-    extraConfig = builtins.readFile ./config/hyprland.conf;
   };
 }
