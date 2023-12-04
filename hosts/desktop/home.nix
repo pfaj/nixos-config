@@ -10,6 +10,7 @@ let
     programs.vscode
     #programs.kitty
     programs.alacritty
+    programs.direnv
 
     services.arrpc
     services.easy-effects
