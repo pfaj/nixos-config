@@ -30,6 +30,10 @@
     musnix = {url = "github:musnix/musnix";};
     plasma6.url = "github:nix-community/kde2nix";
     neovim-flake.url = "github:jordanisaacs/neovim-flake";
+    aylur-dotfiles = {
+      url = "github:Aylur/dotfiles";
+      flake = false;
+    };
   };
 
   nixConfig = {

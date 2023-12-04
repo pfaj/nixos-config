@@ -39,6 +39,22 @@
         "type": "github"
       }
     },
+    "aylur-dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701523163,
+        "narHash": "sha256-y/GVhbfuGDpmYndrCfiIDBuwXRcrDPjg/PNZg/wVi/s=",
+        "owner": "Aylur",
+        "repo": "dotfiles",
+        "rev": "1285ed72ca31573098bc38fed8a062c72550e009",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Aylur",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
     "dirt-samples-src": {
       "flake": false,
       "locked": {
@@ -1620,6 +1636,7 @@
       "inputs": {
         "ags": "ags",
         "anyrun": "anyrun",
+        "aylur-dotfiles": "aylur-dotfiles",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
