@@ -23,6 +23,7 @@
       "editor.smoothScrolling" = true;
       "editor.cursorBlinking" = "smooth";
       "editor.cursorSmoothCaretAnimation" = "on";
+      "editor.formatOnSave" = true;
       "workbench.list.smoothScrolling" = true;
       "terminal.integrated.smoothScrolling" = true;
       "diffEditor.renderSideBySide" = false;

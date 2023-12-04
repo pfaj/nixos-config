@@ -1,4 +1,3 @@
-{ ... }:
 {
   wayland.windowManager.hyprland.settings = {
     exec-once = [
@@ -113,52 +112,70 @@
       };
     };
 
-    windowrule =
-      let
-        float = regex: "float, ^(${regex})$";
-        opacity = value: regex: "opacity ${value} ${value}, ^(${regex})$";
-        size = value: regex: "size ${value} ${value}, ^(${regex})$";
-        workspace = value: regex: "workspace ${value}, ^(${regex})$";
-        pin = regex: "pin, ^(${regex})$";
-        center = regex: "center, ^(${regex})$";
-      in
-      [
-        (workspace "1" ".*brave.*")
-        (workspace "2 silent" "WebCord")
-        (workspace "5 silent" "steam")
-        (workspace "10 silent" "easyeffects")
+    windowrule = let
+      float = regex: "float, ^(${regex})$";
+      opacity = value: regex: "opacity ${value} ${value}, ^(${regex})$";
+      size = value: regex: "size ${value} ${value}, ^(${regex})$";
+      workspace = value: regex: "workspace ${value}, ^(${regex})$";
+      pin = regex: "pin, ^(${regex})$";
+      center = regex: "center, ^(${regex})$";
+    in [
+      (workspace "1" ".*brave.*")
+      (workspace "2 silent" ".*discord.*")
+      (workspace "5 silent" "steam")
+      (workspace "10 silent" ".*easyeffects.*")
 
-        (float "xdg-desktop-portal")
-        (float "xdg-desktop-portal-gtk")
+      (float "xdg-desktop-portal")
+      (float "xdg-desktop-portal-gtk")
 
-        (opacity "0.95" "chromium")
-        (opacity "0.95" ".*code.*")
-        (opacity "0.95" "WebCord")
-        (opacity "0.95" "steam")
-        (opacity "0.95" ".*brave.*")
-        (opacity "0.95" "easyeffects")
+      (opacity "0.95" "chromium")
+      (opacity "0.95" ".*code.*")
+      (opacity "0.95" "WebCord")
+      (opacity "0.95" "steam")
+      (opacity "0.95" ".*brave.*")
+      (opacity "0.95" "easyeffects")
 
-        (float "alacritty-floating")
-        (size "60%" "alacritty-floating")
-        (center "alacritty-floating")
+      (float "alacritty-floating")
+      (size "60%" "alacritty-floating")
+      (center "alacritty-floating")
 
-        (float "org.kde.dolphin")
-        (size "60%" "org.kde.dolphin")
-        (center "org.kde.dolphin")
+      (float "org.kde.dolphin")
+      (size "60%" "org.kde.dolphin")
+      (center "org.kde.dolphin")
 
-        (float "gnome-system-monitor")
-        (opacity "0.95" "gnome-system-monitor")
-        (size "60%" "gnome-system-monitor")
-        (pin "gnome-system-monitor")
-        (center "gnome-system-monitor")
-      ];
-
-    layerrule = [
-      "blur,anyrun"
-      "ignorezero,anyrun"
-      "blur,gtk-layer-shell"
-      "ignorezero,gtk-layer-shell"
+      (float "gnome-system-monitor")
+      (opacity "0.95" "gnome-system-monitor")
+      (size "60%" "gnome-system-monitor")
+      (pin "gnome-system-monitor")
+      (center "gnome-system-monitor")
     ];
+
+    layerrule = let
+      makeRule = type: ["blur, ${type}" "ignorezero, ${type}"];
+      types = [
+        "anyrun"
+        "gtk-layer-shell"
+        "dock1"
+        "notifications1"
+        "corner1topleft"
+        "corner1topright"
+        "corner1bottomleft"
+        "corner1bottomright"
+        "bar1"
+        "indicator1"
+        "dock0"
+        "notifications0"
+        "corner0topleft"
+        "corner0topright"
+        "corner0bottomleft"
+        "corner0bottomright"
+        "bar0"
+        "indicator0"
+        "dashboard"
+        "quicksettings"
+      ];
+    in
+      builtins.concatMap makeRule types;
 
     bind = [
       # management binds
@@ -229,27 +246,29 @@
     bindm = [
       # move/resize window with mouse buttons
       "SUPER, mouse:272, movewindow"
-      "SUPER, mouse:273, resizeactive"
+      "SUPER, mouse:273, resizewindow"
     ];
 
-    bindle = let e = "exec, ags -b hypr -r"; in
-      [
-        ",XF86MonBrightnessUp,   ${e} 'brightness.screen += 0.05; indicator.display()'"
-        ",XF86MonBrightnessDown, ${e} 'brightness.screen -= 0.05; indicator.display()'"
-        ",XF86KbdBrightnessUp,   ${e} 'brightness.kbd++; indicator.kbd()'"
-        ",XF86KbdBrightnessDown, ${e} 'brightness.kbd--; indicator.kbd()'"
-        ",XF86AudioRaiseVolume,  ${e} 'audio.speaker.volume += 0.05; indicator.speaker()'"
-        ",XF86AudioLowerVolume,  ${e} 'audio.speaker.volume -= 0.05; indicator.speaker()'"
-      ];
+    bindle = let
+      e = "exec, ags -b hypr -r";
+    in [
+      ",XF86MonBrightnessUp, ${e} 'brightness.screen += 0.05; indicator.display()'"
+      ",XF86MonBrightnessDown, ${e} 'brightness.screen -= 0.05; indicator.display()'"
+      ",XF86KbdBrightnessUp, ${e} 'brightness.kbd++; indicator.kbd()'"
+      ",XF86KbdBrightnessDown, ${e} 'brightness.kbd--; indicator.kbd()'"
+      ",XF86AudioRaiseVolume, ${e} 'audio.speaker.volume += 0.05; indicator.speaker()'"
+      ",XF86AudioLowerVolume,${e} 'audio.speaker.volume -= 0.05; indicator.speaker()'"
+    ];
 
-    bindl = let e = "exec, ags -b hypr -r"; in
-      [
-        ",XF86AudioPlay,    ${e} 'mpris?.playPause()'"
-        ",XF86AudioStop,    ${e} 'mpris?.stop()'"
-        ",XF86AudioPause,   ${e} 'mpris?.pause()'"
-        ",XF86AudioPrev,    ${e} 'mpris?.previous()'"
-        ",XF86AudioNext,    ${e} 'mpris?.next()'"
-        ",XF86AudioMicMute, ${e} 'audio.microphone.isMuted = !audio.microphone.isMuted'"
-      ];
+    bindl = let
+      e = "exec, ags -b hypr -r";
+    in [
+      ",XF86AudioPlay, ${e} 'mpris?.playPause()'"
+      ",XF86AudioStop, ${e} 'mpris?.stop()'"
+      ",XF86AudioPause, ${e} 'mpris?.pause()'"
+      ",XF86AudioPrev, ${e} 'mpris?.previous()'"
+      ",XF86AudioNext, ${e} 'mpris?.next()'"
+      ",XF86AudioMicMute, ${e} 'audio.microphone.isMuted = !audio.microphone.isMuted'"
+    ];
   };
 }

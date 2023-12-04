@@ -22,13 +22,14 @@ in {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    config = {
-      common = {
-        default = [
-          "gtk"
-        ];
-      };
-    };
+#   config.common.default = "*";
+       config = {
+         common = {
+           default = [
+             "gtk"
+           ];
+         };
+       };
   };
 
   security = {

@@ -45,6 +45,8 @@
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
+  documentation.enable = false;
+
   services = {
     flatpak.enable = true;
     printing.enable = true;
@@ -80,7 +82,7 @@
     wget
     bindfs
     git
-		git-lfs
+    git-lfs
     htop
     neofetch
 

@@ -78,10 +78,11 @@ in
   # 24454 - Minecraft voice chat mod
   # 57621 - Spotify discovery
   # 22 - SSH
+  # 9943 & 9944 - ALVR
   networking = {
     firewall = {
-      allowedTCPPorts = [ 25565 57621 22 ];
-      allowedUDPPorts = [ 25565 24454 ];
+      allowedTCPPorts = [ 25565 57621 22 9943 9944 ];
+      allowedUDPPorts = [ 25565 24454 9943 9944 ];
     };
     
     extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com"; # star citizen anti-cheat

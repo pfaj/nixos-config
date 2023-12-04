@@ -1,9 +1,7 @@
-{ inputs
-, pkgs
-, config
-, lib
-, self
-, ...
+{
+  inputs,
+  pkgs,
+  ...
 }: {
   imports = with inputs.self.homeManagerModules;
     [
@@ -14,7 +12,8 @@
 
       programs.ags # shell
       programs.anyrun # runner
-    ] ++ [
+    ]
+    ++ [
       ./settings.nix
     ];
 
@@ -47,6 +46,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    #extraConfig = builtins.readFile ./config/hyprland.conf;
     plugins = [
       #inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces ### doesn't work as expected
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars

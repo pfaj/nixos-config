@@ -14,6 +14,7 @@
     ];
     extraConfig = ''
       set autochdir
+      set clipboard=unnamedplus
       map ; :Files<CR>
       map <C-o> :NERDTreeToggle<CR>
     '';
