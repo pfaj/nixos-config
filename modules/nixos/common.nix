@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ username, pkgs, inputs, ... }:
 {
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -36,7 +36,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   networking = {
-    hostName = "ben-nixos";
+    hostName = "${username}-nixos";
     networkmanager = {
       enable = true;
       wifi.powersave = false;
@@ -46,6 +46,12 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   documentation.enable = false;
+
+  users.users.${username} = {
+    isNormalUser = true;
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    shell = pkgs.fish;
+  };
 
   services = {
     flatpak.enable = true;

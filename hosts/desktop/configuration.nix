@@ -1,6 +1,7 @@
 { pkgs
 , inputs
 , config
+, username
 , ...
 }:
 let
@@ -32,19 +33,7 @@ in
       ./hardware-configuration.nix
     ] ++ nixosModules;
 
-  # requirement for star citizen
-  boot.kernel.sysctl = {
-    "vm.max_map_count" = 16777216;
-    "fs.file-max" = 524288;
-  };
-
-  users.users.ben = {
-    isNormalUser = true;
-    description = "Ben";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
-    shell = pkgs.fish;
-  };
-  home-manager.users.ben = import ./home.nix;
+  home-manager.users.${username} = import ./home.nix;
 
   services.syncthing.settings = {
     devices = {
@@ -54,7 +43,7 @@ in
 
     folders = {
       "nixos-config" = {
-        path = "/home/ben/.config/nix/";
+        path = "/home/${username}/.config/nix/";
         devices = [ "surface-laptop" ];
         versioning = {
           type = "simple";
@@ -78,14 +67,11 @@ in
   # 24454 - Minecraft voice chat mod
   # 57621 - Spotify discovery
   # 22 - SSH
-  # 9943 & 9944 - ALVR
   networking = {
     firewall = {
-      allowedTCPPorts = [ 25565 57621 22 9943 9944 ];
-      allowedUDPPorts = [ 25565 24454 9943 9944 ];
+      allowedTCPPorts = [ 25565 57621 22 ];
+      allowedUDPPorts = [ 25565 24454 9943 ];
     };
-    
-    extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com"; # star citizen anti-cheat
   };
 
   environment.systemPackages = with pkgs; [

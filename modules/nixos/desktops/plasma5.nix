@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ username, pkgs, ... }:
 let
   inherit (inputs) self;
 in
 {
   # imports plasma5 home-manager module
-  home-manager.users.ben.imports = [
+  home-manager.users.${username}.imports = [
     self.homeManagerModules.desktops.plasma5
   ];
 

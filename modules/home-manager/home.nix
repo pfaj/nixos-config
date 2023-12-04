@@ -1,8 +1,9 @@
+{ username, ... }:
 {
   home = {
-    username = "ben";
-    homeDirectory = "/home/ben";
-    sessionPath = ["$HOME/.local/bin"];
+    username = username;
+    homeDirectory = "/home/${username}";
+    sessionPath = [ "$HOME/.local/bin" ];
     stateVersion = "24.05";
   };
 

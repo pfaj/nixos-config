@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ username, inputs, ... }:
 let
   homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
 in
@@ -11,7 +11,7 @@ in
   environment.extraInit = "[[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars}";
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs; inherit username; };
     useGlobalPkgs = true;
     useUserPackages = true;
   };

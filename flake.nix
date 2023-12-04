@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     naersk.url = "github:nix-community/naersk"; # for easy rust builds
-    musnix = {url = "github:musnix/musnix";};
+    musnix = { url = "github:musnix/musnix"; };
     plasma6.url = "github:nix-community/kde2nix";
     neovim-flake.url = "github:jordanisaacs/neovim-flake";
     aylur-dotfiles = {
@@ -49,35 +49,38 @@
     ];
   };
 
-  outputs = inputs: let
-    inherit (inputs.nixpkgs.lib) nixosSystem;
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations = {
-      "desktop" = nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/desktop/configuration.nix
-          ({pkgs, ...}: {
-            environment.systemPackages = with pkgs; [
-              (nixos-update {
-                configName = "desktop";
-              })
-            ];
-          })
-        ];
-        specialArgs = {inherit inputs;};
+  outputs = inputs:
+    let
+      inherit (inputs.nixpkgs.lib) nixosSystem;
+      system = "x86_64-linux";
+      username = "ben";
+    in
+    {
+      nixosConfigurations = {
+        "desktop" = nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/desktop/configuration.nix
+            ({ pkgs, ... }: {
+              environment.systemPackages = with pkgs; [
+                (nixos-update {
+                  configName = "desktop";
+                })
+              ];
+            })
+          ];
+          specialArgs = { inherit inputs; inherit username; };
+        };
+
+        "surface-laptop" = nixosSystem {
+          inherit system;
+          modules = [ ./hosts/surface-laptop/configuration.nix ];
+          specialArgs = { inherit inputs; inherit username; };
+        };
       };
 
-      "surface-laptop" = nixosSystem {
-        system = "x86_64-linux";
-        modules = [./hosts/surface-laptop/configuration.nix];
-        specialArgs = {inherit inputs;};
-      };
+      overlays = import ./overlays;
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
     };
-
-    overlays = import ./overlays;
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
-  };
 }

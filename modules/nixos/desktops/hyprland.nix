@@ -1,4 +1,5 @@
-{ inputs
+{ username
+, inputs
 , pkgs
 , ...
 }:
@@ -11,7 +12,7 @@ in
   ];
 
   # imports hyprland home-manager module
-  home-manager.users.ben.imports = [
+  home-manager.users.${username}.imports = [
     self.homeManagerModules.desktops.hyprland
   ];
 

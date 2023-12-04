@@ -1,11 +1,11 @@
-{ ... }:
+{ username, ... }:
 {
   services.syncthing = {
     enable = true;
-    user = "ben";
+    user = username;
     openDefaultPorts = true;
     systemService = true;
-    dataDir = "/home/ben/syncthing";
-    configDir = "/home/ben/.config/syncthing";
+    dataDir = "/home/${username}/syncthing";
+    configDir = "/home/${username}/.config/syncthing";
   };
 }
