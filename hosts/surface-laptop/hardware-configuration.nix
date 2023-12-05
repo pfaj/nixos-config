@@ -7,6 +7,25 @@
         (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+    boot = {
+        kernelPackages = pkgs.linuxPackages_xanmod_latest; # install custom xanmod kernel
+        kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop"];
+        extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
+        extraModprobeConfig = ''
+        options vl42loopback exclusive_caps=1 card_label="Virtual Camera"
+        ''; # setup virtual cam
+
+        initrd = {
+            availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+            kernelModules = [];
+        };
+
+        loader = {
+            systemd-boot.enable = true;
+            efi.canTouchEfiVariables = true;
+        };
+    };
+
     fileSystems."/" = {
         device = "/dev/disk/by-uuid/d380c93c-4ebb-48df-9cd3-3e2fa1424605";
         fsType = "ext4";

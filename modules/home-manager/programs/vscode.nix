@@ -30,7 +30,6 @@
       "editor.inlayHints.enabled" = "off";
       "dotnet.server.useOmnisharp" = true;
       "nix.enableLanguageServer" = true;
-      #"nix.serverPath" = "nil";
     };
   };
 }

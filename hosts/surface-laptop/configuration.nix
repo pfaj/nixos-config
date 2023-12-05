@@ -1,42 +1,34 @@
-{ username, pkgs, inputs, config, ... }:
-let
-  inherit (inputs) self home-manager;
-in
 {
-  imports = [
-    ./hardware-configuration.nix
-  ]
-  ++ (with self.nixosModules; [
-    core
+  username,
+  inputs,
+  ...
+}: let
+  inherit (inputs) self home-manager;
+in {
+  imports =
+    [
+      ./hardware-configuration.nix
+    ]
+    ++ (with self.nixosModules; [
+      core
 
-    common
-    #gaming
-    #nvidia
-    audio
-    sddm
-    #ssh
-    #virtualization
-    #zram
-  ]);
+      common
+      #gaming
+      #nvidia
+      audio
+      sddm
+      #ssh
+      syncthing
+      #virtualization
+      #wootility
+      #zram
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # install custom xanmod kernel
-    kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop" ];
-    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
-    extraModprobeConfig = ''
-      options vl42loopback exclusive_caps=1 card_label="Virtual Camera"
-    ''; # setup virtual cam
-
-    initrd = {
-      availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
-      kernelModules = [ ];
-    };
-
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-  };
+      #desktops.gnome
+      desktops.hyprland
+      #desktops.plasma5
+      #desktops.plasma6
+      #desktops.wayfire
+    ]);
 
   home-manager.users.${username} = import ./home.nix;
 
@@ -54,13 +46,4 @@ in
       };
     };
   };
-
-  # For external nix store to work
-  nix.settings = {
-    substituters = [ "https://cache.nixos.org/ file:///mnt/NixExpansion/store" ];
-    trusted-substituters = [ "file:///mnt/NixExpansion/store" ];
-  };
-
-  system.stateVersion = "23.05";
 }
-

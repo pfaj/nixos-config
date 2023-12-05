@@ -1,39 +1,37 @@
-{ config, inputs, pkgs, ... }:
 {
-    imports = with inputs.self.homeManagerModules; [
-        home
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = with inputs.self.homeManagerModules; [
+    home
+    common
 
-        #theme.gtk
-        #theme.qt
+    #programs.neovim
+    #programs.games
+    programs.vscode
+    #programs.kitty
+    programs.alacritty
+    programs.direnv
 
-        #programs.dev
-        #programs.games
-        #programs.vscode
-        programs.alacritty
-        programs.neovim
+    #services.arrpc
+    #services.easy-effects
+  ];
 
-        #services.arrpc
-        #services.easy-effects
+  home.packages = with pkgs; [
+    brave
+    kate
+    webcord-vencord
+    #spotify
+    #playerctl
+    #obs-studio
 
-        #desktops.hyprland
-        desktops.kde
-        #desktops.gnome
-    ];
+    gwenview
+    gimp
+    # vlc
 
-    home.packages = with pkgs; [
-        brave
-        kate
-        webcord-vencord
-        #         spotify
-#         playerctl
-        #         obs-studio
-
-        gwenview
-        gimp
-#         vlc
-
-        #         whatsapp-for-linux
-        appimage-run
-        obsidian
-    ];
+    #whatsapp-for-linux
+    appimage-run
+    obsidian
+  ];
 }
