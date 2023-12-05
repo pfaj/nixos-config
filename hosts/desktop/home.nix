@@ -1,5 +1,9 @@
-{ inputs, config, pkgs, ... }:
-let
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: let
   inherit (inputs) self;
   homeManagerModules = with inputs.self.homeManagerModules; [
     home
@@ -15,8 +19,7 @@ let
     services.arrpc
     services.easy-effects
   ];
-in
-{
+in {
   imports = homeManagerModules;
 
   home = {
@@ -84,5 +87,12 @@ in
       "DP-2,1"
       "HDMI-A-1,11"
     ];
+
+    general = {
+      no_direct_scanout = false;
+      vrr = 1;
+    };
+
+    misc.allow_tearing = true;
   };
 }

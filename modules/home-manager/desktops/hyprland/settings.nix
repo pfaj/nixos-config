@@ -11,7 +11,6 @@
     general = {
       layout = "dwindle";
       resize_on_border = true;
-      allow_tearing = true;
       no_cursor_warps = true;
     };
 
@@ -20,9 +19,7 @@
       disable_splash_rendering = true;
       force_default_wallpaper = 0;
       layers_hog_keyboard_focus = false;
-      no_direct_scanout = false;
-      vrr = 1;
-
+      
       animate_manual_resizes = false;
       animate_mouse_windowdragging = false;
     };
