@@ -88,11 +88,11 @@ in {
       "HDMI-A-1,11"
     ];
 
-    general = {
+    general.allow_tearing = true;
+
+    misc = {
       no_direct_scanout = false;
       vrr = 1;
     };
-
-    misc.allow_tearing = true;
   };
 }
