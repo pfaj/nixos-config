@@ -15,7 +15,7 @@
     programs.direnv
 
     #services.arrpc
-    #services.easy-effects
+    services.easy-effects
   ];
 
   home.packages = with pkgs; [
