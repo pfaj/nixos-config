@@ -51,5 +51,12 @@ in {
         };
       };
     };
+
+    # functionality for laptop??
+    services.logind.extraConfig = ''
+      HandlePowerKey=ignore
+      HandleLidSwitch=suspend
+      HandleLidSwitchExternalPower=ignore
+    '';
   };
 }
