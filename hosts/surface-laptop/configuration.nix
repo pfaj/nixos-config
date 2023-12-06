@@ -32,6 +32,8 @@ in {
 
   home-manager.users.${username} = import ./home.nix;
 
+  
+
   services = {
     syncthing.settings = {
       devices = {
