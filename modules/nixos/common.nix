@@ -1,5 +1,9 @@
-{ username, pkgs, inputs, ... }:
 {
+  username,
+  pkgs,
+  inputs,
+  ...
+}: {
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -49,7 +53,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = ["networkmanager" "wheel" "audio"];
     shell = pkgs.fish;
   };
 
@@ -61,11 +65,13 @@
       enable = true;
       enableExcludeWrapper = false;
     };
+
     xserver = {
       enable = true;
+      excludePackages = [pkgs.xterm];
 
-      layout = "us";
-      xkbVariant = "";
+      #layout = "us";
+      #xkbVariant = "";
     };
   };
 
