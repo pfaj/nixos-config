@@ -19,7 +19,7 @@
       disable_splash_rendering = true;
       force_default_wallpaper = 0;
       layers_hog_keyboard_focus = false;
-      
+
       animate_manual_resizes = false;
       animate_mouse_windowdragging = false;
     };
@@ -148,7 +148,7 @@
     ];
 
     layerrule = let
-      makeRule = type: ["blur, ${type}" "ignorezero, ${type}"];
+      makeRule = type: ["blur, ${type}" "ignorealpha 0.4, ${type}"];
       types = [
         "anyrun"
         "gtk-layer-shell"
@@ -170,6 +170,9 @@
         "indicator0"
         "dashboard"
         "quicksettings"
+        "powermenu"
+        "overview"
+        "applauncher"
       ];
     in
       builtins.concatMap makeRule types;
