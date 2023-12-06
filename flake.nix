@@ -34,6 +34,7 @@
       url = "github:Aylur/dotfiles";
       flake = false;
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = inputs: let
