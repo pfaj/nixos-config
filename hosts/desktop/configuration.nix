@@ -1,10 +1,10 @@
-{ pkgs
-, inputs
-, config
-, username
-, ...
-}:
-let
+{
+  pkgs,
+  inputs,
+  config,
+  username,
+  ...
+}: let
   inherit (inputs) self;
   nixosModules = with self.nixosModules; [
     core
@@ -26,12 +26,12 @@ let
     #desktops.plasma6
     #desktops.wayfire
   ];
-in
-{
+in {
   imports =
     [
       ./hardware-configuration.nix
-    ] ++ nixosModules;
+    ]
+    ++ nixosModules;
 
   home-manager.users.${username} = import ./home.nix;
 
@@ -43,8 +43,8 @@ in
 
     folders = {
       "nixos-config" = {
-        path = "/home/${username}/.config/nix/";
-        devices = [ "surface-laptop" ];
+        path = "~/.config/nix/";
+        devices = ["surface-laptop"];
         versioning = {
           type = "simple";
           params.keep = "10";
@@ -53,7 +53,7 @@ in
 
       "obsidian" = {
         path = "/mnt/LinuxExpansion/Places/Documents/Obsidian";
-        devices = [ "surface-laptop" "samsung-phone" ];
+        devices = ["surface-laptop" "samsung-phone"];
         versioning = {
           type = "simple";
           params.keep = "3";
@@ -66,15 +66,13 @@ in
   # 25565 - Minecraft
   # 24454 - Minecraft voice chat mod
   # 57621 - Spotify discovery
+  # Syncthing - TCP: [ 8384 2000 ]
+  #             UDP: [ 22000 21027 ]
   # 22 - SSH
   networking = {
     firewall = {
-      allowedTCPPorts = [ 25565 57621 22 ];
-      allowedUDPPorts = [ 25565 24454 9943 ];
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    latencyflex
-  ];
 }

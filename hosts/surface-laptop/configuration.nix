@@ -33,15 +33,21 @@ in {
   home-manager.users.${username} = import ./home.nix;
 
   services = {
-    iptsd.enable = true;
-
     syncthing.settings = {
       devices = {
-        "main-desktop" = {
-          id = "Y3KNUJG-DJY2DKX-IXFY2DW-TNOAXLT-UO5LAD2-LV5WTKQ-PP22O6C-ETZ2FQV";
+        "main-desktop".id = "Y3KNUJG-DJY2DKX-IXFY2DW-TNOAXLT-UO5LAD2-LV5WTKQ-PP22O6C-ETZ2FQV";
+        "samsung-phone".id = "ILJUQUQ-55IYYIO-LBQ66ZC-7UZDPR3-FER5YO5-KRM2SDX-VXWOH6H-VLWOMQGWOMQG";
+      };
+
+      folders = {
+        "nixos-config" = {
+          devices = ["main-desktop"];
+          path = "~/.config/nix";
         };
-        "samsung-phone" = {
-          id = "ILJUQUQ-55IYYIO-LBQ66ZC-7UZDPR3-FER5YO5-KRM2SDX-VXWOH6H-VLWOMQG";
+
+        "obsidian" = {
+          devices = ["main-desktop" "samsung-phone"];
+          path = "~/Documents/Obsidian";
         };
       };
     };
