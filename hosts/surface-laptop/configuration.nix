@@ -53,7 +53,7 @@ in {
     };
 
     # functionality for laptop??
-    services.logind.extraConfig = ''
+    logind.extraConfig = ''
       HandlePowerKey=ignore
       HandleLidSwitch=suspend
       HandleLidSwitchExternalPower=ignore
