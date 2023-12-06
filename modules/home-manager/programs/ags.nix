@@ -38,7 +38,8 @@
         "battery.show_percentage": false,
         "font.font": "Roboto 10",
         "font.size": 13,
-        "desktop.avatar": "${config.xdg.configHome}/nix/user-avatar.jpg"
+        "desktop.avatar": "${config.xdg.configHome}/nix/user-avatar.jpg",
+        "workspaces": 10
       }
     '';
 
