@@ -241,6 +241,19 @@
       # scroll through workspaces using mouse wheel
       "SUPER, mouse_down, workspace, m-1"
       "SUPER, mouse_up, workspace, m+1"
+
+      # ags
+      "CTRL SHIFT, R, exec, ags -b hypr quit; ags -b hypr" # restart
+
+      #bind=SUPER, R,       exec, ags -t applauncher
+      ", XF86PowerOff, exec, ags -b hypr -t powermenu"
+      "SUPER, Tab, exec, ags -b hypr -t overview"
+
+      # screenshot & screenrecord
+      ", XF86Launch4, exec, ags -b hypr -r 'recorder.start()'"
+      ", Print, exec, ags -b hypr -r 'recorder.screenshot()'"
+      "SHIFT, Print, exec, ags -b hypr -r 'recorder.screenshot(true)'"
+      "CTRL, Print, exec, grimblast copy area"
     ];
 
     bindm = [
