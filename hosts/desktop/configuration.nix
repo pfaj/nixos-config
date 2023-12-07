@@ -1,7 +1,5 @@
 {
-  pkgs,
   inputs,
-  config,
   username,
   ...
 }: let
@@ -12,6 +10,7 @@
     common
     gaming
     nvidia
+    rt-audio
     audio
     sddm
     ssh

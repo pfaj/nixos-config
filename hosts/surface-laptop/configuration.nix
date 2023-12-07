@@ -15,6 +15,7 @@ in {
       common
       #gaming
       #nvidia
+      #rt-audio
       audio
       sddm
       #ssh
@@ -31,8 +32,6 @@ in {
     ]);
 
   home-manager.users.${username} = import ./home.nix;
-
-  
 
   services = {
     syncthing.settings = {
@@ -54,11 +53,6 @@ in {
       };
     };
 
-    # functionality for laptop??
-    logind.extraConfig = ''
-      HandlePowerKey=ignore
-      HandleLidSwitch=suspend
-      HandleLidSwitchExternalPower=ignore
-    '';
+    tlp.enable = true;
   };
 }
