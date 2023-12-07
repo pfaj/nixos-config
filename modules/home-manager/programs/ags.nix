@@ -56,6 +56,7 @@
       wl-gammactl
       pavucontrol
       swappy
+      libnotify
       (python311.withPackages (p: [p.python-pam]))
     ];
   };
