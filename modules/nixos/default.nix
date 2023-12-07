@@ -4,6 +4,7 @@
   desktops = import ./desktops;
   gaming = import ./gaming.nix;
   nvidia = import ./nvidia.nix;
+  rt-audio = import ./rt-audio.nix;
   audio = import ./audio.nix;
   sddm = import ./sddm.nix;
   ssh = import ./ssh.nix;
