@@ -18,6 +18,7 @@ in {
     whitesur-icon-theme
     colloid-icon-theme
     adw-gtk3
+    roboto
   ];
 
   fonts.fontconfig.enable = true;
