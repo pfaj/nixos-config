@@ -1,7 +1,7 @@
 { username, ... }:
 {
   home = {
-    username = username;
+    inherit username; 
     homeDirectory = "/home/${username}";
     sessionPath = [ "$HOME/.local/bin" ];
     stateVersion = "24.05";
