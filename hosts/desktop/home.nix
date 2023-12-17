@@ -78,14 +78,30 @@ in {
   ];
 
   wayland.windowManager.hyprland.settings = {
+    exec-once = [
+      #"wlr-randr --output HDMI-A-1 --off && sleep 1 && wlr-randr --output HDMI-A-1 --on --pos 1921,0"
+    ];
+
     monitor = [
-      "DP-2,1920x1080@144,0x0,1,bitdepth,10"
-      ",preferred,auto,1,bitdepth,10"
+      "DP-2, 1920x1080@144, 0x0, 1, bitdepth,10"
+      ", preferred, auto, 1, bitdepth, 10"
     ];
 
     workspace = [
-      "DP-2,1"
-      "HDMI-A-1,11"
+      "1, monitor:DP-2, default:true"
+      "2, monitor:DP-2"
+      "3, monitor:DP-2"
+      "4, monitor:DP-2"
+      "5, monitor:DP-2"
+      "6, monitor:DP-2"
+      "7, monitor:DP-2"
+      "11, monitor:HDMI-A-1, default:true"
+      "12, monitor:HDMI-A-1"
+      "13, monitor:HDMI-A-1"
+      "14, monitor:HDMI-A-1"
+      "15, monitor:HDMI-A-1"
+      "16, monitor:HDMI-A-1"
+      "17, monitor:HDMI-A-1"
     ];
 
     general.allow_tearing = true;

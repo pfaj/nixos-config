@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }: {
@@ -34,4 +35,19 @@
     appimage-run
     obsidian
   ];
+
+  wayland.windowManager.hyprland.settings = {
+    monitor = [
+      "eDP-1,preferred,auto,1.5,bitdepth,10"
+    ];
+
+    workspace = [
+      "eDP-1,1"
+    ];
+
+    input = {
+    sensitivity = lib.mkForce 0.5;
+    accel_profile = "adaptive";
+    };
+  };
 }
