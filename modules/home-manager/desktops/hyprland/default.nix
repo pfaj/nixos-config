@@ -54,7 +54,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.default;
     #extraConfig = builtins.readFile ./config/hyprland.conf;
     plugins = [
-      inputs.hycov.packages.${pkgs.system}.hycov
+      inputs.hyprshell.packages.${pkgs.system}.hyprshell
       #inputs.hyprshell.packages.${pkgs.system}.hyprshell
       #inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces ### doesn't work as expected
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars

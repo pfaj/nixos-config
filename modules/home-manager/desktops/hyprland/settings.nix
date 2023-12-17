@@ -109,11 +109,10 @@
         ];
       };
 
-      hycov = {
+      hyprshell = {
         overview_gappo = 56; #gas width from screem
         overview_gappi = 24; #gas width from clients
-        enable_hotarea = false;
-        disable_workspace_change = true;
+        enable_hotarea = 0;
       };
     };
 
@@ -295,7 +294,7 @@
       "SHIFT, Print, exec, ags -b hypr -r 'recorder.screenshot(true)'"
       "CTRL, Print, exec, grimblast copy area"
 
-      "ALT, tab, hycov:toggleoverview"
+      "ALT, tab, hyprshell:toggleoverview"
     ];
 
     bindm = [
