@@ -4,6 +4,10 @@
   inputs,
   ...
 }: {
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
