@@ -17,6 +17,15 @@
       ./settings.nix
     ];
 
+  xdg.desktopEntries."org.gnome.Settings" = {
+    name = "Settings";
+    comment = "Gnome Control Center";
+    icon = "org.gnome.Settings";
+    exec = "XDG_CURRENT_DESKTOP=gnome ${pkgs.gnome.gnome-control-center}/bin/gnome-control-center";
+    categories = ["X-Preferences"];
+    terminal = false;
+  };
+
   home = {
     sessionVariables = {
       XDG_CURRENT_DESKTOP = "Hyprland";
@@ -32,24 +41,23 @@
       CLUTTER_BACKEND = "wayland";
       GDK_BACKEND = "wayland,x11";
     };
+  };
 
-    packages = with pkgs; [
-      # programs
-      dolphin
-      ark
-      gnome.gnome-system-monitor
-
-      # external packages
-      inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-    ];
+  dconf.settings = {
+    "org.gnome.desktop.wm.preferences" = {
+      button-layout = "";
+    };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.default;
     #extraConfig = builtins.readFile ./config/hyprland.conf;
     plugins = [
+      inputs.hycov.packages.${pkgs.system}.hycov
+      #inputs.hyprshell.packages.${pkgs.system}.hyprshell
       #inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces ### doesn't work as expected
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
     ];
   };
 }
