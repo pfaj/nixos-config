@@ -31,6 +31,7 @@
         natural_scroll = true;
         disable_while_typing = true;
         drag_lock = true;
+        clickfinger_behavior = true;
       };
       sensitivity = 0;
       float_switch_override_focus = 2;
@@ -107,6 +108,13 @@
           "rgb(eeee11), 18, , hyprctl dispatch fullscreen 1"
         ];
       };
+
+      hycov = {
+        overview_gappo = 56; #gas width from screem
+        overview_gappi = 24; #gas width from clients
+        enable_hotarea = false;
+        disable_workspace_change = true;
+      };
     };
 
     windowrule = let
@@ -120,7 +128,7 @@
       (workspace "1" ".*brave.*")
       (workspace "2 silent" ".*discord.*")
       (workspace "5 silent" "steam")
-      (workspace "10 silent" ".*easyeffects.*")
+      (workspace "7 silent" ".*easyeffects.*")
 
       (float "xdg-desktop-portal")
       (float "xdg-desktop-portal-gtk")
@@ -139,6 +147,10 @@
       (float "org.kde.dolphin")
       (size "60%" "org.kde.dolphin")
       (center "org.kde.dolphin")
+
+      (float "org.gnome.Nautilus")
+      (size "75%" "org.gnome.Nautilus")
+      (center "org.gnome.Nautilus")
 
       (float "gnome-system-monitor")
       (opacity "0.95" "gnome-system-monitor")
@@ -160,6 +172,7 @@
         "corner1bottomright"
         "bar1"
         "indicator1"
+        "lockscreen1"
         "dock0"
         "notifications0"
         "corner0topleft"
@@ -168,11 +181,14 @@
         "corner0bottomright"
         "bar0"
         "indicator0"
+        "lockscreen0"
         "dashboard"
         "quicksettings"
         "powermenu"
         "overview"
         "applauncher"
+        "verification"
+        "soundboard"
       ];
     in
       builtins.concatMap makeRule types;
@@ -194,7 +210,8 @@
       "SUPER, RETURN, exec, alacritty --class=alacritty-floating"
       "SUPER SHIFT, RETURN, exec, alacritty"
       "SUPER SHIFT, T, exec, alacritty --class=alacritty-floating"
-      "SUPER SHIFT, E, exec, dolphin"
+      #"SUPER SHIFT, E, exec, dolphin"
+      "SUPER SHIFT, E, exec, nautilus"
       "SUPER SHIFT, B, exec, brave"
       "SUPER, grave, exec, gnome-system-monitor"
 
@@ -238,6 +255,29 @@
       "SUPER SHIFT, 0, movetoworkspace, 10"
       "SUPER SHIFT, S, movetoworkspace, special"
 
+      #"SUPER, 1, split-workspace, 1"
+      #"SUPER, 2, split-workspace, 2"
+      #"SUPER, 3, split-workspace, 3"
+      #"SUPER, 4, split-workspace, 4"
+      #"SUPER, 5, split-workspace, 5"
+      #"SUPER, 6, split-workspace, 6"
+      #"SUPER, 7, split-workspace, 7"
+      #"SUPER, 8, split-workspace, 8"
+      #"SUPER, 9, split-workspace, 9"
+      #"SUPER, 0, split-workspace, 10"
+      #"SUPER, S, togglespecialworkspace"
+
+      #"SUPER SHIFT, 1, split-movetoworkspace, 1"
+      #"SUPER SHIFT, 2, split-movetoworkspace, 2"
+      #"SUPER SHIFT, 3, split-movetoworkspace, 3"
+      #"SUPER SHIFT, 4, split-movetoworkspace, 4"
+      #"SUPER SHIFT, 5, split-movetoworkspace, 5"
+      #"SUPER SHIFT, 6, split-movetoworkspace, 6"
+      #"SUPER SHIFT, 7, split-movetoworkspace, 7"
+      #"SUPER SHIFT, 9, split-movetoworkspace, 9"
+      #"SUPER SHIFT, 0, split-movetoworkspace, 10"
+      #"SUPER SHIFT, S, movetoworkspace, special"
+
       # scroll through workspaces using mouse wheel
       "SUPER, mouse_down, workspace, m-1"
       "SUPER, mouse_up, workspace, m+1"
@@ -254,6 +294,8 @@
       ", Print, exec, ags -b hypr -r 'recorder.screenshot()'"
       "SHIFT, Print, exec, ags -b hypr -r 'recorder.screenshot(true)'"
       "CTRL, Print, exec, grimblast copy area"
+
+      "ALT, tab, hycov:toggleoverview"
     ];
 
     bindm = [
