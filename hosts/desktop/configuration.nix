@@ -1,8 +1,11 @@
-{
-  inputs,
-  username,
-  ...
-}: let
+{ inputs
+, config
+, pkgs
+, lib
+, username
+, ...
+}:
+let
   inherit (inputs) self;
   nixosModules = with self.nixosModules; [
     core
@@ -25,12 +28,41 @@
     #desktops.plasma6
     #desktops.wayfire
   ];
-in {
+in
+{
   imports =
     [
       ./hardware-configuration.nix
     ]
     ++ nixosModules;
+
+  boot = {
+    kernelPackages = pkgs.linuxPackages_xanmod_latest; # install custom xanmod kernel
+    kernelModules = [ "v4l2loopback" "snd-aloop" ];
+    extraModulePackages = with config.boot.kernelPackages; [ rtl88x2bu v4l2loopback.out ];
+    extraModprobeConfig = ''
+      options vl42loopback exclusive_caps=1 card_label="Virtual Camera"
+      options nvidia-modeset hdmi_deepcolor=1
+    ''; # setup virtual cam and enable hdmi_deepcolor for Nvidia
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+
+  fileSystems."/mnt/LinuxExpansion" = {
+    device = "/dev/disk/by-uuid/3441c4de-e929-48b0-ac42-06290f4824ca";
+    fsType = "ext4";
+  };
+
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/635dd7c6-377f-4d4d-bb5b-4ce5eb547ecd";
+    }
+  ];
 
   home-manager.users.${username} = import ./home.nix;
 
@@ -43,7 +75,7 @@ in {
     folders = {
       "nixos-config" = {
         path = "~/.config/nix/";
-        devices = ["surface-laptop"];
+        devices = [ "surface-laptop" ];
         versioning = {
           type = "simple";
           params.keep = "10";
@@ -52,7 +84,7 @@ in {
 
       "obsidian" = {
         path = "/mnt/LinuxExpansion/Places/Documents/Obsidian";
-        devices = ["surface-laptop" "samsung-phone"];
+        devices = [ "surface-laptop" "samsung-phone" ];
         versioning = {
           type = "simple";
           params.keep = "3";
@@ -70,8 +102,8 @@ in {
   # 22 - SSH
   networking = {
     firewall = {
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ ];
     };
   };
 }
