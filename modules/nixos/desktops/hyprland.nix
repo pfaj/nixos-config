@@ -38,6 +38,7 @@ in {
   ];
 
   xdg.portal = {
+    enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
     #config.common.default = "*";
     config = {
@@ -80,5 +81,6 @@ in {
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
+    #package = null;
   };
 }
