@@ -9,6 +9,7 @@
   sddm = import ./sddm.nix;
   ssh = import ./ssh.nix;
   syncthing = import ./syncthing.nix;
+  tlp = import ./tlp.nix;
   virtualization = import ./virtualization.nix;
   wootility = import ./wootility.nix;
   zram = import ./zram.nix;

@@ -20,6 +20,7 @@ in {
       sddm
       #ssh
       syncthing
+      #tlp
       #virtualization
       #wootility
       #zram
@@ -52,7 +53,5 @@ in {
         };
       };
     };
-
-    tlp.enable = true;
   };
 }
