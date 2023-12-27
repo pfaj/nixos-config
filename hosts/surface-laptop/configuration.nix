@@ -1,4 +1,7 @@
 {
+  pkgs,
+  config,
+  lib,
   username,
   inputs,
   ...
@@ -32,6 +35,18 @@ in {
       #desktops.plasma6
       #desktops.wayfire
     ]);
+
+  boot = {
+    kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod_latest; # install custom xanmod kernel
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  #microsoft-surface.ipts.enable = true; # custom surface-linux kernel required
+  microsoft-surface.surface-control.enable = true;
 
   home-manager.users.${username} = import ./home.nix;
 
