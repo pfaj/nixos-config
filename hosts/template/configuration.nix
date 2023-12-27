@@ -1,8 +1,8 @@
-{ inputs
-, username
-, ...
-}:
-let
+{
+  inputs,
+  username,
+  ...
+}: let
   inherit (inputs) self;
   nixosModules = with self.nixosModules; [
     core
@@ -15,6 +15,7 @@ let
     #sddm
     #ssh
     #syncthing
+    #tlp
     #virtualization
     #wootility
     #zram
@@ -25,8 +26,7 @@ let
     #desktops.plasma6
     #desktops.wayfire
   ];
-in
-{
+in {
   imports =
     [
       ./hardware-configuration.nix
