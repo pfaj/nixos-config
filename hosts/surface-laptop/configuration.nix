@@ -30,8 +30,8 @@ in {
       #zram
 
       #desktops.gnome
-      desktops.hyprland
-      #desktops.plasma5
+      #desktops.hyprland
+      desktops.plasma5
       #desktops.plasma6
       #desktops.wayfire
     ]);
