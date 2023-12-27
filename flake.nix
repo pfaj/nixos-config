@@ -88,42 +88,18 @@
       };
     };
 
-    nix.binaryCaches = [
-      "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org"
-      "https://anyrun.cachix.org"
-    ];
-    nix.binaryCachePublicKeys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-    ];
-
-    nix.settings = {
-      builders-use-substitutes = true;
-
-      substituters = [
+    nix = {
+      binaryCaches = [
         "https://nix-community.cachix.org"
         "https://hyprland.cachix.org"
         "https://anyrun.cachix.org"
+        "https://0uptime.cachix.org"
       ];
-      trusted-public-keys = [
+      binaryCachePublicKeys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-      ];
-    };
-
-    nixConfig = {
-      extra-substituters = [
-        "https://nix-community.cachix.org"
-        "https://hyprland.cachix.org"
-        "https://anyrun.cachix.org"
-      ];
-      extra-trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+        "uptime.cachix.org-1:ctw8yknBLg9cZBdqss+5krAem0sHYdISkw/IFdRbYdE=" # plasma 6 cachix
       ];
     };
 
