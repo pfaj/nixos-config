@@ -8,6 +8,7 @@ in {
   imports =
     [
       ./hardware-configuration.nix
+      inputs.nixos-hardware.nixosModules.microsoft-surface-common
     ]
     ++ (with self.nixosModules; [
       core

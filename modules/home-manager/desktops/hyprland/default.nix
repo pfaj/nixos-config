@@ -15,7 +15,7 @@
     ]
     ++ [
       ./settings.nix
-      inputs.hyprland.homeManagerModules.default
+      #inputs.hyprland.homeManagerModules.default
     ];
 
   xdg.desktopEntries."org.gnome.Settings" = {
@@ -52,7 +52,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    #package = inputs.hyprland.packages.${pkgs.system}.default;
+    package = inputs.hyprland.packages.${pkgs.system}.default;
     #extraConfig = builtins.readFile ./config/hyprland.conf;
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
