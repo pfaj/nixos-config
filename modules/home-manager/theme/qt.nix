@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home = {
     sessionVariables = {
       QT_STYLE_OVERRIDE = "kvantum";
@@ -10,7 +9,7 @@
     ];
   };
 
-  xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+  xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
     General.theme = "Catppuccin-Frappe-Blue";
   };
 
@@ -22,4 +21,3 @@
   #     style.name = "kvantum";
   # };
 }
-

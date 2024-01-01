@@ -12,6 +12,12 @@
     '';
   };
 in {
+  #home.file = {
+  #  ".local/share/icons/MoreWaita" = {
+  #    source = "${moreWaita}/share/icons";
+  #  };
+  #};
+
   gtk = {
     enable = true;
 
@@ -21,25 +27,15 @@ in {
       size = 11;
     };
 
-    #iconTheme = {
-    #  "name" = "Adwaita-dark";
-    #  package = pkgs.gnome.adwaita-icon-theme;
-    #};
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
 
-    #iconTheme = {
-    #  name = "MoreWaita";
-    #  package = moreWaita;
-    #};
-
-    #theme = {
-    #  name = "Marwaita X Dark";
-    #  package = pkgs.marwaita-x;
-    #};
-
-    #iconTheme = {
-    #  name = "Kora";
-    #  package = pkgs.kora-icon-theme;
-    #};
+    iconTheme = {
+      inherit (moreWaita) name;
+      package = moreWaita;
+    };
 
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
