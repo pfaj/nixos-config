@@ -20,20 +20,17 @@ in {
   };
 
   environment.systemPackages = with pkgs.gnome; [
-    # programs
-    #dolphin
-    #ark
-    adwaita-icon-theme
     pkgs.gnome-icon-theme
+    adwaita-icon-theme
     nautilus
     gnome-calendar
     gnome-control-center
     gnome-weather
     gnome-calculator
+    gnome-clocks
     gnome-software
     gnome-system-monitor
 
-    # external packages
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 
