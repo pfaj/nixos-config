@@ -98,15 +98,17 @@
 
     plugin = {
       hyprbars = {
-        bar_color = "rgb(2a2a2a)";
-        bar_height = 28;
-        col_text = "rgba(ffffffdd)";
-        bar_text_size = 11;
-        bar_text_font = "Roboto Regular";
+        #bar_color = "rgb(2a2a2a)";
+        #bar_height = 28;
+        #col_text = "rgba(ffffffdd)";
+        #bar_text_size = 30;
+        #bar_text_font = "Roboto";
 
-        hyprbars-button = [
-          "rgb(eeee11), 18, , hyprctl dispatch fullscreen 1"
-        ];
+        #hyprbars-button = [
+        #  "rgb(eeee11), 18, , hyprctl dispatch fullscreen 1"
+        #];
+
+        bar_precedence_over_border = true;
       };
 
       hyprshell = {
