@@ -19,7 +19,7 @@ in {
       common
       #gaming
       #nvidia
-      #rt-audio
+      rt-audio
       audio
       sddm
       #ssh
@@ -37,7 +37,7 @@ in {
     ]);
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod_latest; # install custom xanmod kernel
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest; # install custom xanmod kernel
 
     loader = {
       systemd-boot.enable = true;
@@ -45,8 +45,10 @@ in {
     };
   };
 
+  powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
+
   #microsoft-surface.ipts.enable = true; # custom surface-linux kernel required
-  microsoft-surface.surface-control.enable = true;
+  #microsoft-surface.surface-control.enable = true;
 
   home-manager.users.${username} = import ./home.nix;
 
