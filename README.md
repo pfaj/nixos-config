@@ -1,5 +1,4 @@
 # nix-config
-The configuration for my personal NixOS setup.
 ![image](https://github.com/bdebiase/nix-config/assets/66143154/3d76fe92-f50e-4b7e-84d2-b89a0ff4807b)
 
 The project structure is as follows:
