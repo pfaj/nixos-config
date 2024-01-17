@@ -20,6 +20,7 @@
     #wootility
     #zram
 
+    #desktops.cosmic
     #desktops.gnome
     desktops.hyprland
     #desktops.plasma5

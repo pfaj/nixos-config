@@ -22,6 +22,7 @@ let
     wootility
     #zram
 
+    desktops.cosmic
     #desktops.gnome
     desktops.hyprland
     #desktops.plasma5
@@ -74,8 +75,8 @@ in
 
     folders = {
       "nixos-config" = {
-        path = "~/.config/nix/";
-        devices = [ "surface-laptop" ];
+        path = "~/.config/nixos/";
+        devices = ["surface-laptop"];
         versioning = {
           type = "simple";
           params.keep = "10";
