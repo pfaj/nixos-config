@@ -41,7 +41,7 @@ in {
     config = {
       common = {
         default = [
-          "gtk"
+          "*"
         ];
       };
     };

@@ -32,10 +32,10 @@ in {
       package = pkgs.adw-gtk3;
     };
 
-    iconTheme = {
-      inherit (moreWaita) name;
-      package = moreWaita;
-    };
+    #iconTheme = {
+    #  inherit (moreWaita) name;
+    #  package = moreWaita;
+    #};
 
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
