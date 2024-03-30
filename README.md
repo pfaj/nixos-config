@@ -1,5 +1,5 @@
 # nixos-config
-![image](https://github.com/bdebiase/nix-config/assets/66143154/3d76fe92-f50e-4b7e-84d2-b89a0ff4807b)
+![image](https://github.com/bdebiase/nixos-config/assets/66143154/d3539dc3-a8d1-45b3-a2c5-901a1fcea198)
 
 The project structure is as follows:
 - `hosts`: contains the separate configuration files for each of my own systems
