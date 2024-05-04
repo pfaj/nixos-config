@@ -86,6 +86,24 @@
           inherit username;
         };
       };
+
+      "hp-laptop" = nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/hp-laptop/configuration.nix
+          ({pkgs, ...}: {
+            environment.systemPackages = with pkgs; [
+              (nixos-update {
+                configName = "hp-laptop";
+              })
+            ];
+          })
+        ];
+        specialArgs = {
+          inherit inputs;
+          inherit username;
+        };
+      };
     };
 
     nix = {
