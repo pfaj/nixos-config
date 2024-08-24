@@ -1,19 +1,25 @@
-{ pkgs, lib, inputs, ... }:
-let
-  inherit (inputs) self;
-  /*
-    makeEwwOverlay = final: prev: { # TODO: move this to a modular system, idfk how
-    eww = (inputs.eww.packages.${final.system}.eww.override { inherit (prev) rustPlatform; }).overrideAttrs (old: {
-    buildInputs = old.buildInputs ++ (with final; [ prev.glib prev.librsvg prev.libdbusmenu-gtk3 ]);
-    });
-    eww-wayland = final.eww.override { withWayland = true; };
-    };*/
-in
 {
+  pkgs,
+  inputs,
+  ...
+}: let
+  inherit (inputs) self;
+in {
   nixpkgs = {
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "electron-25.9.0"
+      ];
+    };
+
     overlays =
       (builtins.attrValues self.overlays)
-      ++ [ (final: prev: import ../../../pkgs { pkgs = prev; naersk = pkgs.callPackage inputs.naersk { }; }) ];
+      ++ [
+        (final: prev:
+          import ../../../pkgs {
+            pkgs = prev;
+          })
+      ];
   };
 }

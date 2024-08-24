@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -21,105 +21,77 @@
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
-    ags.url = "github:Aylur/ags";
-    anyrun = {
-      url = "github:Kirottu/anyrun";
+    hyprfocus = {
+      url = "github:pyt0xic/hyprfocus";
+      inputs.hyprland.follows = "hyprland";
+    };
+    ags = {
+      url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    naersk.url = "github:nix-community/naersk"; # for easy rust builds
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     musnix = {url = "github:musnix/musnix";};
-    plasma6.url = "github:nix-community/kde2nix";
-    neovim-flake.url = "github:jordanisaacs/neovim-flake";
-    aylur-dotfiles = {
-      url = "github:bdebiase/dotfiles";
-      flake = false;
-    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    more-waita = {
-      url = "https://github.com/somepaulo/MoreWaita/archive/refs/heads/main.zip";
-      flake = false;
+    aylur-dotfiles.url = "github:bdebiase/aylur-dotfiles";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprshell = {
-      url = "github:killown/hyprshell";
-      inputs.hyprland.follows = "hyprland";
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = inputs: let
     inherit (inputs.nixpkgs.lib) nixosSystem;
+    inherit (inputs.nixpkgs) lib;
     system = "x86_64-linux";
-    username = "ben";
+
+    createSystem = username: hostname: configPath:
+      nixosSystem {
+        inherit system;
+        modules = [
+          configPath
+          ({pkgs, ...}: {
+            environment.systemPackages = with pkgs; [
+              (nixos-update {
+                configName = hostname;
+              })
+            ];
+          })
+        ];
+        specialArgs = {
+          inherit inputs;
+          inherit username;
+        };
+      };
+
+    hostsDir = ././hosts;
+    hosts = let
+      dirs = builtins.attrNames (builtins.readDir hostsDir);
+      hostSystems = builtins.map (userDir: let
+        userPath = hostsDir + "/${userDir}";
+        deviceDirs = builtins.attrNames (builtins.readDir userPath);
+        systems =
+          builtins.map (deviceDir: let
+            devicePath = userPath + "/${deviceDir}";
+            configPath = devicePath + "/configuration.nix";
+            hostname = "${userDir}/${deviceDir}";
+          in {
+            "${hostname}" = createSystem userDir hostname configPath;
+          })
+          deviceDirs;
+      in
+        builtins.foldl' (a: b: a // b) {} systems)
+      dirs;
+    in
+      builtins.foldl' (a: b: a // b) {} hostSystems;
   in {
-    nixosConfigurations = {
-      "desktop" = nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/desktop/configuration.nix
-          ({pkgs, ...}: {
-            environment.systemPackages = with pkgs; [
-              (nixos-update {
-                configName = "desktop";
-              })
-            ];
-          })
-        ];
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-        };
-      };
-
-      "surface-laptop" = nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/surface-laptop/configuration.nix
-          ({pkgs, ...}: {
-            environment.systemPackages = with pkgs; [
-              (nixos-update {
-                configName = "surface-laptop";
-              })
-            ];
-          })
-        ];
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-        };
-      };
-
-      "hp-laptop" = nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/hp-laptop/configuration.nix
-          ({pkgs, ...}: {
-            environment.systemPackages = with pkgs; [
-              (nixos-update {
-                configName = "hp-laptop";
-              })
-            ];
-          })
-        ];
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-        };
-      };
-    };
-
-    nix = {
-      binaryCaches = [
-        "https://nix-community.cachix.org"
-        "https://hyprland.cachix.org"
-        "https://anyrun.cachix.org"
-        "https://0uptime.cachix.org"
-      ];
-      binaryCachePublicKeys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-        "uptime.cachix.org-1:ctw8yknBLg9cZBdqss+5krAem0sHYdISkw/IFdRbYdE=" # plasma 6 cachix
-      ];
-    };
+    nixosConfigurations = hosts;
 
     overlays = import ./overlays;
     nixosModules = import ./modules/nixos;

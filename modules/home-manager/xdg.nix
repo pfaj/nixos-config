@@ -1,6 +1,9 @@
 {pkgs, ...}: let
-  browser = "brave-browser.desktop";
-  file-manager = "org.kde.dolphin.desktop";
+  #browser = "brave-browser.desktop";
+  browser = "firefox.desktop";
+  file-manager = "org.gnome.Nautilus.desktop";
+  image-viewer = "org.gnome.Loupe.desktop";
+  video-player = "com.github.rafostar.Clapper.desktop";
 in {
   home = {
     packages = with pkgs; [
@@ -22,6 +25,14 @@ in {
         "x-scheme-handler/http" = browser;
         "x-scheme-handler/https" = browser;
         "text/html" = browser;
+
+        "image/png" = image-viewer;
+        "image/jpeg" = image-viewer;
+        "image/gif" = image-viewer;
+        "image/svg+xml" = image-viewer;
+
+        "video/mp4" = video-player;
+        "video/ogg" = video-player;
       };
     };
   };

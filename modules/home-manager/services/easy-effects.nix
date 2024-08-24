@@ -1,14 +1,11 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    pavucontrol
-    lsp-plugins
-    calf
-    rnnoise
-    zam-plugins
-    zita-convolver
-    soundtouch
-
-    helvum
+    #lsp-plugins
+    #calf
+    #rnnoise
+    #zam-plugins
+    #zita-convolver
+    #soundtouch
   ];
 
   services.easyeffects.enable = true;

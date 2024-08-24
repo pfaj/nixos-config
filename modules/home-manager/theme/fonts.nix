@@ -10,11 +10,25 @@
     ];
   };
 in {
-  home.packages = with pkgs; [
-    nerdfonts
-    font-awesome
-    roboto
-  ];
+  home = {
+    packages = with pkgs; [
+      nerdfonts
+      #font-awesome
+      roboto
+    ];
+
+    file = {
+      ".local/share/fonts" = {
+        recursive = true;
+        source = "${nerdfonts}/share/fonts/truetype/NerdFonts";
+      };
+
+      ".fonts" = {
+        recursive = true;
+        source = "${nerdfonts}/share/fonts/truetype/NerdFonts";
+      };
+    };
+  };
 
   fonts.fontconfig.enable = true;
 }

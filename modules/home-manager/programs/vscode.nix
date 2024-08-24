@@ -1,14 +1,13 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.vscode = {
     enable = true;
+    package = pkgs.vscode.fhs;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     mutableExtensionsDir = true;
     extensions = with pkgs.vscode-extensions; [
+      bbenoist.nix
       rust-lang.rust-analyzer
-      github.copilot
-      github.copilot-chat
       #arrterian.nix-env-selector
       #ms-vscode.cpptools
       #ms-vscode.cmake-tools
@@ -16,8 +15,9 @@
       #twxs.cmake
       #ms-python.python
       #ms-python.vscode-pylance
-      #bbenoist.nix
+      vscjava.vscode-java-pack 
     ];
+
     userSettings = {
       "window.titleBarStyle" = "custom";
       "editor.smoothScrolling" = true;
@@ -30,6 +30,21 @@
       "editor.inlayHints.enabled" = "off";
       "dotnet.server.useOmnisharp" = true;
       "nix.enableLanguageServer" = true;
+      "java.configuration.runtimes" = [
+        {
+          "name" = "JavaSE-17";
+          "path" = "${pkgs.jdk17}/lib/openjdk/";
+          "default" = true;
+        }
+      ];
+      "java.configuration.detectJdksAtStart" = false;
+      "redhat.telemetry.enabled" = false;
+      "workbench.colorTheme" = "Atom One Dark";
     };
+  };
+
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk17;
   };
 }

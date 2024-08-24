@@ -1,5 +1,8 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
+  environment.systemPackages = [
+    pkgs.wootility
+  ];
+
   services.udev.extraRules = ''
     # Wooting One Legacy
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff01", TAG+="uaccess"
@@ -19,8 +22,4 @@
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="31e3", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="31e3", TAG+="uaccess"
   '';
-
-  environment.systemPackages = [
-    pkgs.wootility
-  ];
 }

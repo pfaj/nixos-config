@@ -1,5 +1,8 @@
 {
-    fonts = import ./fonts.nix;
-    gtk = import ./gtk.nix;
-    qt = import ./qt.nix;
+  imports = [
+    ./cursor.nix
+    ./fonts.nix
+    ./gtk.nix
+    ./qt.nix
+  ];
 }

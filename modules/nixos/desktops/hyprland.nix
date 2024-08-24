@@ -1,4 +1,5 @@
 {
+  config,
   username,
   inputs,
   pkgs,
@@ -8,6 +9,7 @@
 in {
   imports = [
     inputs.hyprland.nixosModules.default
+    self.nixosModules.sddm
   ];
 
   # imports hyprland home-manager module
@@ -15,36 +17,10 @@ in {
     self.homeManagerModules.desktops.hyprland
   ];
 
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
-
-  environment.systemPackages = with pkgs.gnome; [
-    pkgs.gnome-icon-theme
-    adwaita-icon-theme
-    nautilus
-    gnome-calendar
-    gnome-control-center
-    gnome-weather
-    gnome-calculator
-    gnome-clocks
-    gnome-software
-    gnome-system-monitor
-
-    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-  ];
-
   xdg.portal = {
     enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    #config.common.default = "*";
-    config = {
-      common = {
-        default = [
-          "*"
-        ];
-      };
-    };
+    config.common.default = "*";
   };
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -61,12 +37,16 @@ in {
     };
   };
 
+  security.polkit.enable = true;
+
   services = {
     blueman.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
     upower.enable = true;
+    #power-profiles-daemon.enable = true;
     accounts-daemon.enable = true;
+
     gnome = {
       evolution-data-server.enable = true;
       glib-networking.enable = true;
@@ -75,9 +55,41 @@ in {
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    libappindicator
+    kdePackages.kstatusnotifieritem
+  ];
+
+  # greeter
+  #  services.greetd = {
+  #    enable = true;
+  #    settings.default_session.command = pkgs.writeShellScript "greeter" ''
+  #      export XKB_DEFAULT_LAYOUT=${config.services.xserver.xkb.layout}
+  #      #export XCURSOR_THEME=
+  #      ${inputs.aylur-dotfiles.packages.${pkgs.system}.default}/bin/greeter
+  #    '';
+  #  };
+  #
+  #  systemd.tmpfiles.rules = [
+  #    "d '/var/cache/greeter' - greeter greeter - -"
+  #  ];
+  #
+  #  system.activationScripts.wallpaper = ''
+  #    PATH=$PATH:${pkgs.coreutils}/bin:${pkgs.gawk}/bin:${pkgs.jq}/bin
+  #    CACHE="/var/cache/greeter"
+  #    OPTS="$CACHE/options.json"
+  #
+  #    cp /home/${username}/.cache/ags/options.json $OPTS
+  #    chown greeter:greeter $OPTS
+  #
+  #    BG=$(cat $OPTS | jq -r '.wallpaper // "/home/${username}/.config/nixos/assets/wallpaper.jpg"')
+  #
+  #    cp $BG $CACHE/background
+  #    chown greeter:greeter $CACHE/background
+  #  '';
+
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
-    #package = null;
   };
 }

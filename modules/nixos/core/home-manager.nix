@@ -1,8 +1,10 @@
-{ username, inputs, ... }:
-let
-  homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
-in
 {
+  username,
+  inputs,
+  ...
+}: let
+  homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
+in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -11,8 +13,12 @@ in
   environment.extraInit = "[[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars}";
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; inherit username; };
+    extraSpecialArgs = {
+      inherit inputs;
+      inherit username;
+    };
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "hm-backup";
   };
 }

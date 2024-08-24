@@ -1,8 +1,25 @@
-{ inputs, pkgs, ... }: {
-    imports = [
-        inputs.plasma6.nixosModules.default
-    ];
+{
+  username,
+  inputs,
+  pkgs,
+  ...
+}: let
+  inherit (inputs) self;
+in {
+  imports = with self.nixosModules; [
+    sddm
+  ];
 
-    services.xserver.desktopManager.plasma6.enable = true;
-    xdg.portal.enable = true;
+  # imports plasma6 home-manager module
+  home-manager.users.${username}.imports = [
+    self.homeManagerModules.desktops.plasma6
+  ];
+
+  services.desktopManager.plasma6.enable = true;
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    oxygen
+    elisa
+    khelpcenter
+  ];
 }

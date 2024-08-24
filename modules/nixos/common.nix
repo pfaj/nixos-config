@@ -1,17 +1,22 @@
 {
   username,
-  pkgs,
   inputs,
+  pkgs,
   ...
-}: {
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
+}: let
+  inherit (inputs) self;
+  nixosModules = with self.nixosModules; [
+    core
+    audio
+    #kdeconnect
+    syncthing
   ];
+in {
+  imports = nixosModules;
 
-  # Set your time zone.
   time.timeZone = "America/New_York";
+  time.hardwareClockInLocalTime = true;
 
-  # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
 
@@ -34,17 +39,12 @@
 
     bluetooth.enable = true;
 
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
+    graphics.enable = true;
   };
 
   security.sudo.wheelNeedsPassword = false;
 
   networking = {
-    hostName = "${username}-nixos";
     networkmanager = {
       enable = true;
       wifi.powersave = false;
@@ -55,27 +55,31 @@
 
   documentation.enable = false;
 
+  security.pki.certificates = [
+    "/etc/ssl/certs/localhost+1.crt"
+  ];
+
   users.users.${username} = {
     isNormalUser = true;
+    initialPassword = "";
     extraGroups = ["networkmanager" "wheel" "audio"];
     shell = pkgs.fish;
   };
 
+  systemd.coredump.enable = false;
+
   services = {
-    flatpak.enable = true;
+    #flatpak.enable = true;
     printing.enable = true;
 
-    mullvad-vpn = {
-      enable = true;
-      enableExcludeWrapper = false;
-    };
+    #mullvad-vpn = {
+    #  enable = true;
+    #  enableExcludeWrapper = false;
+    #};
 
     xserver = {
       enable = true;
       excludePackages = [pkgs.xterm];
-
-      #layout = "us";
-      #xkbVariant = "";
     };
 
     logind.extraConfig = ''
@@ -86,18 +90,8 @@
   };
 
   programs = {
-    droidcam.enable = true;
-
-    fish = {
-      enable = true;
-      interactiveShellInit = ''
-        set -U fish_greeting
-
-        if type -q neofetch
-            neofetch
-        end
-      '';
-    };
+    #nix-ld.enable = true; # enables running binaries
+    fish.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -105,10 +99,13 @@
     bindfs
     git
     git-lfs
+    gh
     htop
-    neofetch
-
-    # custom neovim setup
-    inputs.neovim-flake.packages.${pkgs.system}.nix
+    ncdu
   ];
+
+  # set user icon for accountsservice
+  system.activationScripts.script.text = ''
+    cp /home/${username}/.config/nixos/hosts/${username}/user-avatar.jpg /var/lib/AccountsService/icons/${username}
+  '';
 }

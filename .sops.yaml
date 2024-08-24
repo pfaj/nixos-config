@@ -1,0 +1,10 @@
+keys:
+  - &admin_ben_desktop age1uk2ale6n8l6et87k5vtwx6a7lz29rqnd6cppnqsznkxqme29na2sxv9pmj
+  - &admin_ben_laptop age19mxj6rcr4dlx2a7pj3ekt76mcx0lgj6zpg7mcqpdc7mvlcytkf8qrpd8tc
+creation_rules:
+  - path_regex: ^secrets.yaml$ 
+    key_groups:
+      - pgp:
+        age:
+        - *admin_ben_desktop
+        - *admin_ben_laptop

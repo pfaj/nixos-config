@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-{
-    home.packages = with pkgs; [
-        lutris
-        lunar-client
-        prismlauncher
-        protonup-qt
-    ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    lunar-client
+    prismlauncher
+    protonup-qt
+  ];
 }

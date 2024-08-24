@@ -1,20 +1,29 @@
-{ ... }:
-{
+{pkgs, ...}: {
+  home.packages = with pkgs; [hack-font];
+
   programs.alacritty = {
     enable = true;
     settings = {
+      font = {
+        normal = {
+          family = "hack";
+          style = "Regular";
+        };
+      };
+
       colors = {
         transparent_background_colors = true;
 
         # Colors (Hyper)
         # Default colors
         primary = {
-          background = "#000000";
-          foreground = "#ffffff";
+          background = "#171717";
+          foreground = "#eeeeee";
         };
+
         cursor = {
           text = "#F81CE5";
-          cursor = "#ffffff";
+          cursor = "#eeeeee";
         };
 
         # Normal colors
@@ -41,8 +50,9 @@
           white = "#FFFFFF";
         };
       };
+
       window = {
-        opacity = 0.75;
+        opacity = 0.85;
         #dynamic_padding = true;
         padding = {
           x = 4;

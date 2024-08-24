@@ -1,5 +1,6 @@
 {
-    hyprland = import ./hyprland;
-    plasma5 = import ./plasma5;
-    gnome = import ./gnome.nix;
+  hyprland = import ./hyprland.nix;
+  plasma6 = import ./plasma6.nix;
+  gnome = import ./gnome.nix;
+  wayfire = import ./wayfire.nix;
 }
