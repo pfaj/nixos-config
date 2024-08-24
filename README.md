@@ -1,5 +1,7 @@
 # nixos-config
 ![image](https://github.com/bdebiase/nixos-config/assets/66143154/d3539dc3-a8d1-45b3-a2c5-901a1fcea198)
+> [!WARNING]
+> This config is **heavily** tailored to my needs and won't be as simple as just running it on your system. At some point in the future I do plan on revising the codebase and making it more modular and configurable.
 
 The project structure is as follows:
 - `hosts`: contains the separate configuration files for each of my own systems
