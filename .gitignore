@@ -1,5 +1,5 @@
 .stversions/
 .stfolder/
 
-hosts/*
-!hosts/ben/
+#hosts/*
+#!hosts/ben/

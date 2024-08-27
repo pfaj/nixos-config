@@ -32,8 +32,8 @@
     bkqs
 
     brave
-    #whatsapp-for-linux
-    #neovide
+    whatsapp-for-linux
+    neovide
   ];
 
   home.file.".config/background".source = ../../hosts/${username}/wallpaper.jpg;

@@ -173,7 +173,7 @@
         enable = true;
         sources = {
           diagnostics = {
-            #qmllint.enable = true;
+            qmllint.enable = true;
           };
 
           formatting = {
