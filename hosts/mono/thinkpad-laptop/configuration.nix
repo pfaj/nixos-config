@@ -17,6 +17,7 @@ in {
       ssh
       ollama
       power-saving
+      mysql
 
       desktops.hyprland
       #desktops.plasma6
@@ -29,6 +30,7 @@ in {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    kernelParams = ["nvidia-drm.mode_set=1" "nvidia-drm.fbdev=1"];
   };
 
   hardware.logitech.wireless.enable = true;
@@ -63,16 +65,6 @@ in {
       };
 
       folders = {
-        "nixos-config" = {
-          devices = ["main-desktop"];
-          path = "~/.config/nixos";
-        };
-
-        "quickshell" = {
-          devices = ["main-desktop"];
-          path = "~/.config/quickshell";
-        };
-
         "ObsidianNotebook" = {
           devices = ["mono-desktop" "thinkphone"];
           path = "~/ObsidianNotebook";
@@ -87,24 +79,5 @@ in {
         };
       };
     };
-  };
-
-  systemd.services.copy-file = {
-    description = "Backup quickshell";
-
-    script = ''
-      TIME=$(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H-%M-%S)
-      ${pkgs.gnutar}/bin/tar --exclude=.backup --absolute-names -czf /home/${username}/.config/quickshell/.backup/$TIME.tar.gz ~/.config/quickshell
-    '';
-  };
-
-  systemd.timers.copy-file = {
-    description = "quickshell backup timer";
-    timerConfig = {
-      OnBootSec = "15s";
-      OnUnitActiveSec = "6h";
-      Persistent = true;
-    };
-    wantedBy = ["timers.target"];
   };
 }

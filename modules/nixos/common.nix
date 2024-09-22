@@ -69,7 +69,7 @@ in {
   systemd.coredump.enable = false;
 
   services = {
-    #flatpak.enable = true;
+    flatpak.enable = true;
     printing.enable = true;
 
     #mullvad-vpn = {

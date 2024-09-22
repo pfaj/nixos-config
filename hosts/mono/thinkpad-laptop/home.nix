@@ -32,7 +32,6 @@
       john
       hashcat
       ffuf
-      protonvpn-cli
     ];
   };
 
@@ -41,14 +40,14 @@
       #"wlr-randr --output HDMI-A-1 --off && sleep 1 && wlr-randr --output HDMI-A-1 --on --pos 1921,0"
       "xrandr --output DP-2 --primary"
 
-      "hyprctl dispatch exec 'firefox'"
+      "hyprctl dispatch exec 'floorp'"
       "hyprctl dispatch exec 'obsidian'"
     ];
 
     # https://wiki.hyprland.org/Configuring/Monitors/
     monitor = [
-      "eDP-1, 2560x1600@165.00,0x0, 1.333, bitdepth,10"
-      ", preferred, auto, 1.333, bitdepth, 10"
+      "eDP-1, 2560x1600@165.00,0x0, 1.333"
+      ", preferred, auto, 1.333"
     ];
 
     misc = {
