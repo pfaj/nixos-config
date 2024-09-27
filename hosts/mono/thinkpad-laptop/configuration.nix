@@ -15,9 +15,10 @@ in {
       common
       nvidia
       ssh
+      docker
       ollama
       power-saving
-      mysql
+      #mysql
 
       desktops.hyprland
       #desktops.plasma6
@@ -41,6 +42,8 @@ in {
   home-manager.users.${username} = import ./home.nix;
 
   services.fprintd.enable = true;
+  security.pam.services.swaylock = {};
+  security.pam.services.swaylock.fprintAuth = true;
 
   services.keyd = {
     enable = true;

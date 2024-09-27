@@ -17,7 +17,6 @@
 
     packages = with pkgs; [
       floorp
-      firefox
       obsidian
       gimp-with-plugins
       fprintd
