@@ -254,11 +254,11 @@
         pin = regex: "pin, ${regex}";
         center = regex: "center, ${regex}";
       in [
-        (workspace "1 silent" "brave-browser")
-        (workspace "2 silent" "vesktop")
-        (workspace "3 silent" "spotify")
-        (workspace "3 silent" "obsidian")
-        (workspace "4 silent" "whatsapp")
+        (workspace "1 silent" "floorp")
+        (workspace "2 silent" "obsidian")
+        (workspace "3 silent" "vesktop")
+        (workspace "3 silent" "whatsapp")
+        (workspace "4 silent" "spotify")
         (workspace "5 silent" "steam")
         (workspace "6 silent" "easyeffects")
 
@@ -267,7 +267,7 @@
         (opacity "0.9" "vesktop")
         (opacity "0.9" "steam")
         (opacity "0.9" "easyeffects")
-        (opacity "0.9" "firefox")
+        (opacity "0.9" "floorp")
 
         (float "org.gnome.Nautilus")
         (size "65% 60%" "org.gnome.Nautilus")
@@ -420,10 +420,10 @@
         ", XF86PowerOff, exec, ${ags} -t powermenu"
 
         # quickshell
-        "CTRL SHIFT, Q, exec, pkill quickshell; quickshell" # restart
+        "CTRL SHIFT, Q, exec, pkill quickshell; QSG_USE_SIMPLE_ANIMATION_DRIVER=1 QSG_RENDER_LOOP=threaded quickshell" # restart
         "CTRL ALT, R, exec, pkill quickshell;" # quit
-        "ALT, SPACE, exec, echo 'togglelauncher' | socat - UNIX-CONNECT:/tmp/quickshell.sock" # toggle launcher
-        "SUPER, SPACE, exec, echo 'newworkspace' | socat - UNIX-CONNECT:/tmp/quickshell.sock" # new workspace
+        "ALT, SPACE, exec, qs msg shell send 'togglelauncher'" # toggle launcher
+        "SUPER, SPACE, exec, qs msg shell send 'newworkspace'" # new workspace
 
         # screenshot & screenrecord
         ", XF86Launch4, exec, ${ags} -r 'recorder.start()'"
