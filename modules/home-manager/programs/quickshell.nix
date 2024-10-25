@@ -4,14 +4,13 @@
   ...
 }: {
   home.packages = with pkgs; [
-    swww # wallpaper
     (inputs.quickshell.packages.${pkgs.system}.default.override {withQMLLib = true;})
     wl-clipboard
+    swww # wallpaper
     cliphist
-    libnotify
     inotify-tools
+    libnotify
     socat
     brightnessctl
-    #jc
   ];
 }

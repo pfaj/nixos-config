@@ -47,7 +47,7 @@ in {
   networking = {
     networkmanager = {
       enable = true;
-      wifi.powersave = false;
+      #wifi.powersave = false;
     };
   };
 

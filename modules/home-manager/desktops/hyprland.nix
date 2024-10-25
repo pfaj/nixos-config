@@ -47,7 +47,6 @@
     packages = with pkgs; [
       inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
 
-      cliphist
       loupe # image viewer
       clapper # video player
       snapshot # camera app
@@ -256,9 +255,8 @@
       in [
         (workspace "1 silent" "floorp")
         (workspace "2 silent" "obsidian")
-        (workspace "3 silent" "vesktop")
-        (workspace "3 silent" "whatsapp")
-        (workspace "4 silent" "spotify")
+        (workspace "3 silent" "spotify")
+        (workspace "4 silent" "whatsapp")
         (workspace "5 silent" "steam")
         (workspace "6 silent" "easyeffects")
 

@@ -11,7 +11,7 @@
   home.packages = with pkgs; [
     # formatters
     #alejandra # nix
-    #black # python
+    black # python
     codespell # generalized spelling errors
     #rustfmt # rust
     prettierd
@@ -119,14 +119,10 @@
     #];
 
     plugins = {
-      lazygit = {
-        enable = true;
-      };
       alpha = {
         enable = true; # greeter
         theme = "dashboard";
       };
-      # html short cuts
       emmet = {
         enable = true;
         settings = {
@@ -134,7 +130,6 @@
           leader_key = ",";
         };
       };
-
       #auto-save.enable = true;
       auto-session.enable = true;
       barbar.enable = true;
@@ -198,7 +193,7 @@
             installRustc = false;
           };
           html.enable = true;
-          pylsp.enable = true;
+          emmet-ls.enable = true;
           clangd.enable = true;
           lua-ls.enable = true;
           nil-ls.enable = true;
@@ -430,12 +425,6 @@
         mode = "n";
         key = "<C-t>";
         action = ":FloatermToggle<CR>";
-      }
-      # LazyGit Shortcut
-      {
-        mode = "n";
-        key = "<F9>";
-        action = ":LazyGit<CR>";
       }
     ];
   };
