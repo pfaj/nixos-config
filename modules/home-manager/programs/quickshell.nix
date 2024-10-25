@@ -4,7 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
-    (inputs.quickshell.packages.${pkgs.system}.default.override {withQMLLib = true;})
+    (inputs.quickshell.packages.${pkgs.system}.default.override {})
     wl-clipboard
     swww # wallpaper
     cliphist

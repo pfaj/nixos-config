@@ -123,6 +123,10 @@
         enable = true; # greeter
         theme = "dashboard";
       };
+
+      lazygit = {
+        enable = true;
+      };
       emmet = {
         enable = true;
         settings = {
@@ -425,6 +429,11 @@
         mode = "n";
         key = "<C-t>";
         action = ":FloatermToggle<CR>";
+      }
+      {
+        mode = "n";
+        key = "<F9>";
+        action = ":LazyGit<CR>";
       }
     ];
   };
