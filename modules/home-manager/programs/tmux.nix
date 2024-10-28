@@ -6,6 +6,8 @@
   programs.tmux = {
     enable = true;
     terminal = "screen-256color";
+    shortcut = "a";
+    escapeTime = 0;
     extraConfig = ''
       run-shell '${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin.tmux'
       # Plugins
@@ -20,7 +22,8 @@
       set -g @catppuccin_window_current_fill "number"
       set -g @catppuccin_window_current_text "#W"
 
-      set -g @catppuccin_status_modules_right "directory"
+      set -g status-right-length 100
+      set -g @catppuccin_status_modules_right "#{E:@catppuccin_status_application}#{E:@catppuccin_status_session}"
       set -g @catppuccin_status_left_separator  " "
       set -g @catppuccin_status_right_separator ""
       set -g @catppuccin_status_fill "icon"
