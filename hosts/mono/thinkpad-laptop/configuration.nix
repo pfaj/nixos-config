@@ -22,6 +22,7 @@ in {
 
       desktops.hyprland
       #desktops.plasma6
+      zen
     ]);
 
   boot = {

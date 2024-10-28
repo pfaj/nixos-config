@@ -19,5 +19,6 @@
   virtualization = import ./virtualization.nix;
   ollama = import ./ollama.nix;
   wootility = import ./wootility.nix;
+  zen = import ./zen.nix;
   zram = import ./zram.nix;
 }
