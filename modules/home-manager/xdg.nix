@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   #browser = "brave-browser.desktop";
-  browser = "floorp.desktop";
+  browser = "zen.desktop";
   file-manager = "org.gnome.Nautilus.desktop";
   image-viewer = "org.gnome.Loupe.desktop";
   video-player = "com.github.rafostar.Clapper.desktop";

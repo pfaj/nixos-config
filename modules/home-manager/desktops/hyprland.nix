@@ -253,7 +253,7 @@
         pin = regex: "pin, ${regex}";
         center = regex: "center, ${regex}";
       in [
-        (workspace "1 silent" "floorp")
+        (workspace "1 silent" "zen")
         (workspace "2 silent" "obsidian")
         (workspace "3 silent" "spotify")
         (workspace "4 silent" "whatsapp")
@@ -265,7 +265,6 @@
         (opacity "0.9" "vesktop")
         (opacity "0.9" "steam")
         (opacity "0.9" "easyeffects")
-        (opacity "0.9" "floorp")
 
         (float "org.gnome.Nautilus")
         (size "65% 60%" "org.gnome.Nautilus")
