@@ -12,5 +12,6 @@
     libnotify
     socat
     brightnessctl
+    hyprshade
   ];
 }

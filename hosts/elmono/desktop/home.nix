@@ -40,7 +40,7 @@
       #"wlr-randr --output HDMI-A-1 --off && sleep 1 && wlr-randr --output HDMI-A-1 --on --pos 1921,0"
       "xrandr --output DP-2 --primary"
 
-      "hyprctl dispatch exec 'floorp'"
+      "hyprctl dispatch exec 'zen'"
       "hyprctl dispatch exec 'obsidian'"
       "hyprctl dispatch exec 'easy-effects'"
     ];
