@@ -1281,11 +1281,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730520621,
-        "narHash": "sha256-SbiOcgGq8EP+z0bBhJ0W+uUeHm+Zck+AzwQqU3tEdd8=",
+        "lastModified": 1731414942,
+        "narHash": "sha256-aG+bwhYc0OrsrHDuS5Ah/YKdJVw1fsJZTlvkk7SzyOU=",
         "owner": "outfoxxed",
         "repo": "quickshell",
-        "rev": "cdeec6ee83f6512b2736b4e87695f708f291f843",
+        "rev": "0dd19d4a181378df5f61de9b5f54b3f2bba96e8a",
         "type": "github"
       },
       "original": {
@@ -1673,15 +1673,15 @@
         "nixpkgs": "nixpkgs_11"
       },
       "locked": {
-        "lastModified": 1727721329,
-        "narHash": "sha256-QYlWZwUSwrM7BuO+dXclZIwoPvBIuJr6GpFKv9XKFPI=",
-        "owner": "MarceColl",
+        "lastModified": 1731419975,
+        "narHash": "sha256-63/5uj+VBHi0bI9jdVhs2OQOlepPy6CL9q3gCIBxluc=",
+        "owner": "pfaj",
         "repo": "zen-browser-flake",
-        "rev": "e6ab73f405e9a2896cce5956c549a9cc359e5fcc",
+        "rev": "0d2e34fa206f91c55d7f6b5b741267592c5476d6",
         "type": "github"
       },
       "original": {
-        "owner": "MarceColl",
+        "owner": "pfaj",
         "repo": "zen-browser-flake",
         "type": "github"
       }

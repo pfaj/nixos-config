@@ -44,7 +44,7 @@
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    zen-browser.url = "github:pfaj/zen-browser-flake";
   };
 
   outputs = inputs: let

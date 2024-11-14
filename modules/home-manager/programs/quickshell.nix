@@ -4,14 +4,15 @@
   ...
 }: {
   home.packages = with pkgs; [
-    (inputs.quickshell.packages.${pkgs.system}.default.override {})
+    inputs.quickshell.packages.${pkgs.system}.default
     wl-clipboard
     swww # wallpaper
     cliphist
-    inotify-tools
     libnotify
+    inotify-tools
     socat
     brightnessctl
     hyprshade
+    desktop-file-utils
   ];
 }
