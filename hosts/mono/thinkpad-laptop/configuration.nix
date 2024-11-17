@@ -18,11 +18,11 @@ in {
       docker
       ollama
       power-saving
+      zen
       #mysql
 
       desktops.hyprland
       #desktops.plasma6
-      zen
     ]);
 
   boot = {
@@ -68,28 +68,28 @@ in {
     };
   };
 
-  services = {
-    syncthing.settings = {
-      devices = {
-        "main-desktop".id = "2Z6PAMN-W3IBRFR-Z7JC3S4-JFQFY6T-TF4JVR5-F6XK3M4-HLOF7YE-OZF6PA4";
-        "thinkphone".id = "ADQLAJW-7ZNJ435-QVUVTZA-RBXW3OS-P37SIAQ-HQN5AGD-OXRM37V-3BDVYAH";
-        "mono-desktop".id = "MDC3QPE-N6PPPUM-6TVWPFQ-2DNR4OG-4J3C6MB-5XP3J7A-FREPFEZ-PUBOYQN";
-      };
-
-      folders = {
-        "ObsidianNotebook" = {
-          devices = ["mono-desktop" "thinkphone"];
-          path = "~/ObsidianNotebook";
-        };
-        "website" = {
-          devices = ["mono-desktop"];
-          path = "~/website";
-        };
-        "projects" = {
-          devices = ["mono-desktop"];
-          path = "~/projects/";
-        };
-      };
-    };
-  };
+  # services = {
+  #   syncthing.settings = {
+  #     devices = {
+  #       "main-desktop".id = "2Z6PAMN-W3IBRFR-Z7JC3S4-JFQFY6T-TF4JVR5-F6XK3M4-HLOF7YE-OZF6PA4";
+  #       "thinkphone".id = "ADQLAJW-7ZNJ435-QVUVTZA-RBXW3OS-P37SIAQ-HQN5AGD-OXRM37V-3BDVYAH";
+  #       "mono-desktop".id = "MDC3QPE-N6PPPUM-6TVWPFQ-2DNR4OG-4J3C6MB-5XP3J7A-FREPFEZ-PUBOYQN";
+  #     };
+  #
+  #     folders = {
+  #       "ObsidianNotebook" = {
+  #         devices = ["mono-desktop" "thinkphone"];
+  #         path = "~/ObsidianNotebook";
+  #       };
+  #       "website" = {
+  #         devices = ["mono-desktop"];
+  #         path = "~/website";
+  #       };
+  #       "projects" = {
+  #         devices = ["mono-desktop"];
+  #         path = "~/projects/";
+  #       };
+  #     };
+  #   };
+  # };
 }

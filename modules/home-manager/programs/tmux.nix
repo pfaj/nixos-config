@@ -8,6 +8,7 @@
     terminal = "screen-256color";
     shortcut = "a";
     escapeTime = 0;
+    tmuxinator.enable = true;
     extraConfig = ''
       run-shell '${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin.tmux'
       # Plugins

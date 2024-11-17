@@ -8,6 +8,14 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
     powerManagement.enable = true;
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      intelBusId = "PCI:0:0:2";
+      nvidiaBusId = "PCI:0:1:0";
+    };
     nvidiaSettings = true;
     open = true;
   };

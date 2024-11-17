@@ -16,7 +16,7 @@
     };
 
     packages = with pkgs; [
-      floorp
+      # floorp
       obsidian
       #gimp-with-plugins
       fprintd
