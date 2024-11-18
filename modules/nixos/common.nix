@@ -9,7 +9,7 @@
     core
     audio
     #kdeconnect
-    syncthing
+    # syncthing
   ];
 in {
   imports = nixosModules;

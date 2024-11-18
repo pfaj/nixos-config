@@ -327,7 +327,7 @@
         "SUPER, E, exec, nautilus"
         "SUPER SHIFT CTRL, N, exec, neovide ~/.config/nixos"
         "SUPER SHIFT, N, exec, neovide"
-        "SUPER SHIFT, B, exec, brave"
+        "SUPER SHIFT, B, exec, zen"
         "SUPER, grave, exec, gnome-system-monitor"
 
         # window binds

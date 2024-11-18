@@ -14,5 +14,6 @@
     brightnessctl
     hyprshade
     desktop-file-utils
+    hyprpicker
   ];
 }

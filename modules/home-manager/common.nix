@@ -17,13 +17,13 @@
     programs.quickshell
 
     # custom web apps
-    programs.bandlab
-    programs.chatgpt
-    programs.reddit
-    programs.messages
-    programs.spotify
-    programs.syncthing
-    programs.youtube
+    # programs.bandlab
+    # programs.chatgpt
+    # programs.reddit
+    # programs.messages
+    # programs.spotify
+    # programs.syncthing
+    # programs.youtube
   ];
 
   home.packages = with pkgs; [
@@ -32,7 +32,7 @@
     rmshit # bypasses homemanager bug
     bkqs
 
-    brave
+    # brave
     whatsapp-for-linux
     neovide
   ];
