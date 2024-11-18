@@ -44,7 +44,7 @@
 
     # https://wiki.hyprland.org/Configuring/Monitors/
     monitor = [
-      "eDP-1, 2560x1600@145.00,0x0,1.333"
+      "eDP-1, 2560x1600@165.00,0x0,1.333"
       ", preferred, auto, 1.333"
     ];
 
