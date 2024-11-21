@@ -42,6 +42,8 @@
       GDK_BACKEND = "wayland,x11";
 
       NIXOS_OZONE_WL = "1"; # force wayland on electron apps
+      NVD_BACKEND = "direct"; #Nvdia Backend
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
     };
 
     packages = with pkgs; [

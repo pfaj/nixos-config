@@ -58,6 +58,7 @@ in {
   environment.systemPackages = with pkgs; [
     libappindicator
     kdePackages.kstatusnotifieritem
+    egl-wayland
   ];
 
   # greeter

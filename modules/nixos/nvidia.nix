@@ -1,24 +1,29 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: {
+  environment.systemPackages = with pkgs; [
+    nvidia-vaapi-driver
+  ];
   hardware.nvidia = {
     #package = config.boot.kernelPackages.nvidiaPackages.beta;
     package = config.boot.kernelPackages.nvidiaPackages.production;
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
     powerManagement.enable = true;
-    # prime = {
-    #   offload = {
-    #     enable = true;
-    #     enableOffloadCmd = true;
-    #   };
-    #   intelBusId = "PCI:0:0:2";
-    #   nvidiaBusId = "PCI:0:1:0";
-    # };
+    powerManagement.finegrained = true;
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      intelBusId = "PCI:0:0:2";
+      nvidiaBusId = "PCI:0:1:0";
+    };
     nvidiaSettings = true;
-    open = true;
+    open = false;
   };
 
   services.xserver.videoDrivers = ["nvidia"];
