@@ -17,7 +17,6 @@
     };
 
     packages = with pkgs; [
-      firefox
       obsidian
       gimp-with-plugins
       libreoffice
@@ -47,7 +46,7 @@
 
     # https://wiki.hyprland.org/Configuring/Monitors/
     monitor = [
-      "DP-2, preferred, auto, 1"
+      "DP-2, 1920x1080@144, auto, 1"
       "DP-1, 1920x1080@144, 0x0, 1"
     ];
 

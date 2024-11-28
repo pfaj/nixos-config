@@ -33,7 +33,7 @@
     bkqs
 
     # brave
-    whatsapp-for-linux
+    # whatsapp-for-linux
     neovide
   ];
 
