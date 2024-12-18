@@ -212,7 +212,7 @@
       #     #    "_" = ["trim_whitespace"];
       #   };
       # };
-      codeium-nvim.enable = true;
+      # codeium-nvim.enable = true;
 
       notify.enable = true;
       floaterm.enable = true;
@@ -314,7 +314,7 @@
 
           sources = [
             {name = "path";} # file paths
-            {name = "codeium";} # source for codeium ai
+            # {name = "codeium";} # source for codeium ai
             {name = "nvim_lsp";} # from language server
             {name = "nvim_lsp_signature_help";} # display function signatures with current parameter emphasized
             {name = "buffer";} # source current buffer

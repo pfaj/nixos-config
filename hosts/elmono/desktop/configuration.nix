@@ -17,6 +17,7 @@ in {
       ssh
       gaming
       ollama
+      zen
 
       desktops.hyprland
     ]);
@@ -39,59 +40,73 @@ in {
 
   home-manager.users.${username} = import ./home.nix;
 
-  services = {
-    syncthing.settings = {
-      devices = {
-        "main-desktop".id = "2Z6PAMN-W3IBRFR-Z7JC3S4-JFQFY6T-TF4JVR5-F6XK3M4-HLOF7YE-OZF6PA4";
-        "thinkphone".id = "ADQLAJW-7ZNJ435-QVUVTZA-RBXW3OS-P37SIAQ-HQN5AGD-OXRM37V-3BDVYAH";
-        "thinkpad-laptop".id = "IGL6Y24-HLWHS6L-CMNZ2YA-2OQLWPQ-W3QAQX2-ZZ5RN44-336PXTH-FV4QFQL";
-        "mono-tab".id = "BSC7U6T-QOOETLU-N4YDASY-YFE4WKO-CHHN4LU-AZHCUKN-LQMUPZA-ORDOVAR";
-        "thinkpad-windows".id = "BMMBHBN-2EJA2KZ-4BCEVAP-P26ZW27-WDHBQ5N-UZHGWUM-JFJ6JQG-C5FOUQF";
-      };
-
-      folders = {
-        "nixos-config" = {
-          devices = ["main-desktop" "thinkphone"];
-          path = "~/.config/nixos";
-        };
-
-        "quickshell" = {
-          devices = ["main-desktop" "thinkphone"];
-          path = "~/.config/quickshell";
-        };
-
-        "ObsidianNotebook" = {
-          devices = ["thinkpad-laptop" "thinkphone" "mono-tab" "thinkpad-windows"];
-          path = "~/ObsidianNotebook";
-        };
-        "website" = {
-          devices = ["thinkpad-laptop"];
-          path = "~/website";
-        };
-        "projects" = {
-          devices = ["thinkpad-laptop" "thinkpad-windows"];
-          path = "~/projects/";
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(control, esc)";
+          };
         };
       };
     };
   };
 
-  systemd.services.copy-file = {
-    description = "Backup quickshell";
-
-    script = ''
-      TIME=$(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H-%M-%S)
-      ${pkgs.gnutar}/bin/tar --exclude=.backup --absolute-names -czf /home/${username}/.config/quickshell/.backup/$TIME.tar.gz ~/.config/quickshell
-    '';
-  };
-
-  systemd.timers.copy-file = {
-    description = "quickshell backup timer";
-    timerConfig = {
-      OnBootSec = "15s";
-      OnUnitActiveSec = "6h";
-      Persistent = true;
-    };
-    wantedBy = ["timers.target"];
-  };
+  # services = {
+  #   syncthing.settings = {
+  #     devices = {
+  #       "main-desktop".id = "2Z6PAMN-W3IBRFR-Z7JC3S4-JFQFY6T-TF4JVR5-F6XK3M4-HLOF7YE-OZF6PA4";
+  #       "thinkphone".id = "ADQLAJW-7ZNJ435-QVUVTZA-RBXW3OS-P37SIAQ-HQN5AGD-OXRM37V-3BDVYAH";
+  #       "thinkpad-laptop".id = "IGL6Y24-HLWHS6L-CMNZ2YA-2OQLWPQ-W3QAQX2-ZZ5RN44-336PXTH-FV4QFQL";
+  #       "mono-tab".id = "BSC7U6T-QOOETLU-N4YDASY-YFE4WKO-CHHN4LU-AZHCUKN-LQMUPZA-ORDOVAR";
+  #       "thinkpad-windows".id = "BMMBHBN-2EJA2KZ-4BCEVAP-P26ZW27-WDHBQ5N-UZHGWUM-JFJ6JQG-C5FOUQF";
+  #     };
+  #
+  #     folders = {
+  #       "nixos-config" = {
+  #         devices = ["main-desktop" "thinkphone"];
+  #         path = "~/.config/nixos";
+  #       };
+  #
+  #       "quickshell" = {
+  #         devices = ["main-desktop" "thinkphone"];
+  #         path = "~/.config/quickshell";
+  #       };
+  #
+  #       "ObsidianNotebook" = {
+  #         devices = ["thinkpad-laptop" "thinkphone" "mono-tab" "thinkpad-windows"];
+  #         path = "~/ObsidianNotebook";
+  #       };
+  #       "website" = {
+  #         devices = ["thinkpad-laptop"];
+  #         path = "~/website";
+  #       };
+  #       "projects" = {
+  #         devices = ["thinkpad-laptop" "thinkpad-windows"];
+  #         path = "~/projects/";
+  #       };
+  #     };
+  #   };
+  # };
+  #
+  # systemd.services.copy-file = {
+  #   description = "Backup quickshell";
+  #
+  #   script = ''
+  #     TIME=$(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H-%M-%S)
+  #     ${pkgs.gnutar}/bin/tar --exclude=.backup --absolute-names -czf /home/${username}/.config/quickshell/.backup/$TIME.tar.gz ~/.config/quickshell
+  #   '';
+  # };
+  #
+  # systemd.timers.copy-file = {
+  #   description = "quickshell backup timer";
+  #   timerConfig = {
+  #     OnBootSec = "15s";
+  #     OnUnitActiveSec = "6h";
+  #     Persistent = true;
+  #   };
+  #   wantedBy = ["timers.target"];
+  # };
 }
