@@ -39,7 +39,7 @@
       neovide_remember_window_size = false;
     };
 
-    options = {
+    opts = {
       number = true;
       relativenumber = true;
       tabstop = 4;
@@ -134,24 +134,84 @@
           leader_key = ",";
         };
       };
+
+      rust-tools = {
+        enable = true;
+        server = {
+          checkOnSave = true;
+          inlayHints = {
+            lifetimeElisionHints = {
+              enable = "always";
+            };
+            bindingModeHints = {
+              enable = true;
+            };
+            typeHints = {
+              enable = true;
+            };
+            parameterHints = {
+              enable = true;
+            };
+          };
+          diagnostics = {
+            enable = true;
+          };
+          # Add these root level settings
+          procMacro = {
+            enable = true;
+          };
+        };
+      };
+      # rustaceanvim = {
+      #   enable = true;
+      #   settings = {
+      #     server = {
+      #       cmd = [
+      #         "rustup"
+      #         "run"
+      #         "nightly"
+      #         "rust-analyzer"
+      #       ];
+      #       default_settings = {
+      #         rust-analyzer = {
+      #           check = {
+      #             command = "clippy";
+      #             allTargets = true;
+      #           };
+      #           inlayHints = {
+      #             lifetimeElisionHints = {
+      #               enable = "always";
+      #             };
+      #           };
+      #           # The diagnostics settings are instead placed at this level
+      #           diagnostics = {
+      #             enable = true;
+      #           };
+      #           # Remove checkOnSave as it's not a valid option in this context
+      #         };
+      #       };
+      #       standalone = false;
+      #     };
+      #   };
+      # };
       #auto-save.enable = true;
       auto-session.enable = true;
       barbar.enable = true;
       barbecue.enable = true; # vscode navigation
       better-escape.enable = true;
-      #conform-nvim = {
-      #  enable = true;
-      #  formatOnSave = {};
-      #  formattersByFt = {
-      #    nix = ["alejandra"];
-      #    python = ["black"];
-      #    #javascript = [["prettierd" "prettier"]];
-      #    rust = ["rustfmt"];
-      #    qml = { "qmlformat" };
-      #    #"*" = ["codespell"];
-      #    "_" = ["trim_whitespace"];
-      #  };
-      #};
+      # conform-nvim = {
+      #   enable = true;
+      #   formatOnSave = {};
+      #   formattersByFt = {
+      #     nix = ["alejandra"];
+      #     #    python = ["black"];
+      #     javascript = [["prettierd" "prettier"]];
+      #     rust = ["rustfmt"];
+      #     #    qml = { "qmlformat" };
+      #     #    #"*" = ["codespell"];
+      #     #    "_" = ["trim_whitespace"];
+      #   };
+      # };
       codeium-nvim.enable = true;
 
       notify.enable = true;
@@ -193,8 +253,8 @@
           rust-analyzer = {
             enable = true;
             package = null;
-            installCargo = false;
-            installRustc = false;
+            installCargo = true;
+            installRustc = true;
           };
           html.enable = true;
           emmet-ls.enable = true;
