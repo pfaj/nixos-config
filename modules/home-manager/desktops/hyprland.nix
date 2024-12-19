@@ -419,7 +419,7 @@
         ", XF86PowerOff, exec, ${ags} -t powermenu"
 
         # quickshell
-        "CTRL SHIFT, Q, exec, pkill quickshell; QSG_USE_SIMPLE_ANIMATION_DRIVER=1 QSG_RENDER_LOOP=threaded quickshell" # restart
+        "CTRL SHIFT, Q, exec, pkill quickshell; quickshell" # restart
         "CTRL ALT, R, exec, pkill quickshell;" # quit
         "ALT, SPACE, exec, qs msg shell send 'togglelauncher'" # toggle launcher
         "SUPER, SPACE, exec, qs msg shell send 'newworkspace'" # new workspace
