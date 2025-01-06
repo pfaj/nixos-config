@@ -127,12 +127,21 @@
       lazygit = {
         enable = true;
       };
+
       emmet = {
         enable = true;
         settings = {
           mode = "n";
           leader_key = ",";
         };
+      };
+
+      vim-css-color.enable = true;
+
+      refactoring.enable = true;
+
+      typescript-tools = {
+        enable = true;
       };
 
       rust-tools = {
