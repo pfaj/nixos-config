@@ -42,9 +42,9 @@
     opts = {
       number = true;
       relativenumber = true;
-      tabstop = 4;
-      softtabstop = 4;
-      shiftwidth = 4;
+      tabstop = 2;
+      softtabstop = 2;
+      shiftwidth = 2;
       expandtab = true;
       smartindent = true;
       wrap = false;
@@ -97,26 +97,36 @@
           },
       })
 
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "c", "cpp", "rust", "python", "lua", "javascript", "typescript", "java", "css", "nix", "html" },  -- Adjust for your desired languages
+        callback = function()
+            vim.diagnostic.config({ virtual_text = true })
+        end,
+      })
+
       vim.cmd('highlight Normal guibg=#171717 ctermbg=none')
+
+      require('telescope').load_extension('harpoon')
     '';
 
     extraPlugins = with pkgs.vimPlugins; [
       nvim-scrollview
       #ChatGPT-nvim
     ];
+    # ]
     # Can be used for extra plugins
-    #++ [
-    #  (pkgs.vimUtils.buildVimPlugin {
-    #    pname = "";
-    #    version = "";
-    #    src = pkgs.fetchFromGitHub {
-    #      owner = "";
-    #      repo = "";
-    #      rev = "";
-    #      sha256 = "";
-    #    };
-    #  })
-    #];
+    # ++ [
+    #   (pkgs.vimUtils.buildVimPlugin {
+    #     pname = "";
+    #     version = "";
+    #     src = pkgs.fetchFromGitHub {
+    #       owner = "";
+    #       repo = "";
+    #       rev = "";
+    #       sha256 = "";
+    #     };
+    #   })
+    # ];
 
     plugins = {
       alpha = {
@@ -136,9 +146,21 @@
         };
       };
 
-      vim-css-color.enable = true;
+      harpoon = {
+        enable = true;
+        extraOptions = {
+          # Use current working directory as project key
+          key = "function() return vim.fn.getcwd() end";
+        };
+      };
 
-      refactoring.enable = true;
+      vim-css-color.enable = true;
+      nvim-jdtls = {
+        enable = true;
+        data = "/home/mono/.cache/jdtls/$PWD";
+      };
+
+      # refactoring.enable = true;
 
       typescript-tools = {
         enable = true;
@@ -171,38 +193,7 @@
           };
         };
       };
-      # rustaceanvim = {
-      #   enable = true;
-      #   settings = {
-      #     server = {
-      #       cmd = [
-      #         "rustup"
-      #         "run"
-      #         "nightly"
-      #         "rust-analyzer"
-      #       ];
-      #       default_settings = {
-      #         rust-analyzer = {
-      #           check = {
-      #             command = "clippy";
-      #             allTargets = true;
-      #           };
-      #           inlayHints = {
-      #             lifetimeElisionHints = {
-      #               enable = "always";
-      #             };
-      #           };
-      #           # The diagnostics settings are instead placed at this level
-      #           diagnostics = {
-      #             enable = true;
-      #           };
-      #           # Remove checkOnSave as it's not a valid option in this context
-      #         };
-      #       };
-      #       standalone = false;
-      #     };
-      #   };
-      # };
+
       #auto-save.enable = true;
       auto-session.enable = true;
       barbar.enable = true;
@@ -221,6 +212,7 @@
       #     #    "_" = ["trim_whitespace"];
       #   };
       # };
+
       # codeium-nvim.enable = true;
 
       notify.enable = true;
@@ -272,6 +264,7 @@
           nil-ls.enable = true;
         };
       };
+
       lsp-format.enable = true;
 
       cmp-buffer.enable = true;
@@ -503,6 +496,82 @@
         mode = "n";
         key = "<F9>";
         action = ":LazyGit<CR>";
+      }
+
+      # Harpoon keybindings
+      {
+        mode = "n";
+        key = "<leader>a"; # Add current file to Harpoon
+        action = "<cmd>lua require('harpoon.mark').add_file()<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Add file";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>h"; # Toggle Harpoon quick menu
+        action = "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Toggle menu";
+        };
+      }
+      # Direct navigation to marked files
+      {
+        mode = "n";
+        key = "<leader>1";
+        action = "<cmd>lua require('harpoon.ui').nav_file(1)<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Go to file 1";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>2";
+        action = "<cmd>lua require('harpoon.ui').nav_file(2)<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Go to file 2";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>3";
+        action = "<cmd>lua require('harpoon.ui').nav_file(3)<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Go to file 3";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>4";
+        action = "<cmd>lua require('harpoon.ui').nav_file(4)<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Go to file 4";
+        };
+      }
+      # Navigate next/previous
+      {
+        mode = "n";
+        key = "<leader>j"; # Next Harpoon file
+        action = "<cmd>lua require('harpoon.ui').nav_next()<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Next file";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>k"; # Previous Harpoon file
+        action = "<cmd>lua require('harpoon.ui').nav_prev()<CR>";
+        options = {
+          silent = true;
+          desc = "Harpoon: Previous file";
+        };
       }
     ];
   };

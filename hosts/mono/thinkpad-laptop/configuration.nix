@@ -68,6 +68,14 @@ in {
     };
   };
 
+  networking = {
+    hostName = "thinkpad-laptop";
+    #firewall = {
+    #  allowedTCPPorts = [7236 7250];
+    #  allowedUDPPorts = [51820 7236 5353];
+    #};
+  };
+
   # services = {
   #   syncthing.settings = {
   #     devices = {

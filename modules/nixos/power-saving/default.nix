@@ -3,6 +3,11 @@
   powerManagement.powertop.enable = true;
   hardware.system76.power-daemon.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    lm_sensors
+    stress-ng
+  ];
+
   services = {
     #thermald = {
     #  enable = true;
