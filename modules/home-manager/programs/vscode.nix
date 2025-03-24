@@ -2,10 +2,10 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.fhs;
-    enableUpdateCheck = false;
-    enableExtensionUpdateCheck = false;
+    profiles.default.enableUpdateCheck = false;
+    profiles.default.enableExtensionUpdateCheck = false;
     mutableExtensionsDir = true;
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       rust-lang.rust-analyzer
       #arrterian.nix-env-selector
@@ -15,10 +15,10 @@
       #twxs.cmake
       #ms-python.python
       #ms-python.vscode-pylance
-      vscjava.vscode-java-pack 
+      vscjava.vscode-java-pack
     ];
 
-    userSettings = {
+    profiles.default.userSettings = {
       "window.titleBarStyle" = "custom";
       "editor.smoothScrolling" = true;
       "editor.cursorBlinking" = "smooth";

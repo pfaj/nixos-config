@@ -9,13 +9,13 @@
   ];
 
   services = {
-    #thermald = {
-    #  enable = true;
-    #  configFile = ./thermal-conf.xml;
-    #};
+    thermald = {
+      enable = true;
+      configFile = ./thermal-conf.xml;
+    };
 
     # auto-cpufreq = {
-    #   enable = true;
+    #   # enable = true;
     #   settings = {
     #     battery = {
     #       governor = "conservative";
