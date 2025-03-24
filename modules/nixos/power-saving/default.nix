@@ -14,18 +14,18 @@
     #  configFile = ./thermal-conf.xml;
     #};
 
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery = {
-          governor = "conservative";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
-    };
+    # auto-cpufreq = {
+    #   enable = true;
+    #   settings = {
+    #     battery = {
+    #       governor = "conservative";
+    #       turbo = "never";
+    #     };
+    #     charger = {
+    #       governor = "performance";
+    #       turbo = "auto";
+    #     };
+    #   };
+    # };
   };
 }

@@ -1,5 +1,4 @@
 {
-  config,
   username,
   inputs,
   pkgs,

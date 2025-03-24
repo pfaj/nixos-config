@@ -36,15 +36,19 @@
     musnix = {url = "github:musnix/musnix";};
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     aylur-dotfiles.url = "github:bdebiase/aylur-dotfiles";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixvim = {
+    #   url = "github:nix-community/nixvim";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:pfaj/zen-browser-flake";
+    # niri = {
+    #   url = "github:YaLTeR/niri";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = inputs: let

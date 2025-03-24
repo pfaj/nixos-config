@@ -10,6 +10,7 @@
   messages = import ./messages.nix;
   neofetch = import ./neofetch.nix;
   neovim = import ./neovim.nix;
+  nixvim = import ./nixvim.nix;
   quickshell = import ./quickshell.nix;
   reddit = import ./reddit.nix;
   spotify = import ./spotify.nix;

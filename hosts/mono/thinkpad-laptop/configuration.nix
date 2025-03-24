@@ -22,9 +22,11 @@ in {
       #mysql
 
       desktops.hyprland
+      # desktops.niri
       #desktops.plasma6
     ]);
 
+  nix.settings.download-buffer-size = 10485760; # 10 MiB (default is around 1 MiB)>>
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 

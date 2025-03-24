@@ -199,13 +199,14 @@
       };
 
       decoration = {
-        drop_shadow = true;
-        shadow_range = 48;
-        shadow_render_power = 3;
-        "col.shadow" = "0x66000000";
-        "col.shadow_inactive" = "0x44000000";
         dim_inactive = false;
         dim_special = 0.5;
+
+        shadow = {
+          range = 48;
+          color = "0x66000000";
+          color_inactive = "0x44000000";
+        };
 
         blur = {
           enabled = true;
@@ -255,37 +256,33 @@
         pin = regex: "pin, ${regex}";
         center = regex: "center, ${regex}";
       in [
-        (workspace "1 silent" "zen")
-        (workspace "2 silent" "obsidian")
-        (workspace "3 silent" "spotify")
-        (workspace "4 silent" "whatsapp")
-        (workspace "5 silent" "steam")
-        (workspace "6 silent" "easyeffects")
+        #(workspace "1 silent" "zen")
+        #(workspace "2 silent" "vesktop")
+        #(workspace "3 silent" "spotify")
+        #(workspace "3 silent" "obsidian")
+        #(workspace "4 silent" "whatsapp")
+        #(workspace "5 silent" "steam")
+        #(workspace "6 silent" "easyeffects")
 
-        (opacity "0.9" "brave")
-        (opacity "0.9" "code")
-        (opacity "0.9" "vesktop")
-        (opacity "0.9" "steam")
-        (opacity "0.9" "easyeffects")
+        #(opacity "0.9" "brave")
+        #(opacity "0.9" "code")
+        #(opacity "0.9" "vesktop")
+        #(opacity "0.9" "steam")
+        #(opacity "0.9" "easyeffects")
+        #(opacity "0.9" "firefox")
 
-        (float "org.gnome.Nautilus")
-        (size "65% 60%" "org.gnome.Nautilus")
-        (center "org.gnome.Nautilus")
-        (opacity "0.9" "org.gnome.Nautilus")
-
-        (float "xdg-desktop-portal-gtk")
-        (size "65% 60%" "xdg-desktop-portal-gtk")
-        (center "xdg-desktop-portal-gtk")
-        (opacity "0.9" "xdg-desktop-portal-gtk")
-
-        (float "org.gnome.SystemMonitor")
-        (size "60% 60%" "org.gnome.SystemMonitor")
-        (center "org.gnome.SystemMonitor")
-        (pin "org.gnome.SystemMonitor")
-        (opacity "0.9" "org.gnome.SystemMonitor")
-
-        (pin "gnome-system-monitor")
-        (opacity "0.9" "gnome-system-monitor")
+        # (float "org.gnome.Nautilus")
+        # (size "65% 60%" "org.gnome.Nautilus")
+        # (center "org.gnome.Nautilus")
+        #
+        # (float "xdg-desktop-portal-gtk")
+        # (size "65% 60%" "xdg-desktop-portal-gtk")
+        # (center "xdg-desktop-portal-gtk")
+        #
+        # (float "org.gnome.SystemMonitor")
+        # (size "60% 60%" "org.gnome.SystemMonitor")
+        # (center "org.gnome.SystemMonitor")
+        # (pin "org.gnome.SystemMonitor")
       ];
 
       windowrulev2 = let
