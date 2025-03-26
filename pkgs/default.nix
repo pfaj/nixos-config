@@ -1,7 +1,6 @@
 {pkgs}: let
   callPackage = pkgs.lib.callPackageWith pkgs;
 in {
-  auto-cpufreq = callPackage ./auto-cpufreq.nix {};
   bkqs = callPackage ./bkqs.nix {};
   marwaita-x = callPackage ./marwaita-x.nix {};
   editconf = callPackage ./editconf.nix {};

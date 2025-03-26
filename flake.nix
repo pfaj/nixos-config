@@ -45,10 +45,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:pfaj/zen-browser-flake";
-    # niri = {
-    #   url = "github:YaLTeR/niri";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    niri = {
+      url = "github:YaLTeR/niri";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let

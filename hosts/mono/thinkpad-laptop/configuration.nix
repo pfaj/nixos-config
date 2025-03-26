@@ -21,8 +21,8 @@ in {
       zen
       #mysql
 
-      desktops.hyprland
-      # desktops.niri
+      # desktops.hyprland
+      desktops.niri
       #desktops.plasma6
     ]);
 

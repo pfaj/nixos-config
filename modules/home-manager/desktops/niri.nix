@@ -38,6 +38,7 @@
       #gnome-control-center
       #gnome-weather
       gnome-calculator
+      fuzzel
       #gnome-clocks
       #gnome-software
     ];
