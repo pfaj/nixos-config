@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   powerManagement.enable = true;
-  powerManagement.powertop.enable = true;
+  # powerManagement.powertop.enable = true;
   hardware.system76.power-daemon.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -15,7 +15,7 @@
     };
 
     # auto-cpufreq = {
-    #   # enable = true;
+    #   enable = true;
     #   settings = {
     #     battery = {
     #       governor = "conservative";
