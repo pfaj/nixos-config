@@ -1,4 +1,4 @@
 {writeScriptBin}:
 writeScriptBin "editconf" ''
-  nvim ~/.config/nixos/
+  cd ~/.config/nixos/ && nvim .
 ''
