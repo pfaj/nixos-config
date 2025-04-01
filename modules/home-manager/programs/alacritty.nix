@@ -52,7 +52,7 @@
       };
 
       window = {
-        opacity = 0.85;
+        opacity = 0.99;
         #dynamic_padding = true;
         padding = {
           x = 4;

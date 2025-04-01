@@ -15,6 +15,12 @@
     #kdePackages.qtdeclarative
     lazygit
 
+    gcc
+    vimPlugins.fzf-lua
+    nodejs_22
+    unzip
+    ruff
+
     ctags # required for tagbar
     ripgrep # required for live grep
   ];
