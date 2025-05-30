@@ -18,8 +18,10 @@ in {
       gaming
       ollama
       zen
+      # searxng
 
-      desktops.hyprland
+      # desktops.hyprland
+      desktops.niri
     ]);
 
   boot = {
@@ -91,22 +93,4 @@ in {
   #   };
   # };
   #
-  # systemd.services.copy-file = {
-  #   description = "Backup quickshell";
-  #
-  #   script = ''
-  #     TIME=$(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H-%M-%S)
-  #     ${pkgs.gnutar}/bin/tar --exclude=.backup --absolute-names -czf /home/${username}/.config/quickshell/.backup/$TIME.tar.gz ~/.config/quickshell
-  #   '';
-  # };
-  #
-  # systemd.timers.copy-file = {
-  #   description = "quickshell backup timer";
-  #   timerConfig = {
-  #     OnBootSec = "15s";
-  #     OnUnitActiveSec = "6h";
-  #     Persistent = true;
-  #   };
-  #   wantedBy = ["timers.target"];
-  # };
 }

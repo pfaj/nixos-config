@@ -12,6 +12,7 @@
   power-saving = import ./power-saving;
   rt-audio = import ./rt-audio.nix;
   audio = import ./audio.nix;
+  searxng = import ./searxng.nix;
   sddm = import ./sddm.nix;
   ssh = import ./ssh.nix;
   syncthing = import ./syncthing.nix;
