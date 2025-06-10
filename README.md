@@ -10,6 +10,45 @@ The project structure is as follows:
 - `overlays`: custom overlays/additions to already existing packages
 - `pkgs`: all custom package derivations
 
+---
+## Included Software
+### AI
+- Ollama 
+
+### Browser
+- Zen Browser
+
+### CLI
+- alacritty
+- neofetch
+- tmux
+- wezterm
+
+### Editor
+- Neovim
+- Nixvim
+- VS Code
+
+### UI
+#### Window Managers 
+- Hyprland
+- Niri
+#### Desktop Environments
+- Cosmic
+- KDE
+- Gnome
+- Wayfire
+- Quickshell
+
+### Misc
+- ADB
+- Discord
+- Searxng
+- Steam
+- Syncthing
+
+---
+
 ## Contributing
 Contributions are always welcome. If you see something that looks off or have any suggests to improve the codebase, it would be very much appreciated. This repo will be constantly evolving and adapting to fit modern standards and any NixOS changes moving on.
 
