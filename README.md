@@ -1,5 +1,6 @@
 # nixos-config
-![image](https://github.com/bdebiase/nixos-config/assets/66143154/d3539dc3-a8d1-45b3-a2c5-901a1fcea198)
+![image](https://github.com/user-attachments/assets/47ab4a93-5842-42eb-a59e-6a4ad1e27831)
+
 > [!WARNING]
 > This config is **heavily** tailored to my needs and won't be as simple as just running it on your system. At some point in the future I do plan on revising the codebase and making it more modular and configurable.
 
