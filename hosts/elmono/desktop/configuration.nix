@@ -18,7 +18,7 @@ in {
       gaming
       ollama
       zen
-      # searxng
+      searxng
 
       # desktops.hyprland
       desktops.niri
