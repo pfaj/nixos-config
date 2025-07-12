@@ -58,6 +58,14 @@ in {
     };
   };
 
+  networking = {
+    hostName = "${username}-desktop-nixos";
+    firewall = {
+      allowedTCPPorts = [22565];
+      allowedUDPPorts = [];
+    };
+  };
+
   # services = {
   #   syncthing.settings = {
   #     devices = {
