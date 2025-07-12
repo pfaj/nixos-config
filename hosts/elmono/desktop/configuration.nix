@@ -19,6 +19,8 @@ in {
       ollama
       zen
       searxng
+      tailscale
+      immich
 
       # desktops.hyprland
       desktops.niri
