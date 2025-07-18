@@ -19,7 +19,7 @@
     packages = with pkgs; [
       firefox
       obsidian
-      gimp-with-plugins
+      # gimp-with-plugins
       libreoffice
 
       intellijpatch

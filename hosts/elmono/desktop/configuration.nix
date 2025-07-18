@@ -66,6 +66,18 @@ in {
     };
   };
 
+  fileSystems = {
+    "/data" = { 
+      device = "/dev/disk/by-uuid/034dd298-17d5-4084-bd15-c6f213ca35fc";
+      fsType = "ext4";
+      options = [ "defaults" "nofail" "noatime" ];
+    };
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /data 0777 root root -"
+  ];
+
   # services = {
   #   syncthing.settings = {
   #     devices = {
