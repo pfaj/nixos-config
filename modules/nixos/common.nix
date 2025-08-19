@@ -3,7 +3,8 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (inputs) self;
   nixosModules = with self.nixosModules; [
     core
@@ -11,7 +12,8 @@
     #kdeconnect
     # syncthing
   ];
-in {
+in
+{
   imports = nixosModules;
 
   time.timeZone = "America/New_York";
@@ -62,7 +64,11 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     initialPassword = "";
-    extraGroups = ["networkmanager" "wheel" "audio"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+    ];
     shell = pkgs.fish;
   };
 
@@ -79,7 +85,7 @@ in {
 
     xserver = {
       enable = true;
-      excludePackages = [pkgs.xterm];
+      excludePackages = [ pkgs.xterm ];
     };
 
     logind.extraConfig = ''
@@ -100,7 +106,7 @@ in {
     git
     git-lfs
     gh
-    htop
+    btop
     ncdu
   ];
 

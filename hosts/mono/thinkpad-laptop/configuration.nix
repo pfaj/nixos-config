@@ -4,7 +4,8 @@
   username,
   inputs,
   ...
-}: let
+}:
+let
   inherit (inputs) self;
   custom-auto-cpufreq = pkgs.auto-cpufreq.overrideAttrs (oldAttrs: {
     src = pkgs.fetchFromGitHub {
@@ -13,16 +14,14 @@
       rev = "8f026ac6497050c0e07c55b751c4b80401e932ec";
       sha256 = "sha256-AJH2wgat6ssid3oYb0KBgO4qxhZD6/OWNHwYj11Yfy4=";
     };
-    patches = [];
-    propagatedBuildInputs =
-      oldAttrs.propagatedBuildInputs
-      or []
-      ++ [
-        pkgs.python3Packages.requests
-        pkgs.python3Packages.urwid
-      ];
+    patches = [ ];
+    propagatedBuildInputs = oldAttrs.propagatedBuildInputs or [ ] ++ [
+      pkgs.python3Packages.requests
+      pkgs.python3Packages.urwid
+    ];
   });
-in {
+in
+{
   imports =
     [
       ./hardware-configuration.nix
@@ -31,10 +30,11 @@ in {
       common
       nvidia
       ssh
-      docker
+      # docker
       ollama
       power-saving
       zen
+      tailscale
       #mysql
 
       # desktops.hyprland
@@ -50,8 +50,13 @@ in {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelParams = ["nvidia-drm.mode_set=1" "nvidia-drm.fbdev=1" "thinkpad_acpi.fan_control=1" "thinkpad_acpi.experimental=1"];
-    initrd.kernelModules = ["thinkpad_acpi"];
+    kernelParams = [
+      "nvidia-drm.mode_set=1"
+      "nvidia-drm.fbdev=1"
+      "thinkpad_acpi.fan_control=1"
+      "thinkpad_acpi.experimental=1"
+    ];
+    initrd.kernelModules = [ "thinkpad_acpi" ];
   };
 
   hardware.logitech.wireless.enable = true;
@@ -62,7 +67,7 @@ in {
   home-manager.users.${username} = import ./home.nix;
 
   services.fprintd.enable = true;
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
   security.pam.services.swaylock.fprintAuth = true;
 
   #services.postgresql = {
@@ -78,7 +83,7 @@ in {
     enable = true;
     keyboards = {
       default = {
-        ids = ["*"];
+        ids = [ "*" ];
         settings = {
           main = {
             capslock = "overload(control, esc)";
@@ -98,8 +103,8 @@ in {
 
   systemd.services.custom-auto-cpufreq = {
     description = "Custom auto-cpufreq - Automatic CPU speed & power optimizer";
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
 
     serviceConfig = {
       Type = "simple";
@@ -110,7 +115,7 @@ in {
   };
 
   # Make sure the package is available in the system
-  environment.systemPackages = [custom-auto-cpufreq];
+  environment.systemPackages = [ custom-auto-cpufreq ];
 
   # services = {
   #   syncthing.settings = {
