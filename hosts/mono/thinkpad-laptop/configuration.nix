@@ -35,6 +35,7 @@ in
       power-saving
       zen
       tailscale
+      virtualization
       #mysql
 
       # desktops.hyprland
@@ -61,6 +62,8 @@ in
 
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
+
+  users.users.mono.extraGroups = [ "docker" ];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
