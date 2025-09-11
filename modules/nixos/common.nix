@@ -87,7 +87,7 @@ in
       enable = true;
       excludePackages = [ pkgs.xterm ];
     };
-    #
+
     # logind.extraConfig = ''
     #   HandlePowerKey=ignore
     #   HandleLidSwitch=suspend
