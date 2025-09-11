@@ -15,12 +15,12 @@
 
     packages = with pkgs; [
       obsidian
-      # fprintd
+      fprintd
       libreoffice
-      tailscale
 
       intellijpatch
 
+      nmap
     ];
   };
 
