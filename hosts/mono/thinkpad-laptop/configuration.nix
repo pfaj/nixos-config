@@ -28,6 +28,7 @@ in
     ]
     ++ (with self.nixosModules; [
       common
+      adb
       nvidia
       ssh
       # docker
