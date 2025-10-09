@@ -22,27 +22,26 @@ let
   });
 in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ]
-    ++ (with self.nixosModules; [
-      common
-      adb
-      nvidia
-      ssh
-      # docker
-      ollama
-      power-saving
-      zen
-      tailscale
-      virtualization
-      #mysql
+  imports = [
+    ./hardware-configuration.nix
+  ]
+  ++ (with self.nixosModules; [
+    common
+    adb
+    nvidia
+    ssh
+    # docker
+    ollama
+    power-saving
+    zen
+    tailscale
+    virtualization
+    #mysql
 
-      # desktops.hyprland
-      desktops.niri
-      #desktops.plasma6
-    ]);
+    # desktops.hyprland
+    desktops.niri
+    #desktops.plasma6
+  ]);
 
   nix.settings.download-buffer-size = 10485760; # 10 MiB (default is around 1 MiB)>>
   boot = {
@@ -57,6 +56,7 @@ in
       "nvidia-drm.fbdev=1"
       "thinkpad_acpi.fan_control=1"
       "thinkpad_acpi.experimental=1"
+      "coretemp"
     ];
     initrd.kernelModules = [ "thinkpad_acpi" ];
   };
