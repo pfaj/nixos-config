@@ -3,7 +3,8 @@
   pkgs,
   username,
   ...
-}: {
+}:
+{
   imports = with inputs.self.homeManagerModules; [
     home
     shell
@@ -33,7 +34,6 @@
     bkqs
 
     # brave
-    whatsapp-for-linux
     neovide
   ];
 

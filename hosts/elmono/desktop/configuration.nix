@@ -4,30 +4,31 @@
   username,
   inputs,
   ...
-}: let
+}:
+let
   inherit (inputs) self;
-in {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ]
-    ++ (with self.nixosModules; [
-      common
-      nvidia
-      ssh
-      gaming
-      ollama
-      zen
-      searxng
-      tailscale
-      immich
+in
+{
+  imports = [
+    ./hardware-configuration.nix
+  ]
+  ++ (with self.nixosModules; [
+    common
+    nvidia
+    ssh
+    gaming
+    ollama
+    zen
+    searxng
+    tailscale
+    immich
 
-      # desktops.hyprland
-      desktops.niri
-    ]);
+    # desktops.hyprland
+    desktops.niri
+  ]);
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_lts;
 
     loader = {
       systemd-boot.enable = true;
@@ -48,7 +49,7 @@ in {
     enable = true;
     keyboards = {
       default = {
-        ids = ["*"];
+        ids = [ "*" ];
         settings = {
           main = {
             capslock = "overload(control, esc)";
@@ -61,16 +62,20 @@ in {
   networking = {
     hostName = "${username}-desktop-nixos";
     firewall = {
-      allowedTCPPorts = [22565];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [ 22565 ];
+      allowedUDPPorts = [ ];
     };
   };
 
   fileSystems = {
-    "/data" = { 
+    "/data" = {
       device = "/dev/disk/by-uuid/034dd298-17d5-4084-bd15-c6f213ca35fc";
       fsType = "ext4";
-      options = [ "defaults" "nofail" "noatime" ];
+      options = [
+        "defaults"
+        "nofail"
+        "noatime"
+      ];
     };
   };
 

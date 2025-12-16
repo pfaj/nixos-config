@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.homeManagerModules; [
     common
   ];
