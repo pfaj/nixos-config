@@ -17,21 +17,12 @@
     };
 
     packages = with pkgs; [
-      firefox
       obsidian
       # gimp-with-plugins
       libreoffice
 
       intellijpatch
 
-      #Cyber Sec
-      nmap
-      burpsuite
-      wireshark
-      john
-      hashcat
-      ffuf
-      protonvpn-cli
     ];
   };
 

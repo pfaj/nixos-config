@@ -17,18 +17,15 @@ in
     nvidia
     ssh
     gaming
-    ollama
     zen
-    searxng
     tailscale
-    immich
 
     # desktops.hyprland
     desktops.niri
   ]);
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_lts;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
     loader = {
       systemd-boot.enable = true;
@@ -44,6 +41,15 @@ in
   powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
   home-manager.users.${username} = import ./home.nix;
+
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+    motherboard = "amd";
+    server = {
+      port = 6742;
+    };
+  };
 
   services.keyd = {
     enable = true;
