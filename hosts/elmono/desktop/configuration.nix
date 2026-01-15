@@ -42,6 +42,8 @@ in
 
   home-manager.users.${username} = import ./home.nix;
 
+  boot.loader.systemd-boot.configurationLimit = 5;
+
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
