@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, config, ... }:
+{
   home.packages = with pkgs; [
     adwaita-icon-theme
   ];
@@ -9,6 +10,7 @@
   };
 
   gtk = {
+    gtk4.theme = config.gtk.theme;
     enable = true;
 
     font = {

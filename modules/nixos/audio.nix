@@ -1,7 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     pavucontrol
-    helvum
+    # helvum
+    crosspipe
   ];
 
   security.rtkit.enable = true;

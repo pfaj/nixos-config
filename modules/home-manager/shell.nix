@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   lang = icon: color: {
     symbol = icon;
     format = "[$symbol ](${color})";
@@ -14,10 +15,11 @@
     right = "";
   };
   inherit (inputs) self;
-in {
+in
+{
   imports = with self.homeManagerModules; [
     #programs.macchina
-    programs.neofetch
+    # programs.neofetch
   ];
 
   home.sessionVariables = {
@@ -25,6 +27,7 @@ in {
   };
 
   programs = {
+    fastfetch.enable = true;
     fish = {
       enable = true;
       #syntaxHighlighting.enable = true;
@@ -40,7 +43,7 @@ in {
 
       interactiveShellInit = ''
         set fish_greeting # disable greeting
-        neofetch
+        fastfetch
       '';
     };
 
@@ -65,14 +68,16 @@ in {
           "$status"
           "$line_break"
           "[❯](bold purple)"
-          ''''${custom.space}''
+          "\${custom.space}"
         ];
         custom.space = {
-          when = ''! test $env'';
+          when = "! test $env";
           format = "  ";
         };
         continuation_prompt = "∙  ┆ ";
-        line_break = {disabled = false;};
+        line_break = {
+          disabled = false;
+        };
         status = {
           symbol = "✗";
           not_found_symbol = "󰍉 Not Found";
