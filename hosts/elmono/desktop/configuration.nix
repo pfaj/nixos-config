@@ -19,6 +19,7 @@ in
     gaming
     zen
     tailscale
+    davinci
 
     # desktops.hyprland
     desktops.niri
@@ -36,13 +37,14 @@ in
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
 
+  boot.loader.systemd-boot.configurationLimit = 2;
+  boot.initrd.compressor = "xz";
+
   nixpkgs.config.allowUnfree = true;
 
   powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
   home-manager.users.${username} = import ./home.nix;
-
-  boot.loader.systemd-boot.configurationLimit = 5;
 
   services.hardware.openrgb = {
     enable = true;

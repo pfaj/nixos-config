@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.homeManagerModules; [
     theme
     xdg
@@ -30,6 +31,8 @@
     packages = with pkgs; [
       inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
 
+      qview
+      exiftool
       snapshot # camera app
       baobab # storage visualizer
       file-roller # archive manager

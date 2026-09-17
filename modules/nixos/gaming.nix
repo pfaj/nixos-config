@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   environment = {
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
@@ -25,8 +26,8 @@
       enable = true;
       # fix gamescope inside steam
       package = pkgs.steam.override {
-        extraPkgs = pkgs:
-          with pkgs; [
+        extraPkgs =
+          pkgs: with pkgs; [
             xorg.libXcursor
             xorg.libXi
             xorg.libXinerama

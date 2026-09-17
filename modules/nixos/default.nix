@@ -3,6 +3,7 @@
   audio = import ./audio.nix;
   core = import ./core;
   common = import ./common.nix;
+  davinci = import ./davinci.nix;
   docker = import ./docker.nix;
   desktops = import ./desktops;
   gaming = import ./gaming.nix;
