@@ -3,11 +3,20 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   environment.systemPackages = with pkgs; [
     nvidia-vaapi-driver
   ];
+
+  # Force the NVIDIA proprietary stack for the graphical session. Required for
+  # NVIDIA OpenCL (used by DaVinci Resolve). These live on the NVIDIA module so
+  # hosts don't have to repeat them.
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  };
+
   hardware.nvidia = {
     # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
     #   version = "555.58.02";
@@ -21,6 +30,8 @@
     package = config.boot.kernelPackages.nvidiaPackages.production;
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
+    # Laptop defaults; desktops should override finegrained (and possibly
+    # enable) to false in their host config with `lib.mkForce`.
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     prime = {
@@ -28,6 +39,10 @@
         enable = true;
         enableOffloadCmd = true;
       };
+      # Defaults are the Intel + NVIDIA ThinkPad IDs. Hosts with a different
+      # iGPU (e.g. AMD) must override `intelBusId` with `lib.mkForce ""` and set
+      # `amdgpuBusId` instead. Verify the real IDs with:
+      #   lspci -D -nn | grep -Ei 'vga|3d|display'
       intelBusId = "PCI:0:0:2";
       nvidiaBusId = "PCI:0:1:0";
     };
@@ -35,49 +50,53 @@
     open = false;
   };
 
-  # specialisation = {
-  #   on-the-go.configuration = {
-  #     system.nixos.tags = [ "on-the-go" ];
-  #     hardware.nvidia = {
-  #       prime.offload.enable = lib.mkForce true;
-  #       prime.offload.enableOffloadCmd = lib.mkForce true;
-  #       prime.sync.enable = lib.mkForce false;
-  #     };
-  #   };
-  #   battery-saver.configuration = {
-  #     system.nixos.tags = [ "battery-saver" ];
-  #
-  #     services.xserver.videoDrivers = lib.mkForce [
-  #       "nvidia"
-  #       "modesetting"
-  #     ];
-  #     boot.extraModprobeConfig = ''
-  #       blacklist nouveau
-  #       options nouveau modeset=0
-  #     '';
-  #
-  #     services.udev.extraRules = ''
-  #       # Remove NVIDIA USB xHCI Host Controller devices, if present
-  #       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
-  #       # Remove NVIDIA USB Type-C UCSI devices, if present
-  #       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
-  #       # Remove NVIDIA Audio devices, if present
-  #       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
-  #       # Remove NVIDIA VGA/3D controller devices
-  #       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
-  #     '';
-  #     boot.blacklistedKernelModules = [
-  #       "nouveau"
-  #       "nvidia"
-  #       "nvidia_drm"
-  #       "nvidia_modeset"
-  #     ];
-  #
-  #     systemd.services.nbfc_service.enable = lib.mkForce false;
-  #   };
-  # };
+  specialisation = {
+    on-the-go.configuration = {
+      system.nixos.tags = ["on-the-go"];
+      hardware.nvidia = {
+        prime.offload.enable = lib.mkForce true;
+        prime.offload.enableOffloadCmd = lib.mkForce true;
+        prime.sync.enable = lib.mkForce false;
+      };
+    };
+    battery-saver.configuration = {
+      system.nixos.tags = ["battery-saver"];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+      # The GPU is powered down in this specialisation, so don't force the
+      # NVIDIA GLX/VDPAU stack.
+      environment.sessionVariables = {
+        LIBVA_DRIVER_NAME = lib.mkForce "";
+        NVD_BACKEND = lib.mkForce "";
+        __GLX_VENDOR_LIBRARY_NAME = lib.mkForce "";
+      };
+
+      boot.extraModprobeConfig = ''
+        blacklist nouveau
+        options nouveau modeset=0
+      '';
+
+      services.udev.extraRules = ''
+        # Remove NVIDIA USB xHCI Host Controller devices, if present
+        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+        # Remove NVIDIA USB Type-C UCSI devices, if present
+        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+        # Remove NVIDIA Audio devices, if present
+        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+        # Remove NVIDIA VGA/3D controller devices
+        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+      '';
+      boot.blacklistedKernelModules = [
+        "nouveau"
+        "nvidia"
+        "nvidia_drm"
+        "nvidia_modeset"
+      ];
+
+      systemd.services.nbfc_service.enable = lib.mkForce false;
+    };
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
 
   # FROM https://github.com/TLATER/dotfiles
   boot.extraModprobeConfig =

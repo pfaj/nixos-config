@@ -7,19 +7,6 @@
 }:
 let
   inherit (inputs) self;
-  # custom-auto-cpufreq = pkgs.auto-cpufreq.overrideAttrs (oldAttrs: {
-  #   src = pkgs.fetchFromGitHub {
-  #     owner = "AdnanHodzic";
-  #     repo = "auto-cpufreq";
-  #     rev = "8f026ac6497050c0e07c55b751c4b80401e932ec";
-  #     sha256 = "sha256-AJH2wgat6ssid3oYb0KBgO4qxhZD6/OWNHwYj11Yfy4=";
-  #   };
-  #   patches = [ ];
-  #   propagatedBuildInputs = oldAttrs.propagatedBuildInputs or [ ] ++ [
-  #     pkgs.python3Packages.requests
-  #     pkgs.python3Packages.urwid
-  #   ];
-  # });
 in
 {
   imports = [
@@ -29,6 +16,9 @@ in
     common
     # adb
     nvidia
+    davinci
+    keyd
+    logitech
     ssh
     # docker
     # ollama
@@ -43,7 +33,12 @@ in
     #desktops.plasma6
   ]);
 
-  nix.settings.download-buffer-size = 10485760; # 10 MiB (default is around 1 MiB)>>
+  nix.settings.download-buffer-size = 10485760;
+
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0033", TAG+="uaccess"
+  '';
+
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
@@ -61,9 +56,6 @@ in
     initrd.kernelModules = [ "thinkpad_acpi" ];
   };
 
-  hardware.logitech.wireless.enable = true;
-  hardware.logitech.wireless.enableGraphical = true;
-
   users.users.mono.extraGroups = [ "docker" ];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
@@ -74,36 +66,37 @@ in
   security.pam.services.swaylock = { };
   security.pam.services.swaylock.fprintAuth = true;
 
-  #services.postgresql = {
-  #  enable = true;
-  #  ensureDatabases = ["mydatabase"];
-  #  authentication = pkgs.lib.mkOverride 10 ''
-  #    #type database  DBuser  auth-method
-  #    local all       all     trust
-  #  '';
-  #};
-
-  services.keyd = {
-    enable = true;
-    keyboards = {
-      default = {
-        ids = [ "*" ];
-        settings = {
-          main = {
-            capslock = "overload(control, esc)";
-          };
-        };
-      };
-    };
-  };
+  # services.postgresql = {
+  #   enable = true;
+  #   ensureDatabases = ["mydatabase"];
+  #   authentication = pkgs.lib.mkOverride 10 ''
+  #     #type database  DBuser  auth-method
+  #     local all        all      trust
+  #   '';
+  # };
 
   networking = {
     hostName = "thinkpad-laptop";
-    #firewall = {
-    #  allowedTCPPorts = [7236 7250];
-    #  allowedUDPPorts = [51820 7236 5353];
-    #};
+    # firewall = {
+    #   allowedTCPPorts = [7236 7250];
+    #   allowedUDPPorts = [51820 7236 5353];
+    # };
   };
+
+  networking.firewall.allowedTCPPorts = [ 5353 ];
+  networking.firewall.allowedUDPPorts = [ 5353 ];
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 50000;
+      to = 60000;
+    }
+  ];
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 50000;
+      to = 60000;
+    }
+  ];
 
   # systemd.services.custom-auto-cpufreq = {
   #   description = "Custom auto-cpufreq - Automatic CPU speed & power optimizer";

@@ -3,17 +3,16 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (inputs) self;
   nixosModules = with self.nixosModules; [
     core
     audio
+    thumbnails
     #kdeconnect
     # syncthing
   ];
-in
-{
+in {
   imports = nixosModules;
 
   time.timeZone = "America/New_York";
@@ -85,7 +84,7 @@ in
 
     xserver = {
       enable = true;
-      excludePackages = [ pkgs.xterm ];
+      excludePackages = [pkgs.xterm];
     };
     #
     # logind.extraConfig = ''

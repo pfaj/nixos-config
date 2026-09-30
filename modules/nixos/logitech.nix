@@ -1,10 +1,5 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    solaar
-  ];
-
-  hardware.logitech = {
-    wireless.enable = true;
-    wireless.enableGraphical = true;
-  };
+{...}: {
+  # Provides the Solaar GUI and udev rules. `programs.solaar.enable` also sets
+  # `hardware.logitech.wireless.enable = true`.
+  programs.solaar.enable = true;
 }

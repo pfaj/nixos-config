@@ -13,7 +13,7 @@ in {
     inputs.quickshell.packages.${pkgs.system}.default
     pythonWithDeps
     wl-clipboard
-    swww # wallpaper
+    awww # wallpaper
     cliphist
     libnotify
     inotify-tools

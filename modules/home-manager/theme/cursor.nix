@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home = {
     pointerCursor = {
+      enable = true;
       name = "McMojave-cursors";
       package = pkgs.mcmojave-cursors;
       size = 24;

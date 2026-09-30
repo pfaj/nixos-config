@@ -1,3 +1,3 @@
-{pkgs}: {
-  packages.wezterm.enable = true;
+{pkgs, ...}: {
+  programs.wezterm.enable = true;
 }

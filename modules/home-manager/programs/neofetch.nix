@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [ neofetch ];
+  home.packages = with pkgs; [ fastfetch ];
 
-  xdg.configFile."neofetch/config.conf".text = ''
+  xdg.configFile."fastfetch/config.conf".text = ''
     print_info() {
     prin " \n \n ╭───────┤ $(color 5) NixOS $(color 15)├───────╮"
     info " " kernel

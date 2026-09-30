@@ -1,10 +1,13 @@
 {
   inputs,
   pkgs,
+  lib,
   username,
   ...
-}:
-{
+}: let
+  # Not every host has a wallpaper; only link it when present.
+  wallpaper = ../../hosts/${username}/wallpaper.jpg;
+in {
   imports = with inputs.self.homeManagerModules; [
     home
     shell
@@ -34,8 +37,10 @@
     bkqs
 
     # brave
-    neovide
+    # neovide
   ];
 
-  home.file.".config/background".source = ../../hosts/${username}/wallpaper.jpg;
+  home.file.".config/background" = lib.mkIf (builtins.pathExists wallpaper) {
+    source = wallpaper;
+  };
 }

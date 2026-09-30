@@ -9,9 +9,9 @@
   gaming = import ./gaming.nix;
   immich = import ./immich.nix;
   kdeconnect = import ./kdeconnect.nix;
+  keyd = import ./keyd.nix;
   logitech = import ./logitech.nix;
   mysql = import ./mysql.nix;
-  nextcloud = import ./nextcloud.nix;
   nvidia = import ./nvidia.nix;
   power-saving = import ./power-saving;
   rt-audio = import ./rt-audio.nix;
@@ -20,6 +20,7 @@
   ssh = import ./ssh.nix;
   syncthing = import ./syncthing.nix;
   tailscale = import ./tailscale.nix;
+  thumbnails = import ./thumbnails.nix;
   tlp = import ./tlp.nix;
   virtualization = import ./virtualization.nix;
   ollama = import ./ollama.nix;

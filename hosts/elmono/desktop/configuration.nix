@@ -4,26 +4,27 @@
   username,
   inputs,
   ...
-}:
-let
+}: let
   inherit (inputs) self;
-in
-{
-  imports = [
-    ./hardware-configuration.nix
-  ]
-  ++ (with self.nixosModules; [
-    common
-    nvidia
-    ssh
-    gaming
-    zen
-    tailscale
-    davinci
+in {
+  imports =
+    [
+      ./hardware-configuration.nix
+    ]
+    ++ (with self.nixosModules; [
+      common
+      nvidia
+      davinci
+      keyd
+      logitech
+      ssh
+      gaming
+      zen
+      tailscale
 
-    # desktops.hyprland
-    desktops.niri
-  ]);
+      # desktops.hyprland
+      desktops.niri
+    ]);
 
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
@@ -34,17 +35,33 @@ in
     };
   };
 
-  hardware.logitech.wireless.enable = true;
-  hardware.logitech.wireless.enableGraphical = true;
+  # NOTE: desktop with an AMD iGPU + NVIDIA dGPU. Verify the real bus IDs on
+  # this machine before relying on them:
+  #   lspci -D -nn | grep -Ei 'vga|3d|display'
+  # The values below assume the AMD iGPU at 00:02.0 and the NVIDIA GPU at
+  # 01:00.0; adjust if `lspci` reports different addresses.
+  hardware.nvidia = {
+    # Laptop-only power management is not appropriate on a desktop.
+    powerManagement.enable = lib.mkForce false;
+    powerManagement.finegrained = lib.mkForce false;
+    prime = {
+      # `nvidia.nix` defaults to an Intel iGPU, so clear that and use AMD.
+      intelBusId = lib.mkForce "";
+      amdgpuBusId = lib.mkForce "PCI:0:2:0";
+      nvidiaBusId = lib.mkForce "PCI:1:0:0";
+    };
+  };
 
   boot.loader.systemd-boot.configurationLimit = 2;
   boot.initrd.compressor = "xz";
 
-  nixpkgs.config.allowUnfree = true;
-
   powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
   home-manager.users.${username} = import ./home.nix;
+
+  # Moved out of wayland.windowManager.hyprland.settings (where they were
+  # written as raw Hyprland config and had no effect).
+  programs.dconf.enable = true;
 
   services.hardware.openrgb = {
     enable = true;
@@ -55,25 +72,11 @@ in
     };
   };
 
-  services.keyd = {
-    enable = true;
-    keyboards = {
-      default = {
-        ids = [ "*" ];
-        settings = {
-          main = {
-            capslock = "overload(control, esc)";
-          };
-        };
-      };
-    };
-  };
-
   networking = {
     hostName = "${username}-desktop-nixos";
     firewall = {
-      allowedTCPPorts = [ 22565 ];
-      allowedUDPPorts = [ ];
+      allowedTCPPorts = [22565];
+      allowedUDPPorts = [];
     };
   };
 

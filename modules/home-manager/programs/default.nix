@@ -19,4 +19,5 @@
   vesktop = import ./vesktop.nix;
   vscode = import ./vscode.nix;
   youtube = import ./youtube.nix;
+  wezterm = import ./wezterm.nix;
 }

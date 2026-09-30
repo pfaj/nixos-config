@@ -2,14 +2,15 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixos-cosmic.nixosModules.default
   ];
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-cosmic];
+    extraPortals = with pkgs; [ xdg-desktop-portal-cosmic ];
     config.common.default = "*";
   };
 
@@ -19,7 +20,7 @@
   environment.systemPackages = with pkgs; [
     inputs.quickshell.packages.${pkgs.system}.default
     wl-clipboard
-    swww # wallpaper
+    awww # wallpaper
   ];
 
   #environment.systemPackages = with pkgs; [

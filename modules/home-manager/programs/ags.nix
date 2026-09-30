@@ -4,8 +4,10 @@
   inputs,
   pkgs,
   ...
-}: let
-  hugchat = ps:
+}:
+let
+  hugchat =
+    ps:
     ps.buildPythonPackage rec {
       pname = "hugchat";
       version = "0.4.1";
@@ -15,7 +17,8 @@
       };
       doCheck = false;
     };
-in {
+in
+{
   imports = [
     inputs.ags.homeManagerModules.default
   ];
@@ -28,7 +31,7 @@ in {
     fd
     fzf
     brightnessctl
-    swww
+    awww
     slurp
     wf-recorder
     wl-clipboard

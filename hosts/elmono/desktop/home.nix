@@ -3,27 +3,19 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   imports = with inputs.self.homeManagerModules; [
     common
     services.easy-effects
   ];
 
   home = {
-    sessionVariables = {
-      LIBVA_DRIVER_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    };
-
     packages = with pkgs; [
       obsidian
       # gimp-with-plugins
       libreoffice
 
       intellijpatch
-
     ];
   };
 
@@ -36,9 +28,6 @@
       "hyprctl dispatch exec 'obsidian'"
       "hyprctl dispatch exec 'easy-effects'"
     ];
-
-    services.tumbler.enable = true;
-    programs.dconf.enable = true;
 
     # https://wiki.hyprland.org/Configuring/Monitors/
     # monitor = [

@@ -1,14 +1,6 @@
-{
-  pkgs,
-  username,
-  ...
-}:
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     android-studio
+    android-tools
   ];
-
-  programs.adb.enable = true;
-  users.users.${username}.extraGroups = [ "adbusers" ];
-
 }

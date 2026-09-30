@@ -20,11 +20,8 @@ in {
     file.".local/share/user-places.xbel".source = ./user-places.xbel; # respect custom places dir in file managers
 
     sessionVariables = {
-      LIBVA_DRIVER_NAME = "nvidia";
       #WLR_NO_HARDWARE_CURSORS = "1";
       #WLR_DRM_NO_ATOMIC = "1";
-      NVD_BACKEND = "direct";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       __GL_GSYNC_ALLOWED = "1";
       __GL_VRR_ALLOWED = "1";
       #__GL_SYNC_TO_VBLANK = "0";

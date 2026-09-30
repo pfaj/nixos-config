@@ -3,19 +3,12 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   imports = with inputs.self.homeManagerModules; [
     common
   ];
 
   home = {
-    sessionVariables = {
-      LIBVA_DRIVER_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    };
-
     packages = with pkgs; [
       obsidian
       #gimp-with-plugins

@@ -3,8 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   lang = icon: color: {
     symbol = icon;
     format = "[$symbol ](${color})";
@@ -15,12 +14,51 @@ let
     right = "";
   };
   inherit (inputs) self;
-in
-{
+in {
   imports = with self.homeManagerModules; [
     #programs.macchina
     # programs.neofetch
   ];
+
+  # fastfetch is installed by `programs.fastfetch.enable` below; the config is
+  # generated here in JSONC (fastfetch's native format).
+  xdg.configFile."fastfetch/config.jsonc".text = builtins.toJSON {
+    logo = {
+      padding = {
+        top = 1;
+        right = 3;
+      };
+    };
+    display = {
+      separator = " ";
+      color = {
+        separator = "1";
+      };
+    };
+    modules = [
+      "title"
+      "separator"
+      "os"
+      "host"
+      "kernel"
+      "uptime"
+      "packages"
+      "shell"
+      "resolution"
+      "de"
+      "wm"
+      "wmtheme"
+      "theme"
+      "icons"
+      "terminal"
+      "terminalfont"
+      "cpu"
+      "gpu"
+      "memory"
+      "break"
+      "colors"
+    ];
+  };
 
   home.sessionVariables = {
     #SHELL = "${pkgs.fish}/bin/fish";
@@ -32,14 +70,6 @@ in
       enable = true;
       #syntaxHighlighting.enable = true;
       #enableAutosuggestions = true;
-
-      #initExtra = ''
-      #  if command -v neofetch > /dev/null; then
-      #    neofetch
-      #  elif command -v macchina > /dev/null; then
-      #    macchina -t custom
-      #  fi
-      #'';
 
       interactiveShellInit = ''
         set fish_greeting # disable greeting
@@ -106,18 +136,6 @@ in
           truncation_length = 6;
           truncation_symbol = "~/󰇘/";
         };
-        # directory.substitutions = {
-        #   "Documents" = "󰈙 ";
-        #   "Downloads" = " ";
-        #   "Music" = " ";
-        #   "Pictures" = " ";
-        #   "Videos" = " ";
-        #   "Projects" = "󱌢 ";
-        #   "School" = "󰑴 ";
-        #   "GitHub" = "";
-        #   ".config" = " ";
-        #   "Vault" = "󱉽 ";
-        # };
         git_branch = {
           symbol = "";
           style = "";

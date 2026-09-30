@@ -2,24 +2,26 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (inputs) self;
-in {
+in
+{
   nixpkgs = {
     config = {
       allowUnfree = true;
       permittedInsecurePackages = [
-        "electron-25.9.0"
+        "electron-40.10.5"
       ];
     };
 
-    overlays =
-      (builtins.attrValues self.overlays)
-      ++ [
-        (final: prev:
-          import ../../../pkgs {
-            pkgs = prev;
-          })
-      ];
+    overlays = (builtins.attrValues self.overlays) ++ [
+      (
+        final: prev:
+        import ../../../pkgs {
+          pkgs = prev;
+        }
+      )
+    ];
   };
 }

@@ -76,11 +76,16 @@
       };
 
     hostsDir = ././hosts;
+    # Only treat directories as hosts; ignore loose files (wallpapers, avatars).
+    readDirs = path: let
+      entries = builtins.readDir path;
+    in
+      builtins.filter (name: entries.${name} == "directory") (builtins.attrNames entries);
     hosts = let
-      dirs = builtins.attrNames (builtins.readDir hostsDir);
+      dirs = readDirs hostsDir;
       hostSystems = builtins.map (userDir: let
         userPath = hostsDir + "/${userDir}";
-        deviceDirs = builtins.attrNames (builtins.readDir userPath);
+        deviceDirs = readDirs userPath;
         systems =
           builtins.map (deviceDir: let
             devicePath = userPath + "/${deviceDir}";

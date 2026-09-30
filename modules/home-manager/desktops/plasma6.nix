@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    sierra-breeze-enhanced
+    kdePackages.sierra-breeze-enhanced
     roboto
   ];
 
