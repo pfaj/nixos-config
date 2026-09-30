@@ -4,27 +4,28 @@
   username,
   inputs,
   ...
-}: let
+}:
+let
   inherit (inputs) self;
-in {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ]
-    ++ (with self.nixosModules; [
-      common
-      nvidia
-      davinci
-      keyd
-      logitech
-      ssh
-      gaming
-      zen
-      tailscale
+in
+{
+  imports = [
+    ./hardware-configuration.nix
+  ]
+  ++ (with self.nixosModules; [
+    common
+    nvidia
+    davinci
+    keyd
+    logitech
+    ssh
+    gaming
+    zen
+    tailscale
 
-      # desktops.hyprland
-      desktops.niri
-    ]);
+    # desktops.hyprland
+    desktops.niri
+  ]);
 
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
@@ -47,13 +48,22 @@ in {
     prime = {
       # `nvidia.nix` defaults to an Intel iGPU, so clear that and use AMD.
       intelBusId = lib.mkForce "";
-      amdgpuBusId = lib.mkForce "PCI:0:2:0";
+      amdgpuBusId = lib.mkForce "PCI:12:0:0";
       nvidiaBusId = lib.mkForce "PCI:1:0:0";
     };
   };
 
-  boot.loader.systemd-boot.configurationLimit = 2;
+  # This ESP is 96M shared with Windows (32M), leaving ~64M. One generation is
+  # ~40M (14M kernel + 26M initrd), so only ONE generation fits on the ESP.
+  # Raise this only after growing the partition.
+  boot.loader.systemd-boot.configurationLimit = 1;
   boot.initrd.compressor = "xz";
+
+  # `nvidia.nix` defines on-the-go/battery-saver specialisations, which add a
+  # full extra initrd copy each to the ESP. This machine shares a 96M ESP with
+  # Windows (32M used), so there is not room for them. Cleared here rather than
+  # in the shared module so laptops keep the behaviour.
+  specialisation = lib.mkForce {};
 
   powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
@@ -75,8 +85,8 @@ in {
   networking = {
     hostName = "${username}-desktop-nixos";
     firewall = {
-      allowedTCPPorts = [22565];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [ 22565 ];
+      allowedUDPPorts = [ ];
     };
   };
 

@@ -4,10 +4,12 @@
   lib,
   username,
   ...
-}: let
+}:
+let
   # Not every host has a wallpaper; only link it when present.
   wallpaper = ../../hosts/${username}/wallpaper.jpg;
-in {
+in
+{
   imports = with inputs.self.homeManagerModules; [
     home
     shell
@@ -16,7 +18,7 @@ in {
     programs.direnv
     programs.neovim
     programs.vesktop
-    programs.vscode
+    # programs.vscode
     programs.tmux
     programs.quickshell
 
